@@ -138,10 +138,6 @@ public class HandController : MonoBehaviour {
 
   /** Initalizes the hand and tool lists and recording, if enabled.*/
   void Start() {
-
-        var parameter = FindObjectOfType<LeapMotionParameter>();
-        gameObject.transform.localPosition = parameter.getPosition;
-        handMovementScale = parameter.getMoveMent;
     // Initialize hand lookup tables.
     hand_graphics_ = new Dictionary<int, HandModel>();
     hand_physics_ = new Dictionary<int, HandModel>();
