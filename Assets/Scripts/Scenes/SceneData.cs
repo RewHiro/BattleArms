@@ -5,6 +5,9 @@ public enum SceneType
 {
     TITLE,
     MODE,
+    LOBBY,
+    CUSTOMIZE,
+    STAGESELECT,
     GAME
 }
 

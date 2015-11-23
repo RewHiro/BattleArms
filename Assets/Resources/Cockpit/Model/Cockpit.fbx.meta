@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: 4f6ac0ff04a17024cbcc7ed9062c3dfd
+timeCreated: 1448260594
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: kokkupitto:kokkupitto:kokkupitto:camera1
+    100004: kokkupitto:kokkupitto:kokkupitto:kokkupitto:a:polySurface187
+    100006: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface10
+    100008: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface139
+    100010: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface140
+    100012: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface141
+    100014: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface142
+    100016: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface143
+    100018: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface147
+    100020: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface62
+    100022: kokkupitto:kokkupitto:kokkupitto:polySurface106
+    100024: kokkupitto:kokkupitto:kokkupitto:polySurface3
+    100026: kokkupitto:kokkupitto:kokkupitto:polySurface6
+    100028: kokkupitto:kokkupitto:kokkupitto:polySurface63
+    100030: kokkupitto:kokkupitto:kokkupitto:polySurface64
+    100032: kokkupitto:kokkupitto:kokkupitto:polySurface65
+    100034: kokkupitto:kokkupitto:kokkupitto:polySurface66
+    100036: kokkupitto:kokkupitto:kokkupitto:polySurface67
+    100038: kokkupitto:kokkupitto:kokkupitto:polySurface69
+    100040: kokkupitto:kokkupitto:kokkupitto:polySurface8
+    100042: kokkupitto:kokkupitto:kokkupitto:polySurface92
+    100044: kokkupitto:kokkupitto:kokkupitto:transform1
+    100046: kokkupitto:kokkupitto:kokkupitto:transform2
+    100048: kokkupitto:kokkupitto:kokkupitto:transform3
+    100050: polySurface139
+    100052: polySurface140
+    100054: polySurface144
+    100056: polySurface62
+    100058: transform5
+    400000: //RootNode
+    400002: kokkupitto:kokkupitto:kokkupitto:camera1
+    400004: kokkupitto:kokkupitto:kokkupitto:kokkupitto:a:polySurface187
+    400006: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface10
+    400008: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface139
+    400010: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface140
+    400012: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface141
+    400014: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface142
+    400016: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface143
+    400018: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface147
+    400020: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface62
+    400022: kokkupitto:kokkupitto:kokkupitto:polySurface106
+    400024: kokkupitto:kokkupitto:kokkupitto:polySurface3
+    400026: kokkupitto:kokkupitto:kokkupitto:polySurface6
+    400028: kokkupitto:kokkupitto:kokkupitto:polySurface63
+    400030: kokkupitto:kokkupitto:kokkupitto:polySurface64
+    400032: kokkupitto:kokkupitto:kokkupitto:polySurface65
+    400034: kokkupitto:kokkupitto:kokkupitto:polySurface66
+    400036: kokkupitto:kokkupitto:kokkupitto:polySurface67
+    400038: kokkupitto:kokkupitto:kokkupitto:polySurface69
+    400040: kokkupitto:kokkupitto:kokkupitto:polySurface8
+    400042: kokkupitto:kokkupitto:kokkupitto:polySurface92
+    400044: kokkupitto:kokkupitto:kokkupitto:transform1
+    400046: kokkupitto:kokkupitto:kokkupitto:transform2
+    400048: kokkupitto:kokkupitto:kokkupitto:transform3
+    400050: polySurface139
+    400052: polySurface140
+    400054: polySurface144
+    400056: polySurface62
+    400058: transform5
+    2300000: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface147
+    3300000: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface147
+    4300000: kokkupitto:kokkupitto:kokkupitto:kokkupitto:polySurface147
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

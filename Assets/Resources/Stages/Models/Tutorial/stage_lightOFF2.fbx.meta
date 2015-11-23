@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 88e2e6d8f9fccaa4194208d129f9fd22
+timeCreated: 1448258539
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: floor
+    100002: frame
+    100004: object01
+    100006: object02
+    100008: stage01:pasted__pasted__pasted__pasted__pSphere1
+    100010: stage01:pasted__pasted__pasted__pSphere1
+    100012: stage01:pasted__pasted__pCube3
+    100014: stage01:pasted__pCube1
+    100016: stage01:pasted__pCube2
+    100018: stage01:pasted__pCube22
+    100020: stage01:pasted__pCube3
+    100022: stage01:pCube10
+    100024: stage01:pCube3
+    100026: stage01:pSphere2
+    100028: stage02:pasted__pasted__pasted__pSphere1
+    100030: stage03:pasted__pasted__pasted__pasted__pSphere1
+    100032: stage03:pasted__pasted__pasted__pSphere1
+    100034: stage04:pasted__pasted__pasted__pSphere1
+    100036: //RootNode
+    400000: floor
+    400002: frame
+    400004: object01
+    400006: object02
+    400008: stage01:pasted__pasted__pasted__pasted__pSphere1
+    400010: stage01:pasted__pasted__pasted__pSphere1
+    400012: stage01:pasted__pasted__pCube3
+    400014: stage01:pasted__pCube1
+    400016: stage01:pasted__pCube2
+    400018: stage01:pasted__pCube22
+    400020: stage01:pasted__pCube3
+    400022: stage01:pCube10
+    400024: stage01:pCube3
+    400026: stage01:pSphere2
+    400028: stage02:pasted__pasted__pasted__pSphere1
+    400030: stage03:pasted__pasted__pasted__pasted__pSphere1
+    400032: stage03:pasted__pasted__pasted__pSphere1
+    400034: stage04:pasted__pasted__pasted__pSphere1
+    400036: //RootNode
+    2300000: floor
+    2300002: frame
+    2300004: stage01:pasted__pasted__pasted__pasted__pSphere1
+    2300006: stage01:pasted__pasted__pasted__pSphere1
+    2300008: stage01:pasted__pasted__pCube3
+    2300010: stage01:pasted__pCube1
+    2300012: stage01:pasted__pCube2
+    2300014: stage01:pasted__pCube22
+    2300016: stage01:pasted__pCube3
+    2300018: stage01:pCube10
+    2300020: stage01:pCube3
+    2300022: stage01:pSphere2
+    2300024: stage02:pasted__pasted__pasted__pSphere1
+    2300026: stage03:pasted__pasted__pasted__pasted__pSphere1
+    2300028: stage03:pasted__pasted__pasted__pSphere1
+    2300030: stage04:pasted__pasted__pasted__pSphere1
+    3300000: floor
+    3300002: frame
+    3300004: stage01:pasted__pasted__pasted__pasted__pSphere1
+    3300006: stage01:pasted__pasted__pasted__pSphere1
+    3300008: stage01:pasted__pasted__pCube3
+    3300010: stage01:pasted__pCube1
+    3300012: stage01:pasted__pCube2
+    3300014: stage01:pasted__pCube22
+    3300016: stage01:pasted__pCube3
+    3300018: stage01:pCube10
+    3300020: stage01:pCube3
+    3300022: stage01:pSphere2
+    3300024: stage02:pasted__pasted__pasted__pSphere1
+    3300026: stage03:pasted__pasted__pasted__pasted__pSphere1
+    3300028: stage03:pasted__pasted__pasted__pSphere1
+    3300030: stage04:pasted__pasted__pasted__pSphere1
+    4300000: floor
+    4300002: frame
+    4300004: stage01:pCube3
+    4300006: stage01:pCube10
+    4300008: stage01:pSphere2
+    4300010: stage01:pasted__pCube2
+    4300012: stage01:pasted__pCube3
+    4300014: stage01:pasted__pCube1
+    4300016: stage01:pasted__pasted__pCube3
+    4300018: stage03:pasted__pasted__pasted__pSphere1
+    4300020: stage03:pasted__pasted__pasted__pasted__pSphere1
+    4300022: stage04:pasted__pasted__pasted__pSphere1
+    4300024: stage01:pasted__pCube22
+    4300026: stage01:pasted__pasted__pasted__pSphere1
+    4300028: stage01:pasted__pasted__pasted__pasted__pSphere1
+    4300030: stage02:pasted__pasted__pasted__pSphere1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

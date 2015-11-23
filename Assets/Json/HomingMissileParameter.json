@@ -1,0 +1,17 @@
+{
+    "WeaponHomingMissileParameter": [
+        {
+            "ID": 0,
+            "Name": "Default00",
+            "AttackPower" : 5.0,
+            "BulletMaxRange": 20.0,
+            "ExplosiveRange": 10.0,
+            "BulletsNumber" : 20,
+            "BulletSpeed": 7.0,
+            "ReloadTime": 2.0,
+            "LockOnTime" : 3.0,
+            "ExplanatoryText": "ホーミングミサイル00"
+        }
+    ]
+}
+

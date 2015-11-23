@@ -1,0 +1,25 @@
+﻿{
+    "Debug": false,
+
+    "Position": {
+        "X": 0.0,
+        "Y": 0.35,
+        "Z": -0.01
+    },
+
+    "Movement": {
+        "X": 1.0,
+        "Y": 1.0,
+        "Z": 1.0
+    },
+
+    "ReferencePoint": {
+        "X": 100.0
+    },
+
+    "ReactionValue": 0.1,
+
+    "ReactionBoostValue": 0.7,
+
+    "ReactionJumpValue": 0.4
+}
