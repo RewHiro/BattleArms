@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
-public class Identificationer : MonoBehaviour
+public class Identificationer : NetworkBehaviour
 {
 
     [SerializeField]
@@ -16,6 +17,7 @@ public class Identificationer : MonoBehaviour
 
     void Awake()
     {
+        if (!isLocalPlayer) return;
         ReadJson();
     }
 

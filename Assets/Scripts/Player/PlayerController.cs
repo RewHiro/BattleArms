@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using Leap;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
+
+    [SerializeField]
+    GameObject main_camera_ = null;
 
     float REACTION_BOOST_VALUE = 0.8f;
     float REACTION_JUMP_VALUE = 0.4f;
@@ -270,10 +274,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        leap_contoller_ = FindObjectOfType<HandController>().GetLeapController();
+        if (!isLocalPlayer) return;
+        leap_contoller_ = GetComponentInChildren<HandController>().GetLeapController();
         var leap_motion_parameter = FindObjectOfType<LeapMotionParameter>();
         REACTION_BOOST_VALUE = leap_motion_parameter.getReactionBoostValue;
         REACTION_JUMP_VALUE = leap_motion_parameter.getReactionJumpValue;
+        main_camera_.SetActive(true);
     }
 
 

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class BoostManager : MonoBehaviour
+public class BoostManager : NetworkBehaviour
 {
     public float boostValue { private set; get; }
 
     void Start()
     {
+        if (!isLocalPlayer) return;
         var id = GetComponent<Identificationer>().id;
         boostValue = FindObjectOfType<AirFrameParameter>().GetMaxBoostValue(id);
     }

@@ -5,6 +5,7 @@ public class PlayerRotater : NetworkBehaviour
 {
     void Start()
     {
+        if (!isLocalPlayer) return;
         player_controller_ = GetComponent<PlayerController>();
 
         var air_frame_parameter = FindObjectOfType<AirFrameParameter>();
@@ -15,6 +16,7 @@ public class PlayerRotater : NetworkBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer) return;
         var rotate_value = player_controller_.getRotateValue;
         if (rotate_value == 0.0f) return;
 

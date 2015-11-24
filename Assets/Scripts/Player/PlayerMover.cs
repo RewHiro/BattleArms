@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : NetworkBehaviour
 {
     void Start()
     {
+        if (!isLocalPlayer) return;
         player_controller_ = GetComponent<PlayerController>();
 
         var air_frame_parameter = FindObjectOfType<AirFrameParameter>();
@@ -17,6 +18,7 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer) return;
         Move();
     }
 
@@ -25,6 +27,7 @@ public class PlayerMover : MonoBehaviour
 
         var vartical_axis = player_controller_.getInputVerticalValue;
         var horizontal_axis = player_controller_.getInputHorizontalValue;
+
 
         if (vartical_axis == 0.0f &&
             horizontal_axis == 0.0f)

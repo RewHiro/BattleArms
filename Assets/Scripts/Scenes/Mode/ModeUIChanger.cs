@@ -21,7 +21,5 @@ public class ModeUIChanger : MonoBehaviour
     {
         online_ui_.SetActive(false);
         offline_ui_.SetActive(true);
-        var active_object = FindObjectOfType<MyNetworkLobbyManager>().gameObject;
-        Destroy(active_object);
     }
 }

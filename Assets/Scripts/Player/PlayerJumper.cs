@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerJumper : MonoBehaviour
+public class PlayerJumper : NetworkBehaviour
 {
 
     const int STAGE_LAYER = 11;
 
     void Start()
     {
+
+        if (!isLocalPlayer) return;
         player_controller_ = GetComponent<PlayerController>();
 
         var air_frame_parameter = FindObjectOfType<AirFrameParameter>();
@@ -20,6 +22,7 @@ public class PlayerJumper : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isLocalPlayer) return;
         if (is_jump_) return;
         if (!player_controller_.isInputJump) return;
         rigidbody_.AddForce(Vector3.up * JUMP_POWER, ForceMode.Impulse);
@@ -28,6 +31,7 @@ public class PlayerJumper : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!isLocalPlayer) return;
         if (collision.gameObject.layer != STAGE_LAYER) return;
         is_jump_ = false;
     }
