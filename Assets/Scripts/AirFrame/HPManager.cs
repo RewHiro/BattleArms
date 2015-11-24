@@ -3,7 +3,23 @@ using UnityEngine.Networking;
 
 public class HPManager : NetworkBehaviour
 {
-    public float hp { private set; get; }
+    [SerializeField]
+    int layer_num_ = 3;
+
+    [SyncVar]
+    float hp_ = 100;
+
+    public float hp
+    {
+        private set
+        {
+            hp_ = value;
+        }
+        get
+        {
+            return hp_;
+        }
+    }
 
     void Start()
     {
@@ -14,6 +30,9 @@ public class HPManager : NetworkBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //　ダメージ処理
+        if (!isServer) return;
+        if (collision.gameObject.layer != layer_num_) return;
+        hp -= 10;
+        Destroy(collision.gameObject);
     }
 }
