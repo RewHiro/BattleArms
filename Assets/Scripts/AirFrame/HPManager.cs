@@ -6,7 +6,7 @@ public class HPManager : NetworkBehaviour
     [SerializeField]
     int layer_num_ = 3;
 
-    [SyncVar]
+    [SyncVar (hook = "OnHPChanged")]
     float hp_ = 100;
 
     public float hp
@@ -28,11 +28,15 @@ public class HPManager : NetworkBehaviour
         hp = FindObjectOfType<AirFrameParameter>().GetMaxHP(id);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (!isServer) return;
-        if (collision.gameObject.layer != layer_num_) return;
+        if (collider.gameObject.layer != layer_num_) return;
         hp -= 10;
-        Destroy(collision.gameObject);
+        Destroy(collider.gameObject);
+    }
+
+    void OnHPChanged(float hp)
+    {
+        hp_ = hp;
     }
 }

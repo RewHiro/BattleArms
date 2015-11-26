@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
 public class Weapon : MonoBehaviour
 {
+
+    [SerializeField]
+    GameObject arm_ = null;
+
     virtual public void OnAttack() { }
     virtual public void OnNotAttack() { }
 

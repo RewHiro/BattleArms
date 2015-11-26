@@ -22,9 +22,11 @@ public class PlayerAttacker : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
+        Debug.Log(gameObject.name);
         AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
     }
+
 
     void AttackWithWeapon(bool input, Weapon weapon)
     {

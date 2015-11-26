@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
 public class AssaultRifle : Weapon
 {
@@ -27,6 +27,7 @@ public class AssaultRifle : Weapon
             force = gameObject.transform.forward * Speed;
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
             shot_count_ = 0.1f;
+            NetworkServer.Spawn(obj);
         }
         shot_count_ -= Time.deltaTime;
     }
