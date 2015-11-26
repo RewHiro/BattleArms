@@ -8,26 +8,29 @@ public class AssaultRifle : Weapon
     [SerializeField]
     float Speed = 100;//速度
 
-    GameObject bullet = null;
+    BulletCreater bullet_creater_ = null;
 
     void Start()
     {
-        bullet = FindObjectOfType<BulletCreater>().getAssaulutBullet;
+        Debug.Log("OK");
+        bullet_creater_ = FindObjectOfType<BulletCreater>();
     }
 
     public override void OnAttack()
     {
         if (shot_count_ <= 0.0f)
         {
-            var obj = Instantiate(bullet);
-            obj.transform.position = gameObject.transform.position;
-            obj.transform.Translate(gameObject.transform.forward * 2.5f);
-            obj.transform.rotation = gameObject.transform.rotation;
-            Vector3 force;
-            force = gameObject.transform.forward * Speed;
-            obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            Debug.Log(FindObjectOfType<BulletCreater>());
+            //var obj = Instantiate(bullet);
+            //obj.transform.position = gameObject.transform.position;
+            //obj.transform.Translate(gameObject.transform.forward * 2.5f);
+            //obj.transform.rotation = gameObject.transform.rotation;
+            //Vector3 force;
+            //force = gameObject.transform.forward * Speed;
+            //obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            //shot_count_ = 0.1f;
+            //NetworkServer.Spawn(obj);
             shot_count_ = 0.1f;
-            NetworkServer.Spawn(obj);
         }
         shot_count_ -= Time.deltaTime;
     }
@@ -36,6 +39,7 @@ public class AssaultRifle : Weapon
     {
         shot_count_ = 0.0f;
     }
+
 
     float shot_count_ = 0.0f;
 }

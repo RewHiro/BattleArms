@@ -13,7 +13,6 @@ public class PlayerMover : NetworkBehaviour
 
         MOVE_SPEED = air_frame_parameter.GetMoveSpeed(id);
         BOOST_POWER = air_frame_parameter.GetBoostPower(id);
-
     }
 
     void Update()
@@ -27,7 +26,6 @@ public class PlayerMover : NetworkBehaviour
 
         var vartical_axis = player_controller_.getInputVerticalValue;
         var horizontal_axis = player_controller_.getInputHorizontalValue;
-
 
         if (vartical_axis == 0.0f &&
             horizontal_axis == 0.0f)
@@ -61,7 +59,7 @@ public class PlayerMover : NetworkBehaviour
         }
 
         gameObject.transform.localPosition +=
-            direction.normalized * MOVE_SPEED * slope * boost_value * Time.deltaTime;
+             direction.normalized * MOVE_SPEED * slope * boost_value * Time.deltaTime;
     }
 
     PlayerController player_controller_ = null;

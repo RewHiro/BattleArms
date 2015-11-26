@@ -22,7 +22,6 @@ public class PlayerAttacker : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
-        Debug.Log(gameObject.name);
         AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
     }
@@ -33,12 +32,31 @@ public class PlayerAttacker : NetworkBehaviour
         if (weapon == null) throw new Exception();
         if (input)
         {
-            weapon.OnAttack();
+            //weapon.OnAttack();
+            CmdCreate();
         }
         else
         {
             weapon.OnNotAttack();
         }
+    }
+
+
+    //　true falseで返す(Weapon)
+    //　引数でパラメータ調整
+    [Command]
+    public virtual void CmdCreate()
+    {
+        Debug.Log("OK");
+        
+        var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
+        obj.transform.position = gameObject.transform.position;
+        obj.transform.Translate(gameObject.transform.forward * 2.5f);
+        obj.transform.rotation = gameObject.transform.rotation;
+        Vector3 force;
+        force = gameObject.transform.forward * 100;
+        obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        NetworkServer.Spawn(obj);
     }
 
 

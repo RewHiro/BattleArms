@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 
 public class Weapon : MonoBehaviour
 {
-
-    [SerializeField]
-    GameObject arm_ = null;
+    BulletCreater bullet_creater_ = null;
 
     virtual public void OnAttack() { }
     virtual public void OnNotAttack() { }
