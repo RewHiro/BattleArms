@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
+using System.Collections.Generic;
 
-public class Weapon : NetworkBehaviour
+public class Weapon : MonoBehaviour
 {
     BulletCreater bullet_creater_ = null;
 
@@ -21,7 +21,7 @@ public class Weapon : NetworkBehaviour
     virtual public void OnAttack() { }
     virtual public void OnNotAttack() { }
     virtual public bool CanShot() { return false; }
-    virtual public GameObject CreateBullet() { return new GameObject(); }
+    virtual public IEnumerable<GameObject> CreateBullet() { return null; }
 
     protected int id_ = 0;
     protected string name_ = "";

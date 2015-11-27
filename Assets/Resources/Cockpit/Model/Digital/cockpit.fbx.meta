@@ -1,27 +1,21 @@
 fileFormatVersion: 2
-guid: c4c451fefbeb4de448a9f4368716952a
-timeCreated: 1448595747
+guid: 391d12ece7c90ed43b54d055fd94edee
+timeCreated: 1448665532
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: back
-    100002: //RootNode
-    100004: kokkupitto4:back
-    100006: kokkupitto4:camera1
-    100008: kokkupitto4:kokkupitto4:kokkupitto3:hito:humen:bottom
-    100010: kokkupitto4:left
-    100012: polySurface429
-    400000: back
-    400002: //RootNode
-    400004: kokkupitto4:back
-    400006: kokkupitto4:camera1
-    400008: kokkupitto4:kokkupitto4:kokkupitto3:hito:humen:bottom
-    400010: kokkupitto4:left
-    400012: polySurface429
-    2300000: polySurface429
-    3300000: polySurface429
-    4300000: polySurface429
+    100000: //RootNode
+    100002: kokkupitto5:kokkupitto4:camera1
+    100004: kokkupitto5:kokkupitto4:kokkupitto4:kokkupitto3:polySurface172
+    100006: kokkupitto5:kokkupitto4:left
+    400000: //RootNode
+    400002: kokkupitto5:kokkupitto4:camera1
+    400004: kokkupitto5:kokkupitto4:kokkupitto4:kokkupitto3:polySurface172
+    400006: kokkupitto5:kokkupitto4:left
+    2300000: kokkupitto5:kokkupitto4:kokkupitto4:kokkupitto3:polySurface172
+    3300000: kokkupitto5:kokkupitto4:kokkupitto4:kokkupitto3:polySurface172
+    4300000: kokkupitto5:kokkupitto4:kokkupitto4:kokkupitto3:polySurface172
     9500000: //RootNode
   materials:
     importMaterials: 1

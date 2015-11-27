@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
+using System.Collections.Generic;
 
 public class AssaultRifle : Weapon
 {
@@ -34,8 +34,9 @@ public class AssaultRifle : Weapon
         return shot_count_ <= 0.0f;
     }
 
-    public override GameObject CreateBullet()
+    public override IEnumerable<GameObject> CreateBullet()
     {
+        List<GameObject> bullets = new List<GameObject>();
         var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
         obj.transform.position = gameObject.transform.position;
         obj.transform.Translate(gameObject.transform.forward * 2.5f);
@@ -43,7 +44,8 @@ public class AssaultRifle : Weapon
         Vector3 force;
         force = gameObject.transform.forward * 100;
         obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-        return obj;
+        bullets.Add(obj);
+        return bullets;
     }
 
 

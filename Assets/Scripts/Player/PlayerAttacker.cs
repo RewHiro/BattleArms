@@ -14,7 +14,7 @@ public class PlayerAttacker : NetworkBehaviour
     void Start()
     {
         player_controller_ = GetComponent<PlayerController>();
-        right_weapon_ = right_weapon_object_.AddComponent<AssaultRifle>();
+        right_weapon_ = right_weapon_object_.AddComponent<ShotGun>();
         right_weapon_.SetType(WeaponType.RIGHT);
 
         left_weapon_ = left_weapon_object_.AddComponent<AssaultRifle>();
@@ -57,13 +57,21 @@ public class PlayerAttacker : NetworkBehaviour
     [Command]
     void CmdCreateRightBullet()
     {
-        NetworkServer.Spawn(right_weapon_.CreateBullet());
+        var itr = right_weapon_.CreateBullet().GetEnumerator();
+        while (itr.MoveNext())
+        {
+            NetworkServer.Spawn(itr.Current);
+        }
     }
 
     [Command]
     void CmdCreateLeftBullet()
     {
-        NetworkServer.Spawn(left_weapon_.CreateBullet());
+        var itr = left_weapon_.CreateBullet().GetEnumerator();
+        while (itr.MoveNext())
+        {
+            NetworkServer.Spawn(itr.Current);
+        }
     }
 
     PlayerController player_controller_ = null;
