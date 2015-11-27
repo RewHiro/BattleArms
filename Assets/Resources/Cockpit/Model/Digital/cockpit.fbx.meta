@@ -1,15 +1,27 @@
 fileFormatVersion: 2
-guid: 866cc2767d73eb44d8cb4fb0940c4d16
-timeCreated: 1448594172
+guid: c4c451fefbeb4de448a9f4368716952a
+timeCreated: 1448595747
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pCube1
+    100000: back
+    100002: //RootNode
+    100004: kokkupitto4:back
+    100006: kokkupitto4:camera1
+    100008: kokkupitto4:kokkupitto4:kokkupitto3:hito:humen:bottom
+    100010: kokkupitto4:left
+    100012: polySurface429
+    400000: back
+    400002: //RootNode
+    400004: kokkupitto4:back
+    400006: kokkupitto4:camera1
+    400008: kokkupitto4:kokkupitto4:kokkupitto3:hito:humen:bottom
+    400010: kokkupitto4:left
+    400012: polySurface429
+    2300000: polySurface429
+    3300000: polySurface429
+    4300000: polySurface429
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -34,7 +46,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 50
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

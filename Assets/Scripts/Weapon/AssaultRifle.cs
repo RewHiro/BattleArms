@@ -12,7 +12,6 @@ public class AssaultRifle : Weapon
 
     void Start()
     {
-        Debug.Log("OK");
         bullet_creater_ = FindObjectOfType<BulletCreater>();
     }
 
@@ -20,16 +19,6 @@ public class AssaultRifle : Weapon
     {
         if (shot_count_ <= 0.0f)
         {
-            Debug.Log(FindObjectOfType<BulletCreater>());
-            //var obj = Instantiate(bullet);
-            //obj.transform.position = gameObject.transform.position;
-            //obj.transform.Translate(gameObject.transform.forward * 2.5f);
-            //obj.transform.rotation = gameObject.transform.rotation;
-            //Vector3 force;
-            //force = gameObject.transform.forward * Speed;
-            //obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-            //shot_count_ = 0.1f;
-            //NetworkServer.Spawn(obj);
             shot_count_ = 0.1f;
         }
         shot_count_ -= Time.deltaTime;
@@ -38,6 +27,23 @@ public class AssaultRifle : Weapon
     public override void OnNotAttack()
     {
         shot_count_ = 0.0f;
+    }
+
+    public override bool CanShot()
+    {
+        return shot_count_ <= 0.0f;
+    }
+
+    public override GameObject CreateBullet()
+    {
+        var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
+        obj.transform.position = gameObject.transform.position;
+        obj.transform.Translate(gameObject.transform.forward * 2.5f);
+        obj.transform.rotation = gameObject.transform.rotation;
+        Vector3 force;
+        force = gameObject.transform.forward * 100;
+        obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        return obj;
     }
 
 

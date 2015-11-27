@@ -1,15 +1,37 @@
 fileFormatVersion: 2
-guid: 866cc2767d73eb44d8cb4fb0940c4d16
-timeCreated: 1448594172
+guid: 4fd06aeced56d5f4c9dc7e61ae25e213
+timeCreated: 1448597114
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pCube1
+    100000: endLine
+    100002: haikei
+    100004: haikei1
+    100006: hitBox
+    100008: stage
+    100010: //RootNode
+    400000: endLine
+    400002: haikei
+    400004: haikei1
+    400006: hitBox
+    400008: stage
+    400010: //RootNode
+    2300000: endLine
+    2300002: haikei
+    2300004: haikei1
+    2300006: hitBox
+    2300008: stage
+    3300000: endLine
+    3300002: haikei
+    3300004: haikei1
+    3300006: hitBox
+    3300008: stage
+    4300000: haikei
+    4300002: stage
+    4300004: hitBox
+    4300006: haikei1
+    4300008: endLine
     9500000: //RootNode
   materials:
     importMaterials: 1

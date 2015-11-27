@@ -13,10 +13,12 @@ public class PlayerAttacker : NetworkBehaviour
 
     void Start()
     {
-        if (!isLocalPlayer) return;
         player_controller_ = GetComponent<PlayerController>();
         right_weapon_ = right_weapon_object_.AddComponent<AssaultRifle>();
+        right_weapon_.SetType(WeaponType.RIGHT);
+
         left_weapon_ = left_weapon_object_.AddComponent<AssaultRifle>();
+        left_weapon_.SetType(WeaponType.LEFT);
     }
 
     void FixedUpdate()
@@ -26,14 +28,25 @@ public class PlayerAttacker : NetworkBehaviour
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
     }
 
-
     void AttackWithWeapon(bool input, Weapon weapon)
     {
         if (weapon == null) throw new Exception();
+
         if (input)
         {
-            //weapon.OnAttack();
-            CmdCreate();
+            weapon.OnAttack();
+            if (weapon.CanShot())
+            {
+                switch (weapon.getType)
+                {
+                    case WeaponType.LEFT:
+                        CmdCreateLeftBullet();
+                        break;
+                    case WeaponType.RIGHT:
+                        CmdCreateRightBullet();
+                        break;
+                }
+            }
         }
         else
         {
@@ -41,24 +54,17 @@ public class PlayerAttacker : NetworkBehaviour
         }
     }
 
-
-    //　true falseで返す(Weapon)
-    //　引数でパラメータ調整
     [Command]
-    public virtual void CmdCreate()
+    void CmdCreateRightBullet()
     {
-        Debug.Log("OK");
-        
-        var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
-        obj.transform.position = gameObject.transform.position;
-        obj.transform.Translate(gameObject.transform.forward * 2.5f);
-        obj.transform.rotation = gameObject.transform.rotation;
-        Vector3 force;
-        force = gameObject.transform.forward * 100;
-        obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-        NetworkServer.Spawn(obj);
+        NetworkServer.Spawn(right_weapon_.CreateBullet());
     }
 
+    [Command]
+    void CmdCreateLeftBullet()
+    {
+        NetworkServer.Spawn(left_weapon_.CreateBullet());
+    }
 
     PlayerController player_controller_ = null;
     Weapon right_weapon_ = null;
