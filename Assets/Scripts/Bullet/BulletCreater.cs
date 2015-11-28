@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class BulletCreater : MonoBehaviour
+public class BulletCreater : NetworkBehaviour
 {
     [SerializeField]
     GameObject assalut_bullet_ = null;

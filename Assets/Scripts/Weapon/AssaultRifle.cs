@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
+using System.Collections.Generic;
 
 public class AssaultRifle : Weapon
 {
@@ -8,26 +8,18 @@ public class AssaultRifle : Weapon
     [SerializeField]
     float Speed = 100;//速度
 
-    GameObject bullet = null;
+    BulletCreater bullet_creater_ = null;
 
     void Start()
     {
-        bullet = FindObjectOfType<BulletCreater>().getAssaulutBullet;
+        bullet_creater_ = FindObjectOfType<BulletCreater>();
     }
 
     public override void OnAttack()
     {
         if (shot_count_ <= 0.0f)
         {
-            var obj = Instantiate(bullet);
-            obj.transform.position = gameObject.transform.position;
-            obj.transform.Translate(gameObject.transform.forward * 2.5f);
-            obj.transform.rotation = gameObject.transform.rotation;
-            Vector3 force;
-            force = gameObject.transform.forward * Speed;
-            obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
             shot_count_ = 0.1f;
-            NetworkServer.Spawn(obj);
         }
         shot_count_ -= Time.deltaTime;
     }
@@ -36,6 +28,26 @@ public class AssaultRifle : Weapon
     {
         shot_count_ = 0.0f;
     }
+
+    public override bool CanShot()
+    {
+        return shot_count_ <= 0.0f;
+    }
+
+    public override IEnumerable<GameObject> CreateBullet()
+    {
+        List<GameObject> bullets = new List<GameObject>();
+        var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
+        obj.transform.position = gameObject.transform.position;
+        obj.transform.Translate(gameObject.transform.forward * 2.5f);
+        obj.transform.rotation = gameObject.transform.rotation;
+        Vector3 force;
+        force = gameObject.transform.forward * 100;
+        obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        bullets.Add(obj);
+        return bullets;
+    }
+
 
     float shot_count_ = 0.0f;
 }
