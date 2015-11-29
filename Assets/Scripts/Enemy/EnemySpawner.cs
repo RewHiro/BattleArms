@@ -13,7 +13,10 @@ public class EnemySpawner : NetworkBehaviour
     {
         base.OnStartServer();
         CreateEnemy(0);
+
+        if (MyNetworkLobbyManager.instance.numPlayers != 2) return;
         CreateEnemy(1);
+
     }
 
     void CreateEnemy(int spawn_num)
@@ -22,7 +25,7 @@ public class EnemySpawner : NetworkBehaviour
             enmey_prefab,
             enemy_spawn_point_[spawn_num].transform.position,
             enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
-
+        enemy.name = "Enemy" + spawn_num.ToString();
         NetworkServer.Spawn(enemy);
     }
 }

@@ -4,6 +4,17 @@ using System.IO;
 
 public class MyNetworkLobbyManager : NetworkLobbyManager
 {
+
+    static public MyNetworkLobbyManager instance
+    {
+        get
+        {
+            return instance_;
+        }
+    }
+
+    static MyNetworkLobbyManager instance_ = null;
+
     bool is_host_ = false;
     bool is_start_ = false;
 
@@ -29,6 +40,26 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         }
     }
 
+    public override void OnLobbyServerSceneChanged(string sceneName)
+    {
+        base.OnLobbyServerSceneChanged(sceneName);
+        foreach (var player in FindObjectsOfType<NetworkLobbyPlayer>())
+        {
+            if (player.localPlayerAuthority)
+            {
+
+                Destroy(player.gameObject);
+            }
+        }
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+        instance_.StopClient();
+
+    }
+
     public override void OnLobbyClientConnect(NetworkConnection conn)
     {
         base.OnLobbyClientConnect(conn);
@@ -37,7 +68,7 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
-    {        
+    {
         base.OnServerAddPlayer(conn, playerControllerId);
         if (numPlayers != 2) return;
         is_start_ = false;
@@ -46,6 +77,8 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
 
     void Start()
     {
+        instance_ = this;
+
         var json_text = File.ReadAllText(Utility.JSON_PATH + JSON_FILE_NAME);
         JsonNode json = JsonNode.Parse(json_text);
         is_host_ = json["IsHost"].Get<bool>();
