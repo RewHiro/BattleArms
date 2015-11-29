@@ -11,14 +11,21 @@ public class PlayerAttacker : NetworkBehaviour
     [SerializeField]
     GameObject left_weapon_object_ = null;
 
+    [SerializeField]
+    GameObject back_weapon_object_ = null;
+
     void Start()
     {
         player_controller_ = GetComponent<PlayerController>();
+
         right_weapon_ = right_weapon_object_.AddComponent<ShotGun>();
         right_weapon_.SetType(WeaponType.RIGHT);
 
-        left_weapon_ = left_weapon_object_.AddComponent<AssaultRifle>();
+        left_weapon_ = left_weapon_object_.AddComponent<Rocket>();
         left_weapon_.SetType(WeaponType.LEFT);
+
+        back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
+        back_weapon_.SetType(WeaponType.BACK);
     }
 
     void FixedUpdate()
@@ -26,6 +33,7 @@ public class PlayerAttacker : NetworkBehaviour
         if (!isLocalPlayer) return;
         AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
+        AttackWithWeapon(player_controller_.isInputBothHandAttack, back_weapon_);
     }
 
     void AttackWithWeapon(bool input, Weapon weapon)
@@ -44,6 +52,9 @@ public class PlayerAttacker : NetworkBehaviour
                         break;
                     case WeaponType.RIGHT:
                         CmdCreateRightBullet();
+                        break;
+                    case WeaponType.BACK:
+                        CmdCreateBackBullet();
                         break;
                 }
             }
@@ -68,6 +79,16 @@ public class PlayerAttacker : NetworkBehaviour
     void CmdCreateLeftBullet()
     {
         var itr = left_weapon_.CreateBullet().GetEnumerator();
+        while (itr.MoveNext())
+        {
+            NetworkServer.Spawn(itr.Current);
+        }
+    }
+
+    [Command]
+    void CmdCreateBackBullet()
+    {
+        var itr = back_weapon_.CreateBullet().GetEnumerator();
         while (itr.MoveNext())
         {
             NetworkServer.Spawn(itr.Current);

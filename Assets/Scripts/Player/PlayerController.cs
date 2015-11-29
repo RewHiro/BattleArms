@@ -199,6 +199,19 @@ public class PlayerController : NetworkBehaviour
 
     #endregion
 
+    #region both_hands
+
+    public bool isInputBothHandAttack
+    {
+        get
+        {
+            if (!leap_contoller_.IsConnected) return Input.GetKey(KeyCode.LeftControl);
+            return isInputLeftAttack && isInputRightAttack;
+        }
+    }
+
+    #endregion
+
     #endregion
 
     #region boost property
