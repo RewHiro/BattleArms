@@ -7,9 +7,14 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
     }
-    public float force = 100.0f;
-    public int jumpCount = 0;       // ジャンプした回数
-    public const int MAX_JUMP_COUNT = 2;    // ジャンプできる最大回数
+    [SerializeField]
+    GameObject bullet;
+    [SerializeField]
+    float force = 100.0f;
+    [SerializeField]
+    int jumpCount = 0;       // ジャンプした回数
+    [SerializeField]
+    const int MAX_JUMP_COUNT = 2;    // ジャンプできる最大回数
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -33,12 +38,17 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKey("right")|| Input.GetKey("e"))
         {
-            transform.Rotate(0, 5, 0);
+            transform.Rotate(0, 3, 0);
         }
         if (Input.GetKey("left")|| Input.GetKey("q"))
         {
-            transform.Rotate(0, -5, 0);
+            transform.Rotate(0, -3, 0);
         }
+        if (Input.GetKeyDown("space"))
+        {
+            Instantiate(bullet, new Vector3(transform.position.x+3, transform.position.y, transform.position.z), transform.rotation);
+        }
+
         if (jumpCount < MAX_JUMP_COUNT && Input.GetKey("x"))
         {
             jumpCount++;
