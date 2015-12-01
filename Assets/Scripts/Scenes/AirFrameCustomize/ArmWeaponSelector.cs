@@ -9,8 +9,12 @@ public class ArmWeaponSelector : MonoBehaviour
 
     GameObject left_weapon_ = null;
 
+    AirFrameManager air_frame_manager_ = null;
+
     public void ChangeRightWeapon(int id)
     {
+        air_frame_manager_.rightWeaponId = id;
+
         Destroy(right_weapon_.transform.GetChild(0).gameObject);
 
         var select_weapon = weapon_list_[id];
@@ -27,6 +31,8 @@ public class ArmWeaponSelector : MonoBehaviour
 
     public void ChangeLeftWeapon(int id)
     {
+        air_frame_manager_.leftWeaponId = id;
+
         Destroy(left_weapon_.transform.GetChild(0).gameObject);
 
         var select_weapon = weapon_list_[id];
@@ -49,6 +55,6 @@ public class ArmWeaponSelector : MonoBehaviour
     {
         right_weapon_ = GameObject.FindGameObjectWithTag("RightWeapon");
         left_weapon_ = GameObject.FindGameObjectWithTag("LeftWeapon");
+        air_frame_manager_ = FindObjectOfType<AirFrameManager>();
     }
-
 }

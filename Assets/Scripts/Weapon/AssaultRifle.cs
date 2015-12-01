@@ -44,6 +44,9 @@ public class AssaultRifle : Weapon
         Vector3 force;
         force = gameObject.transform.forward * 100;
         obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
+        Destroy(obj, 3.0f);
+
         bullets.Add(obj);
         return bullets;
     }

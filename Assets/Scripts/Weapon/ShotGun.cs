@@ -42,6 +42,9 @@ public class ShotGun : Weapon
             var random = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
             force = (gameObject.transform.forward + random) * 100;
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
+            Destroy(obj, 3.0f);
+
             bullets.Add(obj);
         }
         return bullets;

@@ -2,6 +2,8 @@
 using System;
 using UnityEngine.Networking;
 
+
+// ネットワーク専用のイベント登録があるからそれでやった方がよいかも
 public class PlayerAttacker : NetworkBehaviour
 {
 
@@ -14,18 +16,37 @@ public class PlayerAttacker : NetworkBehaviour
     [SerializeField]
     GameObject back_weapon_object_ = null;
 
+    public override void PreStartClient()
+    {
+        base.PreStartClient();
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+    }
+
     void Start()
     {
         player_controller_ = GetComponent<PlayerController>();
 
-        right_weapon_ = right_weapon_object_.AddComponent<ShotGun>();
-        right_weapon_.SetType(WeaponType.RIGHT);
-
-        left_weapon_ = left_weapon_object_.AddComponent<Rocket>();
-        left_weapon_.SetType(WeaponType.LEFT);
-
         back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
         back_weapon_.SetType(WeaponType.BACK);
+    }
+
+    void Update()
+    {
+        if (right_weapon_ == null)
+        {
+            right_weapon_ = right_weapon_object_.GetComponentInChildren<Weapon>();
+            right_weapon_.SetType(WeaponType.RIGHT);
+        }
+
+        if (left_weapon_ == null)
+        {
+            left_weapon_ = left_weapon_object_.GetComponentInChildren<Weapon>();
+            left_weapon_.SetType(WeaponType.LEFT);
+        }
     }
 
     void FixedUpdate()
