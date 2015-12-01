@@ -32,10 +32,15 @@ public class TargetCircle : MonoBehaviour
     void Update()
     {
         NearEnemySelect();
-        Debug.Log(Is_Hit_Enemy_);
+    //    Debug.Log(Is_Hit_Enemy_);
     }
 
-    int  NearEnemySelect()
+    public GameObject GetEnemyObject
+    {
+        get { return enemy_[NearEnemySelect()]; }
+    }
+
+  public  int  NearEnemySelect()
     {
         enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         enemy_camera_position_ = new Vector3[enemy_.Length];
