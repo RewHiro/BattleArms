@@ -8,21 +8,21 @@ using System.Linq;
 
 public class ServerManager : NetworkBehaviour
 {
-
-    GameObject local_player_ = null;
-    GameObject remote_player_ = null;
-
+    GameObject[] players = null;
     GameObject[] enemys = null;
 
     public bool goResult
     {
         get
         {
-            if (local_player_ == null) return false;
-            if (remote_player_ == null) return false;
+            List<HPManager> player_hp_managers = new List<HPManager>();
+            foreach (var player in players)
+            {
+                player_hp_managers.Add(player.GetComponent<HPManager>());
+            }
 
-            if (!(local_player_.GetComponent<HPManager>().isActive &&
-                remote_player_.GetComponent<HPManager>().isActive)) return true;
+            if (player_hp_managers.All(player => !player.isActive)) return true;
+
             List<HPManager> enemy_hp_managers = new List<HPManager>();
 
             foreach (var enemy in enemys)
@@ -39,40 +39,24 @@ public class ServerManager : NetworkBehaviour
     {
         get
         {
-            if (local_player_.GetComponent<HPManager>().isActive &&
-                remote_player_.GetComponent<HPManager>().isActive) return true;
+            foreach (var player in players)
+            {
+                var hp_manager = player.GetComponent<HPManager>();
+                if (hp_manager.isActive) return true;
+            }
             return false;
         }
     }
 
     void Start()
     {
-        FindPlayers();
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     void Update()
     {
-        FindPlayers();
-
         Result();
-    }
-
-    void FindPlayers()
-    {
-        if (remote_player_ != null) return;
-        var players = FindObjectsOfType<PlayerController>();
-        foreach (var player in players)
-        {
-            if (player.isLocalPlayer)
-            {
-                local_player_ = player.gameObject;
-            }
-            else
-            {
-                remote_player_ = player.gameObject;
-            }
-        }
     }
 
     void Result()

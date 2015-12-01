@@ -6,18 +6,22 @@ public class TitleTransit : MonoBehaviour
     [SerializeField]
     SceneType transit_scene_type_ = SceneType.MODE;
 
+    GameObject customize_player_robot_ = null;
+
     HandController hand_contoller_ = null;
 
     void Start()
     {
         hand_contoller_ = FindObjectOfType<HandController>();
+        customize_player_robot_ = GameObject.FindGameObjectWithTag("Player");
+        customize_player_robot_.SetActive(false);
     }
 
     void Update()
     {
         if (!isTransit) return;
         FindObjectOfType<SceneManager>().Transition(transit_scene_type_);
-
+        customize_player_robot_.SetActive(true);
     }
 
     bool isTransit

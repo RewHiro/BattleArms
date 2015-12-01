@@ -1,14 +1,16 @@
 fileFormatVersion: 2
-guid: 261dcaebce04e39478f6ca39d369d82c
-timeCreated: 1448597679
+guid: 34cfbb2c8f7dfaa4e8ea332ed258174c
+timeCreated: 1448944974
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: ShotGun
+    100002: //RootNode
+    400000: ShotGun
+    400002: //RootNode
+    2300000: ShotGun
+    3300000: ShotGun
     4300000: ShotGun
     9500000: //RootNode
   materials:

@@ -1,14 +1,16 @@
 fileFormatVersion: 2
-guid: 2622de3d504a60944a4049e7881d424d
-timeCreated: 1448332304
+guid: e7829dfdcddd0e243940b1e85b635e89
+timeCreated: 1448945100
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: AssaultRifle
+    100002: //RootNode
+    400000: AssaultRifle
+    400002: //RootNode
+    2300000: AssaultRifle
+    3300000: AssaultRifle
     4300000: AssaultRifle
     9500000: //RootNode
   materials:

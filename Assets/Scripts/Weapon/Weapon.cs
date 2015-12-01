@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour
 {
-    BulletCreater bullet_creater_ = null;
 
     public WeaponType getType
     {
