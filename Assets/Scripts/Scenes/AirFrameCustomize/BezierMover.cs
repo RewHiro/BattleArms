@@ -33,6 +33,7 @@ public class BezierMover : MonoBehaviour
     void Start()
     {
         bezier_curve_ = GetComponent<BezierCurve>();
+        bezier_curve_[0].position = move_object_.transform.position;
     }
 
     void Update()
