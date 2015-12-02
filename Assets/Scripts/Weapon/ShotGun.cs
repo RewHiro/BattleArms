@@ -39,8 +39,13 @@ public class ShotGun : Weapon
             obj.transform.Translate(gameObject.transform.forward * 1.5f);
             obj.transform.rotation = gameObject.transform.rotation;
             Vector3 force;
+
+            var reticle_position = GameObject.FindGameObjectWithTag("LockOnSite").transform.position;
+
+            var direction = (reticle_position - transform.position).normalized;
+
             var random = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
-            force = (gameObject.transform.forward + random) * 100;
+            force = (direction + random) * 100;
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
             Destroy(obj, 3.0f);

@@ -42,7 +42,11 @@ public class AssaultRifle : Weapon
         obj.transform.Translate(gameObject.transform.forward * 2.5f);
         obj.transform.rotation = gameObject.transform.rotation;
         Vector3 force;
-        force = gameObject.transform.forward * 100;
+
+        var reticle_position = GameObject.FindGameObjectWithTag("LockOnSite").transform.position;
+
+        var direction = (reticle_position - transform.position).normalized;
+        force = direction * 100;
         obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
         Destroy(obj, 3.0f);
