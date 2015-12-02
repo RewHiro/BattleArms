@@ -12,6 +12,7 @@ public class StageCreater : MonoBehaviour
     {
         var create_stage_num = stage_prefabs_.Length < create_stage_num_ ?
             0 : create_stage_num_;
+        create_stage_num = FindObjectOfType<StageData>().stageNum;
         var stage = Instantiate<GameObject>(stage_prefabs_[create_stage_num]);
         stage.name = stage_prefabs_[create_stage_num_].name;
         stage.transform.SetParent(gameObject.transform);

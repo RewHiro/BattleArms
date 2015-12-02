@@ -90,6 +90,11 @@ public class LeftHandInput : MonoBehaviour
 
     void Start()
     {
+        if (Application.loadedLevelName == "offline")
+        {
+            Destroy(this);
+            return;
+        }
         hand_model_ = GetComponent<HandModel>();
         player_controller_ = FindObjectOfType<PlayerController>();
         player_controller_.SetLeftHandInput(this);

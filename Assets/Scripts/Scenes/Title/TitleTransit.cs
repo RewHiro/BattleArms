@@ -22,6 +22,8 @@ public class TitleTransit : MonoBehaviour
         if (!isTransit) return;
         FindObjectOfType<SceneManager>().Transition(transit_scene_type_);
         customize_player_robot_.SetActive(true);
+        var ovr_display = new OVRDisplay();
+        ovr_display.RecenterPose();
     }
 
     bool isTransit
