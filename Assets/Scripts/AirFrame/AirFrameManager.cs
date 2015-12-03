@@ -22,8 +22,18 @@ public class AirFrameManager : MonoBehaviour
         get; set;
     }
 
-    void Start()
+    static bool is_create_ = false;
+
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (!is_create_)
+        {
+            DontDestroyOnLoad(gameObject);
+            is_create_ = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -24,6 +24,7 @@ public class TitleTransit : MonoBehaviour
         customize_player_robot_.SetActive(true);
         var ovr_display = new OVRDisplay();
         ovr_display.RecenterPose();
+        FindObjectOfType<SoundManager>().PlaySE(3);
     }
 
     bool isTransit

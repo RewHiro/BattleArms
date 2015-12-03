@@ -52,6 +52,9 @@ public class AssaultRifle : Weapon
         Destroy(obj, 3.0f);
 
         bullets.Add(obj);
+
+        FindObjectOfType<SoundManager>().PlaySE(7);
+
         return bullets;
     }
 

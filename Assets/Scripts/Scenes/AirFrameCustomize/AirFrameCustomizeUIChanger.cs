@@ -18,23 +18,27 @@ public class AirFrameCustomizeUIChanger : MonoBehaviour
     {
         right_weapon_select_ui_.SetActive(false);
         air_frame_select_ui_.SetActive(true);
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     public void ChangeRightWeaponSelectUI()
     {
         right_weapon_select_ui_.SetActive(true);
         air_frame_select_ui_.SetActive(false);
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     public void ChangeLeftWeaponSelectUI()
     {
         left_weapon_select_ui_.SetActive(true);
         right_weapon_select_ui_.SetActive(false);
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     public void ChangeBackWeaponSelectUI()
     {
         back_weapon_select_ui_.SetActive(true);
         left_weapon_select_ui_.SetActive(false);
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 }

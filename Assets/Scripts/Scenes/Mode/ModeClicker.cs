@@ -9,6 +9,7 @@ public class ModeClicker : MonoBehaviour
         var my_network_lobby_manager = FindObjectOfType<MyNetworkLobbyManager>();
         my_network_lobby_manager.maxPlayers = 1;
         my_network_lobby_manager.StartHost();
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     public void LobbyStart()

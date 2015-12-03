@@ -27,6 +27,8 @@ public class ArmWeaponSelector : MonoBehaviour
         weapon_transform.localPosition = select_weapon_transform.position;
         weapon_transform.localRotation = select_weapon_transform.rotation;
         weapon_transform.localScale = select_weapon_transform.lossyScale;
+
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     public void ChangeLeftWeapon(int id)
@@ -49,6 +51,8 @@ public class ArmWeaponSelector : MonoBehaviour
 
         weapon_transform.localRotation = select_weapon_transform.rotation;
         weapon_transform.localScale = select_weapon_transform.lossyScale;
+
+        FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
     void Start()
