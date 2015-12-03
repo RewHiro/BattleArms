@@ -4,7 +4,7 @@
             "ID": 0,
             "Mass": 1.0,
             "Drag": 0.0,
-            "MoveSpeed": 20.0,
+            "MoveSpeed": 8.0,
             "SwingSpeed": 50.0,
             "BoostPower": 5.0,
             "JumpPower": 15.0,

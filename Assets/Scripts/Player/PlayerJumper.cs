@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 public class PlayerJumper : NetworkBehaviour
 {
 
-    const int STAGE_LAYER = 11;
+    const int STAGE_LAYER = 13;
 
     void Start()
     {
