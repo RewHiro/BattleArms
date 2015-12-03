@@ -3,11 +3,21 @@ using UnityEngine.Networking;
 
 public class HPManager : NetworkBehaviour
 {
+    bool is_active_ = true;
+
     [SerializeField]
     int layer_num_ = 3;
 
-    [SyncVar (hook = "OnHPChanged")]
+    [SyncVar]
     float hp_ = 100;
+
+    public bool isActive
+    {
+        get
+        {
+            return is_active_;
+        }
+    }
 
     public float hp
     {
@@ -23,20 +33,16 @@ public class HPManager : NetworkBehaviour
 
     void Start()
     {
-        if (!isLocalPlayer) return;
         var id = GetComponent<Identificationer>().id;
         hp = FindObjectOfType<AirFrameParameter>().GetMaxHP(id);
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        if (!isServer) return;
         if (collider.gameObject.layer != layer_num_) return;
         hp -= 10;
         Destroy(collider.gameObject);
-    }
-
-    void OnHPChanged(float hp)
-    {
-        hp_ = hp;
+        if (hp_ <= 0) is_active_ = false;
     }
 }
