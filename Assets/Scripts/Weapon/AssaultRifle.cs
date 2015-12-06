@@ -43,7 +43,7 @@ public class AssaultRifle : Weapon
         obj.transform.rotation = gameObject.transform.rotation;
         Vector3 force;
 
-        var reticle_position = GameObject.FindGameObjectWithTag("LockOnSite").transform.position;
+        var reticle_position = Reticle.transform.position;
 
         var direction = (reticle_position - transform.position).normalized;
         force = direction * 100;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 public class Weapon : MonoBehaviour
 {
 
+    [SerializeField]
+    GameObject reticle_ = null;
+
     public WeaponType getType
     {
         get
@@ -12,9 +15,22 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public GameObject Reticle
+    {
+        get
+        {
+            return reticle_;
+        }
+    }
+
     public void SetType(WeaponType weapon_type)
     {
         weapon_type_ = weapon_type;
+    }
+
+    public void SetReticle(GameObject reticle)
+    {
+        reticle_ = reticle;
     }
 
     virtual public void OnAttack() { }

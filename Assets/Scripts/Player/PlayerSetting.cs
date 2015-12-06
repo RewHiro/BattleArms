@@ -74,6 +74,13 @@ public class PlayerSetting : NetworkBehaviour
 
             CreateRightWeapon(right_weapon_id_);
             CreateLeftWeapon(left_weapon_id_);
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                if ("mesh" != child.name) continue;
+                child.gameObject.layer = LayerMask.NameToLayer("Player");
+            }
         }
     }
 

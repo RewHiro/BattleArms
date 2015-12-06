@@ -16,6 +16,9 @@ public class PlayerAttacker : NetworkBehaviour
     [SerializeField]
     GameObject back_weapon_object_ = null;
 
+    [SerializeField]
+    GameObject reticle_ = null;
+
     public override void PreStartClient()
     {
         base.PreStartClient();
@@ -40,12 +43,14 @@ public class PlayerAttacker : NetworkBehaviour
         {
             right_weapon_ = right_weapon_object_.GetComponentInChildren<Weapon>();
             right_weapon_.SetType(WeaponType.RIGHT);
+            right_weapon_.SetReticle(reticle_);
         }
 
         if (left_weapon_ == null)
         {
             left_weapon_ = left_weapon_object_.GetComponentInChildren<Weapon>();
             left_weapon_.SetType(WeaponType.LEFT);
+            left_weapon_.SetReticle(reticle_);
         }
     }
 
