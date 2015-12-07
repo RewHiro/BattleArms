@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class Reticle : MonoBehaviour
 {
-    GameObject[] enemy_;
 
     bool lock_on_site_enemy_hit_;
 
@@ -23,12 +22,14 @@ public class Reticle : MonoBehaviour
 
     void Start()
     {
-        target_circle_ = GameObject.Find(target_circle_prefab_.name).GetComponent<TargetCircle>();
+        target_circle_ = FindObjectOfType<TargetCircle>();
+        //target_circle_ = GameObject.Find(target_circle_prefab_.name).GetComponent<TargetCircle>();
     }
 
     void OnTriggerStay2D(Collider2D collision2D_stay)
     {
-        enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log(target_circle_);
+        var enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemy_.Length == 0) return;
         if (collision2D_stay.gameObject.transform.parent.name == enemy_[target_circle_.NearEnemySelect()].name)
         {
@@ -39,7 +40,7 @@ public class Reticle : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision2D_exit)
     {
-        enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemy_.Length == 0) return;
         if (collision2D_exit.gameObject.transform.parent.name == enemy_[target_circle_.NearEnemySelect()].name)
         {
