@@ -1,5 +1,5 @@
 ﻿{
-    "Debug": false,
+    "Debug": true,
 
     "Position": {
         "X": 0.0,
@@ -14,7 +14,7 @@
     },
 
     "ReferencePoint": {
-        "X": 100.0
+        "X": 185.0
     },
 
     "ReactionValue": 0.1,

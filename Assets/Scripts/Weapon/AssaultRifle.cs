@@ -9,6 +9,7 @@ public class AssaultRifle : Weapon
     float Speed = 100;//速度
 
     BulletCreater bullet_creater_ = null;
+    Vector3 origin_pos_ = Vector3.zero;
 
     void Start()
     {
@@ -20,6 +21,15 @@ public class AssaultRifle : Weapon
         if (shot_count_ <= 0.0f)
         {
             shot_count_ = 0.1f;
+
+            if (origin_pos_ == Vector3.zero)
+            {
+                origin_pos_ = WeaponObject.transform.localPosition;
+            }
+
+            var diff = 0.01f;
+            var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), 0.0f);
+            WeaponObject.transform.localPosition = origin_pos_ + random; 
         }
         shot_count_ -= Time.deltaTime;
     }
@@ -46,7 +56,12 @@ public class AssaultRifle : Weapon
         var reticle_position = Reticle.transform.position;
 
         var direction = (reticle_position - transform.position).normalized;
-        force = direction * 100;
+
+        const float diff = 0.1f;
+
+        var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), Random.Range(-diff, diff));
+
+        force = (direction + random) * 100;
         obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
         Destroy(obj, 3.0f);

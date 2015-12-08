@@ -44,6 +44,7 @@ public class PlayerAttacker : NetworkBehaviour
             right_weapon_ = right_weapon_object_.GetComponentInChildren<Weapon>();
             right_weapon_.SetType(WeaponType.RIGHT);
             right_weapon_.SetReticle(reticle_);
+            right_weapon_.SetWeaponObject(right_weapon_object_);
         }
 
         if (left_weapon_ == null)
@@ -51,6 +52,7 @@ public class PlayerAttacker : NetworkBehaviour
             left_weapon_ = left_weapon_object_.GetComponentInChildren<Weapon>();
             left_weapon_.SetType(WeaponType.LEFT);
             left_weapon_.SetReticle(reticle_);
+            left_weapon_.SetWeaponObject(left_weapon_object_);
         }
     }
 

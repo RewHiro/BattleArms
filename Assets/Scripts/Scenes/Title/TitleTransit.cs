@@ -25,6 +25,7 @@ public class TitleTransit : MonoBehaviour
         var ovr_display = new OVRDisplay();
         ovr_display.RecenterPose();
         FindObjectOfType<SoundManager>().PlaySE(3);
+        FindObjectOfType<AirFrameManager>().Reset();
     }
 
     bool isTransit

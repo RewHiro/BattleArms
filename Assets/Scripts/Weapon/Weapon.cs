@@ -23,6 +23,14 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public GameObject WeaponObject
+    {
+        get
+        {
+            return weapon_object_;
+        }
+    }
+
     public void SetType(WeaponType weapon_type)
     {
         weapon_type_ = weapon_type;
@@ -31,6 +39,11 @@ public class Weapon : MonoBehaviour
     public void SetReticle(GameObject reticle)
     {
         reticle_ = reticle;
+    }
+
+    public void SetWeaponObject(GameObject weapon_object)
+    {
+        weapon_object_ = weapon_object;
     }
 
     virtual public void OnAttack() { }
@@ -42,4 +55,5 @@ public class Weapon : MonoBehaviour
     protected string name_ = "";
     protected string explanatory_text_ = "";
     WeaponType weapon_type_ = WeaponType.LEFT;
+    GameObject weapon_object_ = null;
 }

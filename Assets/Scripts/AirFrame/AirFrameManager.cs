@@ -36,4 +36,12 @@ public class AirFrameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Reset()
+    {
+        leftWeaponId = 0;
+        rightWeaponId = 0;
+        backWeaponId = 0;
+        airFrameId = 0;
+    }
 }

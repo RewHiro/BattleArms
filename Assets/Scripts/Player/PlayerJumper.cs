@@ -25,6 +25,7 @@ public class PlayerJumper : NetworkBehaviour
         if (!isLocalPlayer) return;
         if (is_jump_) return;
         if (!player_controller_.isInputJump) return;
+        Debug.Log("OK");
         rigidbody_.AddForce(Vector3.up * JUMP_POWER, ForceMode.Impulse);
         is_jump_ = true;
     }
