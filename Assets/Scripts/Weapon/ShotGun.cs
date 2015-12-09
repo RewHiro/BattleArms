@@ -58,7 +58,7 @@ public class ShotGun : Weapon
             const float diff = 0.1f;
 
             var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), Random.Range(-diff, diff));
-            force = (direction + random) * 100;
+            force = (direction + random) * 300;
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
             Destroy(obj, 3.0f);

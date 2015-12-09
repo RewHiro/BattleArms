@@ -11,6 +11,9 @@ public class HPManager : NetworkBehaviour
     [SyncVar]
     float hp_ = 100;
 
+    [SerializeField]
+    GameObject hit_effect_prefab = null;
+
     public bool isActive
     {
         get
@@ -43,6 +46,10 @@ public class HPManager : NetworkBehaviour
         if (collider.gameObject.layer != layer_num_) return;
         hp -= 10;
         Destroy(collider.gameObject);
+        var hit_effect = Instantiate(hit_effect_prefab);
+        hit_effect.transform.SetParent(gameObject.transform);
+        hit_effect.transform.position = collider.gameObject.transform.position;
+        NetworkServer.Spawn(hit_effect);
         if (hp_ <= 0) is_active_ = false;
     }
 }
