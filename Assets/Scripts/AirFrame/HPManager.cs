@@ -14,6 +14,9 @@ public class HPManager : NetworkBehaviour
     [SerializeField]
     GameObject hit_effect_prefab = null;
 
+    [SerializeField]
+    GameObject destory_effect_prefab_ = null;
+
     public bool isActive
     {
         get
@@ -50,6 +53,10 @@ public class HPManager : NetworkBehaviour
         hit_effect.transform.SetParent(gameObject.transform);
         hit_effect.transform.position = collider.gameObject.transform.position;
         NetworkServer.Spawn(hit_effect);
-        if (hp_ <= 0) is_active_ = false;
+        if (hp_ > 0) return;
+        var destory_effect = Instantiate(destory_effect_prefab_);
+        destory_effect.transform.SetParent(gameObject.transform);
+        destory_effect.transform.position = gameObject.transform.position;
+        Destroy(gameObject, 3.0f);
     }
 }

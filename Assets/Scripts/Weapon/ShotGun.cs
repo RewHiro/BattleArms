@@ -12,6 +12,9 @@ public class ShotGun : Weapon
 
     Vector3 origin_pos_ = Vector3.zero;
 
+    [SerializeField]
+    GameObject spark_prefab_ = null;
+
     override public void OnAttack()
     {
         if (shot_count_ <= 0.0f)
@@ -22,7 +25,7 @@ public class ShotGun : Weapon
             {
                 origin_pos_ = WeaponObject.transform.localPosition;
             }
-
+            spark_prefab_.SetActive(true);
             var diff = 0.01f;
             var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), 0.0f);
             WeaponObject.transform.localPosition = origin_pos_ + random;
@@ -33,6 +36,7 @@ public class ShotGun : Weapon
     override public void OnNotAttack()
     {
         shot_count_ = 0.0f;
+        spark_prefab_.SetActive(false);
     }
 
     override public bool CanShot()
@@ -60,6 +64,8 @@ public class ShotGun : Weapon
             var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), Random.Range(-diff, diff));
             force = (direction + random) * 300;
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
+            obj.layer = layer_;
 
             Destroy(obj, 3.0f);
 

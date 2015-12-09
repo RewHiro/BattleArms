@@ -11,6 +11,9 @@ public class AssaultRifle : Weapon
     BulletCreater bullet_creater_ = null;
     Vector3 origin_pos_ = Vector3.zero;
 
+    [SerializeField]
+    GameObject spark_prefab_ = null;
+
     void Start()
     {
         bullet_creater_ = FindObjectOfType<BulletCreater>();
@@ -26,7 +29,7 @@ public class AssaultRifle : Weapon
             {
                 origin_pos_ = WeaponObject.transform.localPosition;
             }
-
+            spark_prefab_.SetActive(true);
             var diff = 0.01f;
             var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), 0.0f);
             WeaponObject.transform.localPosition = origin_pos_ + random; 
@@ -37,6 +40,7 @@ public class AssaultRifle : Weapon
     public override void OnNotAttack()
     {
         shot_count_ = 0.0f;
+        spark_prefab_.SetActive(false);
     }
 
     public override bool CanShot()
@@ -63,6 +67,8 @@ public class AssaultRifle : Weapon
 
         force = (direction + random) * 300;
         obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
+        obj.layer = layer_;
 
         Destroy(obj, 3.0f);
 

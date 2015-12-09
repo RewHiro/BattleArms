@@ -70,6 +70,6 @@ public class ServerManager : NetworkBehaviour
         {
             //　敗北演出
         }
-        MyNetworkLobbyManager.instance.StopHost();
+        //MyNetworkLobbyManager.instance.StopHost();
     }
 }

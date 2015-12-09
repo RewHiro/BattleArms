@@ -46,11 +46,17 @@ public class Weapon : MonoBehaviour
         weapon_object_ = weapon_object;
     }
 
+    public void SetLayer(int layer)
+    {
+        layer_ = layer;
+    }
+
     virtual public void OnAttack() { }
     virtual public void OnNotAttack() { }
     virtual public bool CanShot() { return false; }
     virtual public IEnumerable<GameObject> CreateBullet() { return null; }
 
+    protected int layer_ = 0;
     protected int id_ = 0;
     protected string name_ = "";
     protected string explanatory_text_ = "";
