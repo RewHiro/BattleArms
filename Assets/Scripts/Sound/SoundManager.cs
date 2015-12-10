@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySE(int num)
     {
-        if (se_list_[num].isPlaying) return;
+        //if (se_list_[num].isPlaying) return;
         se_list_[num].Play();
     }
 
