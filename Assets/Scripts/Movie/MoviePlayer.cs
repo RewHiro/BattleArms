@@ -16,6 +16,21 @@ public class MoviePlayer : MonoBehaviour
 
     public void Play()
     {
+        GetComponent<RawImage>().color = new Color(1, 1, 1, 1);
         movie_texture_.Play();
+    }
+
+    public bool isPlaying
+    {
+        get
+        {
+            return movie_texture_.isPlaying;
+        }
+    }
+
+    public void Stop()
+    {
+        GetComponent<RawImage>().color = new Color(1, 1, 1, 0);
+        movie_texture_.Stop();
     }
 }

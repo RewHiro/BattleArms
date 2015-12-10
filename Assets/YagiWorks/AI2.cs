@@ -45,11 +45,15 @@ public class AI2 : MonoBehaviour
 
     // private bool isGround = false;
 
+    HPManager hp_manager_ = null;
+
     //ゲーム開始時に一度
     void Start()
     {
         //Playerオブジェクトを検索し、参照を代入
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        hp_manager_ = GetComponent<HPManager>();
+
         distance_state = DISTANCE_STATE.LONG;
         attack_state = ATTACK_STATE.WAIT;
     }
@@ -57,6 +61,9 @@ public class AI2 : MonoBehaviour
     //毎フレームに一度
     void Update()
     {
+        if (!hp_manager_.isActive) return;
+        if (GameObject.FindGameObjectWithTag("Player") == null) return;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 playerPos = player.position;                 //プレイヤーの位置
         Vector3 direction = playerPos - transform.position; //方向と距離を求める。
         float distance = direction.sqrMagnitude;            //directionから距離要素だけを取り出す。
@@ -166,5 +173,4 @@ public class AI2 : MonoBehaviour
         left_weapon.CreateBullet();
         left_weapon.SetReticle(player.gameObject);
     }
-
 }

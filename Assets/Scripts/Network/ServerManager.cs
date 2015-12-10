@@ -11,6 +11,8 @@ public class ServerManager : NetworkBehaviour
     GameObject[] players = null;
     GameObject[] enemys = null;
 
+    float count_ = 0.0f;
+
     public bool goResult
     {
         get
@@ -62,14 +64,31 @@ public class ServerManager : NetworkBehaviour
     void Result()
     {
         if (!goResult) return;
-        if (isWinPlayer)
+        if (count_ <= 0.0)
         {
-            //　勝利演出
+            if (isWinPlayer)
+            {
+                //　勝利演出
+
+                foreach (var player in FindObjectsOfType<EndDirector>())
+                {
+                    player.RpcTellClientStart("Win");
+                }
+            }
+            else
+            {
+                //　敗北演出
+                foreach (var player in FindObjectsOfType<EndDirector>())
+                {
+                    player.RpcTellClientStart("Lose");
+                }
+            }
         }
-        else
-        {
-            //　敗北演出
-        }
-        //MyNetworkLobbyManager.instance.StopHost();
+
+        count_ += Time.deltaTime;
+
+        if (count_ <= 5.0f) return;
+
+        MyNetworkLobbyManager.instance.StopHost();
     }
 }

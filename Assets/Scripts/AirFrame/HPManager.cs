@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class HPManager : NetworkBehaviour
 {
@@ -16,6 +17,9 @@ public class HPManager : NetworkBehaviour
 
     [SerializeField]
     GameObject destory_effect_prefab_ = null;
+
+    [SerializeField]
+    GameObject hp_text_ = null;
 
     public bool isActive
     {
@@ -39,8 +43,17 @@ public class HPManager : NetworkBehaviour
 
     void Start()
     {
+
         var id = GetComponent<Identificationer>().id;
         hp = FindObjectOfType<AirFrameParameter>().GetMaxHP(id);
+    }
+
+    void Update()
+    {
+        if (!isLocalPlayer) return;
+        if (hp_text_ == null) return;
+
+        hp_text_.GetComponent<Text>().text = "HP:" + hp_.ToString();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -57,6 +70,7 @@ public class HPManager : NetworkBehaviour
         var destory_effect = Instantiate(destory_effect_prefab_);
         destory_effect.transform.SetParent(gameObject.transform);
         destory_effect.transform.position = gameObject.transform.position;
-        Destroy(gameObject, 3.0f);
+        is_active_ = false;
+        FindObjectOfType<SoundManager>().PlaySE(0);
     }
 }

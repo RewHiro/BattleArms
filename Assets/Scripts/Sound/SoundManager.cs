@@ -54,6 +54,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(int num)
     {
+        Debug.Log(bgm_list_.Count);
         if (bgm_list_[num].isPlaying) return;
         bgm_list_[num].Play();
     }

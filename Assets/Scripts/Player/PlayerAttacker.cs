@@ -19,6 +19,8 @@ public class PlayerAttacker : NetworkBehaviour
     [SerializeField]
     GameObject reticle_ = null;
 
+    HPManager hp_manager_ = null;
+
     public override void PreStartClient()
     {
         base.PreStartClient();
@@ -31,6 +33,8 @@ public class PlayerAttacker : NetworkBehaviour
 
     void Start()
     {
+        hp_manager_ = GetComponent<HPManager>();
+
         player_controller_ = GetComponent<PlayerController>();
 
         back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
@@ -61,6 +65,7 @@ public class PlayerAttacker : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
+        if (!hp_manager_.isActive) return;
         AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
         AttackWithWeapon(player_controller_.isInputBothHandAttack, back_weapon_);
@@ -68,7 +73,7 @@ public class PlayerAttacker : NetworkBehaviour
 
     void AttackWithWeapon(bool input, Weapon weapon)
     {
-        if (weapon == null) throw new Exception();
+        if (weapon == null) return;
 
         if (input)
         {

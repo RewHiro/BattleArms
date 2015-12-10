@@ -47,7 +47,6 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         {
             if (player.localPlayerAuthority)
             {
-
                 Destroy(player.gameObject);
             }
         }
@@ -64,6 +63,7 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
     {
         base.OnLobbyClientConnect(conn);
         if (is_host_) return;
+        if (Application.loadedLevelName != "offline") return;
         FindObjectOfType<SceneManager>().Transition(SceneType.CUSTOMIZE);
     }
 
@@ -72,6 +72,7 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         base.OnServerAddPlayer(conn, playerControllerId);
         if (numPlayers != 2) return;
         is_start_ = false;
+        if (Application.loadedLevelName != "offline") return;
         FindObjectOfType<SceneManager>().Transition(SceneType.CUSTOMIZE);
     }
 
