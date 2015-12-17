@@ -95,5 +95,12 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         if (!ready) return;
         base.OnLobbyServerPlayersReady();
     }
-
+    public void Ready()
+    {
+        foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
+        {
+            if (!player.isLocalPlayer) continue;
+            player.SendReadyToBeginMessage();
+        }
+    }
 }
