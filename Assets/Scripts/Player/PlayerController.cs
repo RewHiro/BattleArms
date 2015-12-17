@@ -91,11 +91,11 @@ public class PlayerController : NetworkBehaviour
 
             if (right_hand_input_.isRight)
             {
-                return right_hand_input_.getHorizaontalValue;
+                return Mathf.Max(right_hand_input_.getHorizaontalValue, left_hand_input_.getHorizaontalValue);
             }
             else if (left_hand_input_.isLeft)
-            {
-                return left_hand_input_.getHorizaontalValue;
+            {                
+                return Mathf.Min(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
             }
             else
             {
@@ -235,17 +235,17 @@ public class PlayerController : NetworkBehaviour
                     return false;
                 return true;
             }
-            else if (isBothHandsRight)
+            else if (right_hand_input_.isRight)
             {
-                if (!(right_hand_input_.getHorizaontalValue >= REACTION_BOOST_VALUE &&
-                        left_hand_input_.getHorizaontalValue >= REACTION_BOOST_VALUE))
+                var value = Mathf.Max(right_hand_input_.getHorizaontalValue, left_hand_input_.getHorizaontalValue);
+                if (!(value >= REACTION_BOOST_VALUE))
                     return false;
                 return true;
             }
-            else if (isBothHandsLeft)
+            else if (left_hand_input_.isLeft)
             {
-                if (!(right_hand_input_.getHorizaontalValue <= -REACTION_BOOST_VALUE &&
-                    left_hand_input_.getHorizaontalValue <= -REACTION_BOOST_VALUE))
+                var value = Mathf.Min(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
+                if (!(value <= -REACTION_BOOST_VALUE))
                     return false;
                 return true;
             }
