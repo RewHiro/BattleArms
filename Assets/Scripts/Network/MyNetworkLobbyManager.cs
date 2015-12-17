@@ -79,18 +79,6 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
 
     void Update()
     {
-        foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
-        {
-            if (player.isLocalPlayer)
-            {
-                Debug.Log("host:" + player.readyToBegin.ToString());
-            }
-            else
-            {
-                Debug.Log("local:" + player.readyToBegin.ToString());
-            }
-        }
-
         if (!is_host_) return;
         if (!is_start_) return;
         count_ += Time.deltaTime;
