@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
+using System.Linq;
 
 public class MyNetworkLobbyManager : NetworkLobbyManager
 {
-
-    static public MyNetworkLobbyManager instance
-    {
-        get
-        {
-            return instance_;
-        }
-    }
-
-    static MyNetworkLobbyManager instance_ = null;
 
     bool is_host_ = false;
     bool is_start_ = false;
@@ -55,7 +46,7 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
-        instance_.StopClient();
+        StopClient();
 
     }
 
@@ -63,7 +54,8 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
     {
         base.OnLobbyClientConnect(conn);
         if (is_host_) return;
-        if (Application.loadedLevelName != "offline") return;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "offline") return;
         FindObjectOfType<SceneManager>().Transition(SceneType.CUSTOMIZE);
     }
 
@@ -72,14 +64,13 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         base.OnServerAddPlayer(conn, playerControllerId);
         if (numPlayers != 2) return;
         is_start_ = false;
-        if (Application.loadedLevelName != "offline") return;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "offline") return;
         FindObjectOfType<SceneManager>().Transition(SceneType.CUSTOMIZE);
     }
 
     void Start()
     {
-        instance_ = this;
-
         var json_text = File.ReadAllText(Utility.JSON_PATH + JSON_FILE_NAME);
         JsonNode json = JsonNode.Parse(json_text);
         is_host_ = json["IsHost"].Get<bool>();
@@ -88,6 +79,18 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
 
     void Update()
     {
+        foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
+        {
+            if (player.isLocalPlayer)
+            {
+                Debug.Log("host:" + player.readyToBegin.ToString());
+            }
+            else
+            {
+                Debug.Log("local:" + player.readyToBegin.ToString());
+            }
+        }
+
         if (!is_host_) return;
         if (!is_start_) return;
         count_ += Time.deltaTime;
@@ -95,6 +98,14 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         if (count_ < WAIT_TIME) return;
         is_start_ = false;
         StopHost();
-
     }
+
+    public override void OnLobbyServerPlayersReady()
+    {
+        var players = FindObjectsOfType<MyNetworkLobbyPlayer>();
+        var ready = players.All(player => player.readyToBegin);
+        if (!ready) return;
+        base.OnLobbyServerPlayersReady();
+    }
+
 }

@@ -16,7 +16,7 @@ public class EnemySpawner : NetworkBehaviour
         base.OnStartServer();
         CreateEnemy(0);
 
-        if (MyNetworkLobbyManager.instance.numPlayers != 2) return;
+        if (FindObjectOfType<MyNetworkLobbyManager>().numPlayers <= 2) return;
         CreateEnemy(1);
 
     }

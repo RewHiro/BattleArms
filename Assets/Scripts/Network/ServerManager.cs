@@ -17,6 +17,7 @@ public class ServerManager : NetworkBehaviour
     {
         get
         {
+            players = GameObject.FindGameObjectsWithTag("Player");
             List<HPManager> player_hp_managers = new List<HPManager>();
             foreach (var player in players)
             {
@@ -27,6 +28,7 @@ public class ServerManager : NetworkBehaviour
 
             List<HPManager> enemy_hp_managers = new List<HPManager>();
 
+            enemys = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var enemy in enemys)
             {
                 enemy_hp_managers.Add(enemy.GetComponent<HPManager>());
@@ -52,8 +54,8 @@ public class ServerManager : NetworkBehaviour
 
     void Start()
     {
-        enemys = GameObject.FindGameObjectsWithTag("Enemy");
         players = GameObject.FindGameObjectsWithTag("Player");
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
@@ -89,6 +91,6 @@ public class ServerManager : NetworkBehaviour
 
         if (count_ <= 5.0f) return;
 
-        MyNetworkLobbyManager.instance.StopHost();
+        FindObjectOfType<MyNetworkLobbyManager>().StopHost();
     }
 }

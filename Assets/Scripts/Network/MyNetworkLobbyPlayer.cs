@@ -3,4 +3,5 @@ using UnityEngine.Networking;
 
 public class MyNetworkLobbyPlayer : NetworkLobbyPlayer
 {
+
 }
