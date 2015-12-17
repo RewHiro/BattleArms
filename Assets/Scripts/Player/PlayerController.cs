@@ -89,13 +89,13 @@ public class PlayerController : NetworkBehaviour
         {
             if (!leap_contoller_.IsConnected) return Input.GetAxis("Horizontal");
 
-            if (isBothHandsRight)
+            if (right_hand_input_.isRight)
             {
-                return Mathf.Max(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
+                return right_hand_input_.getHorizaontalValue;
             }
-            else if (isBothHandsLeft)
+            else if (left_hand_input_.isLeft)
             {
-                return Mathf.Min(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
+                return left_hand_input_.getHorizaontalValue;
             }
             else
             {
