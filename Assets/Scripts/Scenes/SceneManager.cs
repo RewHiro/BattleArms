@@ -28,6 +28,11 @@ public class SceneManager : MonoBehaviour
         CreateScene(start_scene_type_);
     }
 
+    void Start()
+    {
+        FindObjectOfType<SoundManager>().PlayBGM(0);
+    }
+
     GameObject CreateScene(SceneType scene_type)
     {
         var scene_prefab = scene_list_.ContainsKey(scene_type) ?

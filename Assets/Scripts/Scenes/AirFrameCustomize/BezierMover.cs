@@ -57,7 +57,7 @@ public class BezierMover : MonoBehaviour
         move_object_.transform.position = current_point;
 
         var player_position = GameObject.FindGameObjectWithTag("Player").transform.position;
-        iTween.LookUpdate(move_object_.gameObject, player_position, 1.0f);
+        move_object_.transform.LookAt(player_position);
 
         if (!(current_time_ >= STOP_TIME)) return;
         type_ = Type.STOP;

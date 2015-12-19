@@ -21,6 +21,21 @@ public class SoundManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             is_create_ = true;
+
+            for (int i = 0; i < bgms_.Length; ++i)
+            {
+                var audio_source = gameObject.AddComponent<AudioSource>();
+                audio_source.clip = bgms_[i];
+                audio_source.loop = true;
+                bgm_list_.Add(audio_source);
+            }
+
+            for (int i = 0; i < ses_.Length; ++i)
+            {
+                var audio_source = gameObject.AddComponent<AudioSource>();
+                audio_source.clip = ses_[i];
+                se_list_.Add(audio_source);
+            }
         }
         else
         {
@@ -31,19 +46,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
 
-        for (int i = 0; i < bgms_.Length; ++i)
-        {
-            var audio_source = gameObject.AddComponent<AudioSource>();
-            audio_source.clip = bgms_[i];
-            bgm_list_.Add(audio_source);
-        }
 
-        for (int i = 0; i < ses_.Length; ++i)
-        {
-            var audio_source = gameObject.AddComponent<AudioSource>();
-            audio_source.clip = ses_[i];
-            se_list_.Add(audio_source);
-        }
     }
 
     public void PlaySE(int num)
@@ -54,7 +57,6 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(int num)
     {
-        Debug.Log(bgm_list_.Count);
         if (bgm_list_[num].isPlaying) return;
         bgm_list_[num].Play();
     }
@@ -75,6 +77,11 @@ public class SoundManager : MonoBehaviour
         {
             itr.Current.Stop();
         }
+    }
+
+    public void StopBGM(int num)
+    {
+        bgm_list_[num].Stop();
     }
 
     public void StopSE(int num)

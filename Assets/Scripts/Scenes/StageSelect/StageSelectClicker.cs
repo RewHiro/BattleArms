@@ -16,7 +16,11 @@ public class StageSelectClicker : MonoBehaviour
     public void Ready(int num)
     {
         FindObjectOfType<MyNetworkLobbyManager>().playScene = stage_name_list_[num];
-        FindObjectOfType<SoundManager>().PlaySE(4);
+
+        var sound_manager = FindObjectOfType<SoundManager>();
+        sound_manager.PlaySE(4);
+        sound_manager.StopBGM(0);
+
         FindObjectOfType<StageData>().stageNum = num;
 
         FindObjectOfType<MyNetworkLobbyManager>().CheckReadyToBegin();

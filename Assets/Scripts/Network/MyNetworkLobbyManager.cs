@@ -62,7 +62,9 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         base.OnServerAddPlayer(conn, playerControllerId);
-        if (numPlayers != 2) return;
+
+        if (numPlayers == 2) return;
+
         is_start_ = false;
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "offline") return;
