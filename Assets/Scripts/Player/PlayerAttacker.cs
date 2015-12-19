@@ -39,6 +39,7 @@ public class PlayerAttacker : NetworkBehaviour
 
         back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
         back_weapon_.SetType(WeaponType.BACK);
+        back_weapon_.SetReticle(reticle_);
     }
 
     void Update()

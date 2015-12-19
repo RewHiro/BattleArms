@@ -36,9 +36,11 @@ public class HomingGun : Weapon
         var obj = Instantiate(FindObjectOfType<BulletCreater>().getHomingBullet);
         obj.transform.position = gameObject.transform.position;;
         obj.transform.rotation = gameObject.transform.rotation;
-        Destroy(obj, 2.0f);
+
+        obj.GetComponent<HomingBulletMover>().SetReticle(Reticle.GetComponentInChildren<Reticle>());
 
         bullets.Add(obj);
+
         return bullets;
     }
 

@@ -6,6 +6,8 @@ public class StageSelectClicker : MonoBehaviour
 {
     List<string> stage_name_list_ = new List<string>();
 
+    bool is_click_ = false;
+
     void Start()
     {
         stage_name_list_.Add("stage01");
@@ -15,6 +17,8 @@ public class StageSelectClicker : MonoBehaviour
 
     public void Ready(int num)
     {
+        if (is_click_) return;
+        is_click_ = true;
         FindObjectOfType<MyNetworkLobbyManager>().playScene = stage_name_list_[num];
 
         var sound_manager = FindObjectOfType<SoundManager>();
@@ -25,10 +29,12 @@ public class StageSelectClicker : MonoBehaviour
 
         FindObjectOfType<MyNetworkLobbyManager>().CheckReadyToBegin();
 
+        FindObjectOfType<MoviePlayer>().Play();
+
         foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
         {
             if (!player.isLocalPlayer) continue;
-            player.SendReadyToBeginMessage();
+            player.Ready();
         }
 
     }
