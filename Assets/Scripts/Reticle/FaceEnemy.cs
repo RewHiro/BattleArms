@@ -5,43 +5,90 @@ using System.Collections.Generic;
 
 public class FaceEnemy : MonoBehaviour {
 
-   // [SerializeField]
-    GameObject[] enemys_;
-    GameObject lock_enemy_;
-    GameObject start_lock_enemy_;
+    GameObject[] enemy_;
+    GameObject[] base_;
+    GameObject look_object_;
+//    GameObject start_lock_enemy_;
+    Vector3 enemy_position;
 
-    int enemy_number;
-
-    TargetCircle target_circle_;
-
-    //List<GameObject[]> enemys_;
-
-	void Start ()
+//    TargetCircle target_circle_;
+    
+    int enemy_number_;
+    int base_number_;
+    
+    void Awake()
     {
-        //enemys_ = new List<GameObject[]>();
-
-        enemy_number = 0;
-        target_circle_ = FindObjectOfType<TargetCircle>();
-        start_lock_enemy_ = target_circle_.GetEnemyObject;
-        lock_enemy_ = start_lock_enemy_;
+        enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
+        base_ = GameObject.FindGameObjectsWithTag("Base");
     }
-	
-	void Update ()
+
+    void Start ()
     {
-                target_circle_ = FindObjectOfType<TargetCircle>();
-                lock_enemy_ = target_circle_.GetEnemyObject;
-        //        Debug.Log((gameObject.transform.position - enemy_.transform.position).magnitude);
+        // target_circle_ = GetComponent<TargetCircle>();
+        base_number_ = 0;
+        enemy_number_ = 0;
+//        target_circle_ = FindObjectOfType<TargetCircle>();
+ //       start_lock_enemy_ = target_circle_.GetEnemyObject;
+   //     enemy_position = start_lock_enemy_.transform.position;
 
-        ChangeLockEnemy();
-        //lock_enemy_ = enemys_[enemy_number];
+    }
 
-        gameObject.transform.LookAt(lock_enemy_.transform);
-	}
-
-    void ChangeLockEnemy()
+    void Update ()
     {
-        //enemys_.Add(GameObject.FindGameObjectsWithTag("Enemy"));
+        IsChangeEnemyNumber();
+        LookAtEnemy();
+        Debug.Log(base_.Length);
+    }
 
-      //  Debug.Log(enemys_[0].name);
+    public  void ChangeLockEnemy()
+    {
+        enemy_number_++;
+
+        if(enemy_number_ >= enemy_.Length)
+        {
+            base_number_++;
+        }
+
+        if(base_number_ >= base_.Length)
+        {
+            base_number_ = -1;
+            enemy_number_ = 0;
+
+        }
+
+    }
+
+
+    public void IsChangeEnemyNumber()
+    {
+        if (!(enemy_.Length == GameObject.FindGameObjectsWithTag("Enemy").Length))
+        {
+            enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
+        }
+
+        if (!(base_.Length == GameObject.FindGameObjectsWithTag("Base").Length))
+        {
+            base_ = GameObject.FindGameObjectsWithTag("Base");
+        }
+
+    }
+
+    public void LookAtEnemy()
+    {
+        if (enemy_number_ < enemy_.Length)
+        {
+            look_object_ = enemy_[enemy_number_];
+        }
+        else
+        if(enemy_number_ >= enemy_.Length)
+        {
+            look_object_ = base_[base_number_];
+        }
+
+        enemy_position = look_object_.transform.position;
+        enemy_position.y = gameObject.transform.position.y;
+
+        gameObject.transform.LookAt(enemy_position);
+
     }
 }
