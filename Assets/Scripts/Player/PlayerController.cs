@@ -89,18 +89,21 @@ public class PlayerController : NetworkBehaviour
         {
             if (!leap_contoller_.IsConnected) return Input.GetAxis("Horizontal");
 
-            if (right_hand_input_.isRight)
+            if (right_hand_input_ != null)
             {
-                return Mathf.Max(right_hand_input_.getHorizaontalValue, left_hand_input_.getHorizaontalValue);
+                if (right_hand_input_.isRight)
+                {
+                    return right_hand_input_.getHorizaontalValue;
+                }
             }
-            else if (left_hand_input_.isLeft)
-            {                
-                return Mathf.Min(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
-            }
-            else
+            if (left_hand_input_ != null)
             {
-                return 0.0f;
+                if (left_hand_input_.isLeft)
+                {
+                    return left_hand_input_.getHorizaontalValue;
+                }
             }
+            return 0.0f;
         }
     }
     #endregion
@@ -235,24 +238,27 @@ public class PlayerController : NetworkBehaviour
                     return false;
                 return true;
             }
-            else if (right_hand_input_.isRight)
+            if (right_hand_input_ != null)
             {
-                var value = Mathf.Max(right_hand_input_.getHorizaontalValue, left_hand_input_.getHorizaontalValue);
-                if (!(value >= REACTION_BOOST_VALUE))
-                    return false;
-                return true;
+                if (right_hand_input_.isRight)
+                {
+                    var value = right_hand_input_.getHorizaontalValue;
+                    if (!(value >= REACTION_BOOST_VALUE))
+                        return false;
+                    return true;
+                }
             }
-            else if (left_hand_input_.isLeft)
+            if (left_hand_input_ != null)
             {
-                var value = Mathf.Min(left_hand_input_.getHorizaontalValue, right_hand_input_.getHorizaontalValue);
-                if (!(value <= -REACTION_BOOST_VALUE))
-                    return false;
-                return true;
+                if (left_hand_input_.isLeft)
+                {
+                    var value = left_hand_input_.getHorizaontalValue;
+                    if (!(value <= -REACTION_BOOST_VALUE))
+                        return false;
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -285,16 +291,29 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public bool isKeyTap
+    {
+        get
+        {
+            foreach (var gesture in leap_contoller_.Frame().Gestures())
+            {
+                var screen_tap = new KeyTapGesture(gesture);
+                if (!screen_tap.IsValid) continue;
+                return true;
+            }
+            return false;
+        }
+    }
+
     void Start()
     {
         if (!isLocalPlayer) return;
-        leap_contoller_ = GetComponentInChildren<HandController>().GetLeapController();
         var leap_motion_parameter = FindObjectOfType<LeapMotionParameter>();
         REACTION_BOOST_VALUE = leap_motion_parameter.getReactionBoostValue;
         REACTION_JUMP_VALUE = leap_motion_parameter.getReactionJumpValue;
         main_camera_.SetActive(true);
+        leap_contoller_ = GetComponentInChildren<HandController>().GetLeapController();
     }
-
 
     bool NullCheck()
     {

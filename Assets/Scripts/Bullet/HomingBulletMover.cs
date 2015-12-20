@@ -55,7 +55,7 @@ public class HomingBulletMover : MonoBehaviour
     void HomingMove()
     {
         if (current_time < EXPLOSITION_TIME) return;
-
+        Destroy(gameObject);
     }
 
 }

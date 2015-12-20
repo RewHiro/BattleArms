@@ -90,7 +90,7 @@ public class LeftHandInput : MonoBehaviour
 
     void Start()
     {
-        if (Application.loadedLevelName == "offline")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "offline")
         {
             Destroy(this);
             return;

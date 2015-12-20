@@ -27,6 +27,7 @@ public class TargetCircle : MonoBehaviour
 
     void Start()
     {
+        enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
@@ -37,7 +38,11 @@ public class TargetCircle : MonoBehaviour
 
     public GameObject GetEnemyObject
     {
-        get { return enemy_[NearEnemySelect()]; }
+        get
+        {
+            if (enemy_.Length == 0) return null;
+            return enemy_[NearEnemySelect()];
+        }
     }
 
   public  int  NearEnemySelect()
