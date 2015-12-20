@@ -6,6 +6,8 @@ using System.Linq;
 public class MyNetworkLobbyManager : NetworkLobbyManager
 {
 
+    MyNetworkDiscovery my_network_discovery_ = null;
+
     bool is_host_ = false;
     bool is_start_ = false;
 
@@ -71,12 +73,44 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         FindObjectOfType<SceneManager>().Transition(SceneType.CUSTOMIZE);
     }
 
+    public override void OnLobbyStartHost()
+    {
+        my_network_discovery_.StartAsServer();
+        base.OnLobbyStartHost();
+    }
+
+    public override void OnLobbyStartClient(NetworkClient lobbyClient)
+    {
+        my_network_discovery_.StartAsClient();
+        base.OnLobbyStartClient(lobbyClient);
+    }
+
+    public override void OnStopClient()
+    {
+        my_network_discovery_.StopBroadcast();
+        base.OnStopClient();
+    }
+
+    void Awake()
+    {
+        my_network_discovery_ = GetComponent<MyNetworkDiscovery>();
+    }
+
     void Start()
     {
+        my_network_discovery_.Initialize();
         var json_text = File.ReadAllText(Utility.JSON_PATH + JSON_FILE_NAME);
         JsonNode json = JsonNode.Parse(json_text);
         is_host_ = json["IsHost"].Get<bool>();
-        networkAddress = json["IP"].Get<string>();
+
+        if (is_host_)
+        {
+            my_network_discovery_.StartAsServer();
+        }
+        else
+        {
+            my_network_discovery_.StartAsClient();
+        }
     }
 
     void Update()
@@ -97,6 +131,7 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
         if (!ready) return;
         base.OnLobbyServerPlayersReady();
     }
+
     public void Ready()
     {
         foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
