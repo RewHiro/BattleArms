@@ -2,6 +2,7 @@
 
 public class PlayerModer : MonoBehaviour
 {
+    Vector3 hit_position_ = Vector3.zero;
     PlayerMode player_mode_ = PlayerMode.NORMAL;
     int ENEMY_HASH = 0;
 
@@ -26,10 +27,17 @@ public class PlayerModer : MonoBehaviour
         ENEMY_HASH = "Enemy".GetHashCode();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void Update()
     {
-        if (collision.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
-        
+        if (!isMeleeMode) return;
+        transform.position.Set(hit_position_.x, transform.position.y, hit_position_.z);
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
+        var direction = new Vector3(transform.forward.x, 0, transform.forward.z);
+        hit_position_ = transform.position - direction * 5.0f;
         player_mode_ = PlayerMode.MELEE;
     }
 }

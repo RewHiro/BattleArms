@@ -29,6 +29,7 @@ public class AI : MonoBehaviour
 
     void Update()
     {
+        if (!hp_manager_.isActive) return;
         if (!enemy_stater_.isNormal) return;
 
         //Agentと目的地の距離

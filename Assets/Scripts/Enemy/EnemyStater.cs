@@ -2,6 +2,8 @@
 
 public class EnemyStater : MonoBehaviour
 {
+    Vector3 hit_position_ = Vector3.zero;
+    Quaternion hit_rotate_ = Quaternion.identity;
     EnemyState enemy_state_ = EnemyState.NORMAL;
     int PLAYER_HASH = 0;
 
@@ -34,9 +36,18 @@ public class EnemyStater : MonoBehaviour
         PLAYER_HASH = "Player".GetHashCode();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (PLAYER_HASH != collision.gameObject.tag.GetHashCode()) return;
+        if (PLAYER_HASH != collider.gameObject.tag.GetHashCode()) return;
         enemy_state_ = EnemyState.MELEED;
+        hit_position_ = transform.position;
+        hit_rotate_ = transform.rotation;
+    }
+
+    void Update()
+    {
+        if (!isMeleed) return;
+        transform.position.Set(hit_position_.x, transform.position.y, hit_position_.z);
+        transform.rotation = hit_rotate_;
     }
 }
