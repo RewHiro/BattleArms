@@ -46,6 +46,7 @@ public class AI2 : MonoBehaviour
     // private bool isGround = false;
 
     HPManager hp_manager_ = null;
+    EnemyStater enemy_stater_ = null;
 
     //ゲーム開始時に一度
     void Start()
@@ -53,6 +54,7 @@ public class AI2 : MonoBehaviour
         //Playerオブジェクトを検索し、参照を代入
 
         hp_manager_ = GetComponent<HPManager>();
+        enemy_stater_ = GetComponent<EnemyStater>();
 
         distance_state = DISTANCE_STATE.LONG;
         attack_state = ATTACK_STATE.WAIT;
@@ -62,6 +64,7 @@ public class AI2 : MonoBehaviour
     void Update()
     {
         if (!hp_manager_.isActive) return;
+        if (!enemy_stater_.isNormal) return;
         if (GameObject.FindGameObjectWithTag("Player") == null) return;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 playerPos = player.position;                 //プレイヤーの位置

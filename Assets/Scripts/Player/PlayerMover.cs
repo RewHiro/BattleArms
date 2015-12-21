@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 public class PlayerMover : NetworkBehaviour
 {
     HPManager hp_manager_ = null;
+    PlayerModer player_moder_ = null;
 
     void Start()
     {
@@ -12,6 +13,7 @@ public class PlayerMover : NetworkBehaviour
         hp_manager_ = GetComponent<HPManager>();
 
         player_controller_ = GetComponent<PlayerController>();
+        player_moder_ = GetComponent<PlayerModer>();
 
         var air_frame_parameter = FindObjectOfType<AirFrameParameter>();
         var id = GetComponent<Identificationer>().id;
@@ -24,6 +26,7 @@ public class PlayerMover : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (!hp_manager_.isActive) return;
+        if (!player_moder_.isNormalMode) return;
         Move();
     }
 

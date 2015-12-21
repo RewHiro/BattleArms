@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 public class PlayerRotater : NetworkBehaviour
 {
     HPManager hp_manager_ = null;
+    PlayerModer player_moder_ = null;
 
     void Start()
     {
@@ -12,6 +13,7 @@ public class PlayerRotater : NetworkBehaviour
         hp_manager_ = GetComponent<HPManager>();
 
         player_controller_ = GetComponent<PlayerController>();
+        player_moder_ = GetComponent<PlayerModer>();
 
         var air_frame_parameter = FindObjectOfType<AirFrameParameter>();
         var id = GetComponent<Identificationer>().id;
@@ -24,6 +26,8 @@ public class PlayerRotater : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         if (!hp_manager_.isActive) return;
+
+        if (!player_moder_.isNormalMode) return;
 
         var rotate_value = player_controller_.getRotateValue;
         if (rotate_value == 0.0f) return;

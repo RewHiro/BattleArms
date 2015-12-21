@@ -7,6 +7,7 @@ public class PlayerJumper : NetworkBehaviour
     const int STAGE_LAYER = 13;
 
     HPManager hp_manager_ = null;
+    PlayerModer player_moder_ = null;
 
     void Start()
     {
@@ -23,12 +24,15 @@ public class PlayerJumper : NetworkBehaviour
         JUMP_POWER = air_frame_parameter.GetJumpPower(id);
 
         rigidbody_ = GetComponent<Rigidbody>();
+
+        player_moder_ = GetComponent<PlayerModer>();
     }
 
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
         if (!hp_manager_.isActive) return;
+        if (!player_moder_.isNormalMode) return;
         if (is_jump_) return;
         if (!player_controller_.isInputJump) return;
         Debug.Log("OK");

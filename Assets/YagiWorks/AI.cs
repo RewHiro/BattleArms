@@ -7,6 +7,8 @@ public class AI : MonoBehaviour
     public Transform target; //プレイヤーの位置
     static Vector3 pos;
     NavMeshAgent agent;
+    EnemyStater enemy_stater_ = null;
+    HPManager hp_manager_ = null;
 
     float agentToPatroldistance;
     float agentToTargetdistance;
@@ -19,12 +21,16 @@ public class AI : MonoBehaviour
 
     void Start()
     {
+        hp_manager_ = GetComponent<HPManager>();
+        enemy_stater_ = GetComponent<EnemyStater>();
         DoPatrol();
     }
 
 
     void Update()
     {
+        if (!enemy_stater_.isNormal) return;
+
         //Agentと目的地の距離
         agentToPatroldistance = Vector3.Distance(this.agent.transform.position, pos);
 
