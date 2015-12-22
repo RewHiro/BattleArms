@@ -39,9 +39,9 @@ public class PlayerAttacker : NetworkBehaviour
         player_controller_ = GetComponent<PlayerController>();
         player_moder_ = GetComponent<PlayerModer>();
 
-        back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
-        back_weapon_.SetType(WeaponType.BACK);
-        back_weapon_.SetReticle(reticle_);
+        //back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
+        //back_weapon_.SetType(WeaponType.BACK);
+        //back_weapon_.SetReticle(reticle_);
     }
 
     void Update()
@@ -62,6 +62,15 @@ public class PlayerAttacker : NetworkBehaviour
             left_weapon_.SetReticle(reticle_);
             left_weapon_.SetWeaponObject(left_weapon_object_);
             left_weapon_.SetLayer(10);
+        }
+
+        if (back_weapon_ == null)
+        {
+            back_weapon_ = back_weapon_object_.GetComponentInChildren<Weapon>();
+            back_weapon_.SetType(WeaponType.BACK);
+            back_weapon_.SetReticle(reticle_);
+            back_weapon_.SetWeaponObject(back_weapon_object_);
+            back_weapon_.SetLayer(10);
         }
     }
 

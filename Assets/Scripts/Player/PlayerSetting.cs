@@ -10,6 +10,9 @@ public class PlayerSetting : NetworkBehaviour
     [SerializeField]
     GameObject left_weapon_ = null;
 
+    [SerializeField]
+    GameObject back_weapon_ = null;
+
     [SyncVar]
     int left_weapon_id_ = 0;
 
@@ -67,6 +70,7 @@ public class PlayerSetting : NetworkBehaviour
 
             CreateRightWeapon(right_weapon_id_);
             CreateLeftWeapon(left_weapon_id_);
+            CreateBackWeapon(back_weapon_id_);
         }
         else
         {
@@ -74,6 +78,7 @@ public class PlayerSetting : NetworkBehaviour
 
             CreateRightWeapon(right_weapon_id_);
             CreateLeftWeapon(left_weapon_id_);
+            CreateBackWeapon(back_weapon_id_);
 
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -110,6 +115,24 @@ public class PlayerSetting : NetworkBehaviour
         var weapon_transform = weapon.transform;
 
         weapon_transform.SetParent(left_weapon_.transform);
+
+        var temp_position = select_weapon_transform.localPosition;
+        temp_position.x *= -1;
+        weapon.transform.localPosition = temp_position;
+
+        weapon_transform.localRotation = select_weapon_transform.rotation;
+        weapon_transform.localScale = select_weapon_transform.lossyScale;
+    }
+
+    void CreateBackWeapon(int id)
+    {
+        var select_weapon = FindObjectOfType<BackWeaponPrefabList>().GetWeaponPrefab((uint)id);
+        var select_weapon_transform = select_weapon.transform;
+
+        var weapon = Instantiate(select_weapon);
+        var weapon_transform = weapon.transform;
+
+        weapon_transform.SetParent(back_weapon_.transform);
 
         var temp_position = select_weapon_transform.localPosition;
         temp_position.x *= -1;
