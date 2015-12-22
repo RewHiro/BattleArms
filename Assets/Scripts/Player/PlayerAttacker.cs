@@ -20,6 +20,7 @@ public class PlayerAttacker : NetworkBehaviour
     GameObject reticle_ = null;
 
     HPManager hp_manager_ = null;
+    PlayerModer player_moder_ = null;
 
     public override void PreStartClient()
     {
@@ -36,6 +37,7 @@ public class PlayerAttacker : NetworkBehaviour
         hp_manager_ = GetComponent<HPManager>();
 
         player_controller_ = GetComponent<PlayerController>();
+        player_moder_ = GetComponent<PlayerModer>();
 
         back_weapon_ = back_weapon_object_.AddComponent<HomingGun>();
         back_weapon_.SetType(WeaponType.BACK);
@@ -67,6 +69,7 @@ public class PlayerAttacker : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (!hp_manager_.isActive) return;
+        if (!player_moder_.isNormalMode) return;
         AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
         AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
         AttackWithWeapon(player_controller_.isInputBothHandAttack, back_weapon_);

@@ -13,4 +13,5 @@ public class HitEffector : MonoBehaviour
         effect_.transform.position = gameObject.transform.position;
         Destroy(effect, 4.0f);
     }
+
 }
