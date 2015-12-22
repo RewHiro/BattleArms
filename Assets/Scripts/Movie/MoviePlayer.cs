@@ -30,7 +30,7 @@ public class MoviePlayer : MonoBehaviour
 
     public void Stop()
     {
-        GetComponent<RawImage>().color = new Color(1, 1, 1, 0);
+        //GetComponent<RawImage>().color = new Color(1, 1, 1, 0);
         movie_texture_.Stop();
     }
 }

@@ -11,12 +11,15 @@ public class ServerManager : NetworkBehaviour
     GameObject[] players = null;
     GameObject[] enemys = null;
 
-    float count_ = 0.0f;
+    float result_count_ = 0.0f;
+    float limit_count_ = 60 * 5;
 
     public bool goResult
     {
         get
         {
+            if (limit_count_ <= 0.0f) return true;
+
             players = GameObject.FindGameObjectsWithTag("Player");
             List<HPManager> player_hp_managers = new List<HPManager>();
             foreach (var player in players)
@@ -43,6 +46,8 @@ public class ServerManager : NetworkBehaviour
     {
         get
         {
+            if (limit_count_ <= 0.0f) return false;
+
             foreach (var player in players)
             {
                 var hp_manager = player.GetComponent<HPManager>();
@@ -61,12 +66,20 @@ public class ServerManager : NetworkBehaviour
     void Update()
     {
         Result();
+
+        if (goResult) return;
+        limit_count_ -= Time.deltaTime;
+
+        foreach (var player in FindObjectsOfType< Limiter > ())
+        {
+            player.RpcTellToClient(limit_count_);
+        }
     }
 
     void Result()
     {
         if (!goResult) return;
-        if (count_ <= 0.0)
+        if (result_count_ <= 0.0)
         {
             if (isWinPlayer)
             {
@@ -87,9 +100,9 @@ public class ServerManager : NetworkBehaviour
             }
         }
 
-        count_ += Time.deltaTime;
+        result_count_ += Time.deltaTime;
 
-        if (count_ <= 5.0f) return;
+        if (result_count_ <= 5.0f) return;
 
         FindObjectOfType<MyNetworkLobbyManager>().StopHost();
     }

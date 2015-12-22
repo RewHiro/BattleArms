@@ -8,16 +8,16 @@
     },
 
     "Movement": {
-        "X": 1.0,
+        "X": 2.5,
         "Y": 1.0,
         "Z": 1.0
     },
 
     "ReferencePoint": {
-        "X": 185.0
+        "X": 135.0
     },
 
-    "ReactionValue": 0.1,
+    "ReactionValue": 0.05,
 
     "ReactionBoostValue": 0.7,
 

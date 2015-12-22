@@ -64,7 +64,6 @@ public class AI2 : MonoBehaviour
     void Update()
     {
         if (!hp_manager_.isActive) return;
-        Debug.Log(enemy_stater_.getEnemyState);
         if (!enemy_stater_.isNormal) return;
         if (GameObject.FindGameObjectWithTag("Player") == null) return;
         player = GameObject.FindGameObjectWithTag("Player").transform;

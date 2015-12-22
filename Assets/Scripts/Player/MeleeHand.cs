@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class MeleeHand : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class MeleeHand : MonoBehaviour
 
     [SerializeField]
     GameObject effect_ = null;
+
+    [SerializeField]
+    GameObject explosion_effect_ = null;
 
     PlayerMeleeAttacker player_melee_attacker_ = null;
 
@@ -21,12 +25,30 @@ public class MeleeHand : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
-        
         player_melee_attacker_.SendAttack();
         collider.gameObject.GetComponent<EnemyStater>().SendAttacked();
 
         var effect = Instantiate(effect_);
-        effect.transform.position = collider.transform.position;
+        effect.transform.position = transform.position;
         Destroy(effect, 4.0f);
+
+        var explosion = Instantiate(explosion_effect_);
+        explosion.transform.position = collider.gameObject.transform.position;
+        NetworkServer.Spawn(explosion);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
+        player_melee_attacker_.SendAttack();
+        collision.gameObject.GetComponent<EnemyStater>().SendAttacked();
+
+        var effect = Instantiate(effect_);
+        effect.transform.position = transform.position;
+        Destroy(effect, 4.0f);
+
+        var explosion = Instantiate(explosion_effect_);
+        explosion.transform.position = collision.gameObject.transform.position;
+        NetworkServer.Spawn(explosion);
     }
 }

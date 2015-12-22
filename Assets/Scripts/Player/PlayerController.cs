@@ -91,13 +91,26 @@ public class PlayerController : NetworkBehaviour
 
             if (right_hand_input_ != null)
             {
+                //if (right_hand_input_.isLeft)
+                //{
+                //    return right_hand_input_.getHorizaontalValue;
+                //}
+
                 if (right_hand_input_.isRight)
                 {
                     return right_hand_input_.getHorizaontalValue;
                 }
             }
+
+
+
             if (left_hand_input_ != null)
             {
+                //if (left_hand_input_.isRight)
+                //{
+                //    return left_hand_input_.getHorizaontalValue;
+                //}
+
                 if (left_hand_input_.isLeft)
                 {
                     return left_hand_input_.getHorizaontalValue;
@@ -138,7 +151,6 @@ public class PlayerController : NetworkBehaviour
             {
                 return 0.0f;
             }
-
         }
     }
 
@@ -154,7 +166,6 @@ public class PlayerController : NetworkBehaviour
             if (!leap_contoller_.IsConnected) return Input.GetKeyDown(KeyCode.Space);
             if (NullCheck()) return false;
             if (!(right_hand_input_.isRight && left_hand_input_.isLeft)) return false;
-
             if (!(right_hand_input_.getHorizaontalValue > REACTION_JUMP_VALUE &&
                 left_hand_input_.getHorizaontalValue < -REACTION_JUMP_VALUE))
                 return false;
@@ -224,40 +235,49 @@ public class PlayerController : NetworkBehaviour
         get
         {
             if (!leap_contoller_.IsConnected) return Input.GetKey(KeyCode.LeftShift);
+
             if (isBothHandsFront)
             {
-                if (!(right_hand_input_.getVerticalValue >= REACTION_BOOST_VALUE &&
-                    left_hand_input_.getVerticalValue >= REACTION_BOOST_VALUE))
-                    return false;
-                return true;
+                if (right_hand_input_.getVerticalValue >= REACTION_BOOST_VALUE &&
+                    left_hand_input_.getVerticalValue >= REACTION_BOOST_VALUE)
+                {
+                    return true;
+                }
             }
-            else if (isBothHandsBack)
+
+            if (isBothHandsBack)
             {
-                if (!(right_hand_input_.getVerticalValue <= -REACTION_BOOST_VALUE &&
-                    left_hand_input_.getVerticalValue <= -REACTION_BOOST_VALUE))
-                    return false;
-                return true;
+                if (right_hand_input_.getVerticalValue <= -REACTION_BOOST_VALUE &&
+                    left_hand_input_.getVerticalValue <= -REACTION_BOOST_VALUE)
+                {
+                    return true;
+                }
             }
+
             if (right_hand_input_ != null)
             {
                 if (right_hand_input_.isRight)
                 {
                     var value = right_hand_input_.getHorizaontalValue;
-                    if (!(value >= REACTION_BOOST_VALUE))
-                        return false;
-                    return true;
+                    if (value >= 0.6f)
+                    {
+                        return true;
+                    }
                 }
             }
+
             if (left_hand_input_ != null)
             {
                 if (left_hand_input_.isLeft)
                 {
                     var value = left_hand_input_.getHorizaontalValue;
-                    if (!(value <= -REACTION_BOOST_VALUE))
-                        return false;
-                    return true;
+                    if (value <= -0.6f)
+                    {
+                        return true;
+                    }
                 }
             }
+
             return false;
         }
     }
@@ -298,6 +318,20 @@ public class PlayerController : NetworkBehaviour
             foreach (var gesture in leap_contoller_.Frame().Gestures())
             {
                 var screen_tap = new KeyTapGesture(gesture);
+                if (!screen_tap.IsValid) continue;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public bool isChangeTarget
+    {
+        get
+        {
+            foreach (var gesture in leap_contoller_.Frame().Gestures())
+            {
+                var screen_tap = new SwipeGesture(gesture);
                 if (!screen_tap.IsValid) continue;
                 return true;
             }

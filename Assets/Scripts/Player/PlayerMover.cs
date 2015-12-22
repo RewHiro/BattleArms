@@ -46,18 +46,18 @@ public class PlayerMover : NetworkBehaviour
         direction = direction * vartical_axis;
         direction += -cross * horizontal_axis;
 
-        var slope = 0.0f;
-        if (vartical_axis == 0.0f)
+        var slope = 1.0f;
+
+        var abs_vartical_axis = Mathf.Abs(vartical_axis);
+        var abs_horizantal_axis = Mathf.Abs(horizontal_axis);
+
+        if (abs_vartical_axis > abs_horizantal_axis)
         {
-            slope = Mathf.Abs(horizontal_axis);
-        }
-        else if (horizontal_axis == 0.0f)
-        {
-            slope = Mathf.Abs(vartical_axis);
+            slope = abs_vartical_axis;
         }
         else
         {
-            slope = (Mathf.Abs(horizontal_axis) + Mathf.Abs(vartical_axis)) * 0.5f;
+            slope = abs_horizantal_axis;
         }
 
         float boost_value = 1.0f;
@@ -68,7 +68,7 @@ public class PlayerMover : NetworkBehaviour
         }
 
         gameObject.transform.localPosition +=
-             direction.normalized * MOVE_SPEED * slope * boost_value * Time.deltaTime;
+             direction.normalized * MOVE_SPEED * boost_value * slope * Time.deltaTime;
     }
 
     PlayerController player_controller_ = null;

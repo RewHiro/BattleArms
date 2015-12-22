@@ -31,6 +31,8 @@ public class StageSelectClicker : MonoBehaviour
 
         FindObjectOfType<MoviePlayer>().Play();
 
+        FindObjectOfType<MyNetworkDiscovery>().StopBroadcast();
+
         foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
         {
             if (!player.isLocalPlayer) continue;

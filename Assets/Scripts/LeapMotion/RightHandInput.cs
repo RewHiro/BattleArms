@@ -23,7 +23,7 @@ public class RightHandInput : MonoBehaviour
             point *= ratio_;
             point = Mathf.Clamp(point, -1.0f, 1.0f);
             if (REACTION_VALUE > point && -REACTION_VALUE < point) return 0.0f;
-            return point;
+            return point * 1.5f;
         }
     }
 

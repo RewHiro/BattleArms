@@ -65,6 +65,9 @@ public class LeapGestureInitialization : MonoBehaviour
         leap_contoller.Config.SetFloat("Gesture.KeyTap.HistorySeconds", 0.3f);
         leap_contoller.Config.SetFloat("Gesture.KeyTap.MinDistance", 0.01f);
 
+        leap_contoller.Config.SetFloat("Gesture.Swipe.MinLength", 100.0f);
+        leap_contoller.Config.SetFloat("Gesture.Swipe.MinVelocity", 750.0f);
+
         leap_contoller.Config.Save();
     }
 }

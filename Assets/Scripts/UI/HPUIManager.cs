@@ -27,5 +27,11 @@ public class HPUIManager : MonoBehaviour
         var size_delta = rect_transform_.sizeDelta;
         size_delta.x = (hp_manager_.hp / MAX_HP)* MAX_WIDTH;
         rect_transform_.sizeDelta = size_delta;
+
+        if (hp_manager_.hp > MAX_HP * 0.5f) return;
+        image_.color = Color.HSVToRGB(68.0f / 255, 1.0f, 1.0f);
+
+        if (hp_manager_.hp > MAX_HP * 0.2f) return;
+        image_.color = Color.HSVToRGB(0.0f, 1.0f, 1.0f);
     }
 }

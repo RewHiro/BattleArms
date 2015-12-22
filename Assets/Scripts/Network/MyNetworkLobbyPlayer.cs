@@ -25,6 +25,7 @@ public class MyNetworkLobbyPlayer : NetworkLobbyPlayer
         if (!is_ready_) return;
         if (movie_player_.isPlaying) return;
         if (is_send_server_) return;
+        movie_player_.Stop();
         is_send_server_ = true;
         SendReadyToBeginMessage();
     }

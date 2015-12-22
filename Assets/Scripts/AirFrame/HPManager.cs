@@ -21,6 +21,8 @@ public class HPManager : NetworkBehaviour
     [SerializeField]
     GameObject hp_text_ = null;
 
+    float MAX_HP = 0.0f;
+
     public bool isActive
     {
         get
@@ -46,6 +48,7 @@ public class HPManager : NetworkBehaviour
 
         var id = GetComponent<Identificationer>().id;
         hp = FindObjectOfType<AirFrameParameter>().GetMaxHP(id);
+        MAX_HP = hp;
     }
 
     void Update()
@@ -53,7 +56,7 @@ public class HPManager : NetworkBehaviour
         if (!isLocalPlayer) return;
         if (hp_text_ == null) return;
 
-        hp_text_.GetComponent<Text>().text = "HP:" + hp_.ToString();
+        hp_text_.GetComponent<Text>().text = "HP:" + hp_.ToString() + "/" + MAX_HP.ToString();
     }
 
     void OnTriggerEnter(Collider collider)

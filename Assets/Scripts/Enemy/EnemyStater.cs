@@ -51,22 +51,30 @@ public class EnemyStater : MonoBehaviour
         attacked_count_++;
     }
 
+    public void SendHitPlayer(Transform transform)
+    {
+        enemy_state_ = EnemyState.MELEED;
+        hit_position_ = transform.position;
+        hit_rotate_ = transform.rotation;
+        var rigidbody = GetComponent<Rigidbody>();
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+    }
+
     void Start()
     {
         PLAYER_HASH = "Player".GetHashCode();
 
         state_update_list_.Add(EnemyState.MELEED, MeleeUpdate);
         state_update_list_.Add(EnemyState.STOP, StopUpdate);
-        state_update_list_.Add(EnemyState.NORMAL, StopUpdate);
+        state_update_list_.Add(EnemyState.NORMAL, NormalUpdate);
     }
 
     void OnTriggerEnter(Collider collider)
     {
         if (PLAYER_HASH != collider.gameObject.tag.GetHashCode()) return;
-        enemy_state_ = EnemyState.MELEED;
-        hit_position_ = transform.position;
-        hit_rotate_ = transform.rotation;
     }
+
 
     void Update()
     {
@@ -78,7 +86,7 @@ public class EnemyStater : MonoBehaviour
         transform.position.Set(hit_position_.x, transform.position.y, hit_position_.z);
         transform.rotation = hit_rotate_;
 
-        if (!(attacked_count_ >= 3)) return;
+        if (attacked_count_ < 3) return;
         enemy_state_ = EnemyState.STOP;
         attacked_count_ = 0;
     }

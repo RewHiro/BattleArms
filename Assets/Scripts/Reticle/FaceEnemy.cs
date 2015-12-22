@@ -11,14 +11,21 @@ public class FaceEnemy : NetworkBehaviour
     GameObject look_object_;
     Vector3 enemy_position;
 
+    PlayerController player_controller_ = null;
+
+    float cool_down_count_ = 0.0f;
+
     int enemy_number_;
     int base_number_;
+
+    bool is_change_target_ = false;
 
     public override void OnStartLocalPlayer()
     {
 
         enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         base_ = GameObject.FindGameObjectsWithTag("Base");
+        player_controller_ = GetComponent<PlayerController>();
 
         base.OnStartLocalPlayer();
     }
@@ -28,10 +35,26 @@ public class FaceEnemy : NetworkBehaviour
         if (!isLocalPlayer) return;
         IsChangeEnemyNumber();
         LookAtEnemy();
+        ChangeLockEnemy();
+        ChangeTargetCoolDown();
+    }
+
+    void ChangeTargetCoolDown()
+    {
+        if (!is_change_target_) return;
+        cool_down_count_ += Time.deltaTime;
+
+        if (cool_down_count_ <= 2.0f) return;
+        cool_down_count_ = 0.0f;
+        is_change_target_ = false;
     }
 
     public void ChangeLockEnemy()
     {
+        if (!player_controller_.isChangeTarget) return;
+        if (cool_down_count_ != 0.0f) return;
+        Debug.Log("OK");
+        is_change_target_ = true;
         enemy_number_++;
 
         if (enemy_number_ >= enemy_.Length)
@@ -45,7 +68,6 @@ public class FaceEnemy : NetworkBehaviour
             enemy_number_ = 0;
 
         }
-
     }
 
 
