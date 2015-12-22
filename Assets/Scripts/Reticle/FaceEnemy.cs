@@ -53,7 +53,7 @@ public class FaceEnemy : NetworkBehaviour
     {
         if (!player_controller_.isChangeTarget) return;
         if (cool_down_count_ != 0.0f) return;
-        Debug.Log("OK");
+        FindObjectOfType<SoundManager>().PlaySE(1);
         is_change_target_ = true;
         enemy_number_++;
 

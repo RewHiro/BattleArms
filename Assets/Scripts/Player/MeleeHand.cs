@@ -40,6 +40,9 @@ public class MeleeHand : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
+
+        FindObjectOfType<SoundManager>().PlaySE(6);
+
         player_melee_attacker_.SendAttack();
         collision.gameObject.GetComponent<EnemyStater>().SendAttacked();
 
