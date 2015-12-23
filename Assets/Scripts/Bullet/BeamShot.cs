@@ -10,6 +10,9 @@ public class BeamShot : Weapon {
 	RaycastHit shotHit;  
 	ParticleSystem beamParticle;
 	LineRenderer lineRenderer;
+
+    [SerializeField]
+    GameObject explosion_effect_ = null;
 	
 	// Use this for initialization
 	void Awake () {
@@ -40,17 +43,23 @@ public class BeamShot : Weapon {
         var direction = Reticle.gameObject.transform.position - transform.position;
         direction.Normalize();
 
-        transform.rotation = 
-        Quaternion.FromToRotation(transform.forward, direction);
+        transform.rotation =
+        Quaternion.LookRotation(direction, Vector3.up);
 
-		lineRenderer.SetPosition (0, transform.position);
+        lineRenderer.SetPosition (0, transform.position);
 		shotRay.origin = transform.position;
 		shotRay.direction = transform.forward;
-		
-		int layerMask = 0;
-		if(Physics.Raycast(shotRay , out shotHit , range , layerMask))
+		if(Physics.Raycast(shotRay , out shotHit , range))
         {
             // hit
+            var effect = Instantiate(explosion_effect_);
+            effect.transform.position = shotHit.point;
+
+            var collider = shotHit.collider;
+            if (collider.tag == "Enemy")
+            {
+                collider.GetComponent<HPManager>().Damage(1);
+            }
              
 		}
 		lineRenderer.SetPosition(1 , shotRay.origin + shotRay.direction * range);

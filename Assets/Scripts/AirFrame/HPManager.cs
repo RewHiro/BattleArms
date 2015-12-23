@@ -43,6 +43,11 @@ public class HPManager : NetworkBehaviour
         }
     }
 
+    public void Damage(float damage)
+    {
+        hp -= damage;
+    }
+
     void Start()
     {
 
@@ -51,12 +56,26 @@ public class HPManager : NetworkBehaviour
         MAX_HP = hp;
     }
 
+    void Death()
+    {
+        if (!isServer) return;
+        if (!isActive) return;
+        if (hp_ > 0) return;
+        var destory_effect = Instantiate(destory_effect_prefab_);
+        destory_effect.transform.SetParent(gameObject.transform);
+        destory_effect.transform.position = gameObject.transform.position;
+        is_active_ = false;
+        FindObjectOfType<SoundManager>().PlaySE(0);
+    }
+
     void Update()
     {
+        Death();
         if (!isLocalPlayer) return;
         if (hp_text_ == null) return;
 
         hp_text_.GetComponent<Text>().text = "HP:" + hp_.ToString() + "/" + MAX_HP.ToString();
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -69,11 +88,11 @@ public class HPManager : NetworkBehaviour
         hit_effect.transform.SetParent(gameObject.transform);
         hit_effect.transform.position = collider.gameObject.transform.position;
         NetworkServer.Spawn(hit_effect);
-        if (hp_ > 0) return;
-        var destory_effect = Instantiate(destory_effect_prefab_);
-        destory_effect.transform.SetParent(gameObject.transform);
-        destory_effect.transform.position = gameObject.transform.position;
-        is_active_ = false;
-        FindObjectOfType<SoundManager>().PlaySE(0);
+        //if (hp_ > 0) return;
+        //var destory_effect = Instantiate(destory_effect_prefab_);
+        //destory_effect.transform.SetParent(gameObject.transform);
+        //destory_effect.transform.position = gameObject.transform.position;
+        //is_active_ = false;
+        //FindObjectOfType<SoundManager>().PlaySE(0);
     }
 }
