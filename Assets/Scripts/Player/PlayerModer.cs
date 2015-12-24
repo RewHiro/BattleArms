@@ -13,6 +13,7 @@ public class PlayerModer : NetworkBehaviour
     PlayerMode player_mode_ = PlayerMode.NORMAL;
     PlayerMeleeAttacker player_melee_attacker_ = null;
     Rigidbody rigidbody_ = null;
+    float MELEE_DISTANCE = 7.0f;
     int ENEMY_HASH = 0;
 
     public bool isNormalMode
@@ -57,11 +58,15 @@ public class PlayerModer : NetworkBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
+
         var enemy_stater = collider.gameObject.GetComponent<EnemyStater>();
         if (!enemy_stater.isNormal) return;
+
+        if (player_mode_ != PlayerMode.NORMAL) return;
+
         enemy_stater.SendHitPlayer(transform);
         var direction = new Vector3(transform.forward.x, 0, transform.forward.z);
-        hit_position_ = collider.gameObject.transform.position + direction * 8.0f;
+        hit_position_ = collider.gameObject.transform.position + direction * MELEE_DISTANCE;
         player_mode_ = PlayerMode.MELEE;
         melee_manager_.SetActive(true);
         for (int i = 0; i < 4; i++)
@@ -80,11 +85,15 @@ public class PlayerModer : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
+
         var enemy_stater = collision.gameObject.GetComponent<EnemyStater>();
         if (!enemy_stater.isNormal) return;
+
+        if (player_mode_ != PlayerMode.NORMAL) return;
+
         enemy_stater.SendHitPlayer(transform);
         var direction = new Vector3(transform.forward.x, 0, transform.forward.z);
-        hit_position_ = collision.gameObject.transform.position + direction * 8.0f;
+        hit_position_ = collision.gameObject.transform.position + direction * MELEE_DISTANCE;
         player_mode_ = PlayerMode.MELEE;
         melee_manager_.SetActive(true);
         for (int i = 0; i < 4; i++)
