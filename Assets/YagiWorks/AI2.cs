@@ -42,20 +42,17 @@ public class AI2 : MonoBehaviour
 
     private int timer = 0;
     private int atktimer = 0;
+    
+    private GameObject nearObj;
+    private float searchTime=0;
 
     // private bool isGround = false;
-
-    HPManager hp_manager_ = null;
-    EnemyStater enemy_stater_ = null;
 
     //ゲーム開始時に一度
     void Start()
     {
         //Playerオブジェクトを検索し、参照を代入
-
-        hp_manager_ = GetComponent<HPManager>();
-        enemy_stater_ = GetComponent<EnemyStater>();
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         distance_state = DISTANCE_STATE.LONG;
         attack_state = ATTACK_STATE.WAIT;
     }
@@ -63,15 +60,23 @@ public class AI2 : MonoBehaviour
     //毎フレームに一度
     void Update()
     {
-        if (!hp_manager_.isActive) return;
-        if (!enemy_stater_.isNormal) return;
-        if (GameObject.FindGameObjectWithTag("Player") == null) return;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         Vector3 playerPos = player.position;                 //プレイヤーの位置
         Vector3 direction = playerPos - transform.position; //方向と距離を求める。
         float distance = direction.sqrMagnitude;            //directionから距離要素だけを取り出す。
         direction = direction.normalized;                   //単位化（距離要素を取り除く）
         direction.y = 0f;                                   //後に敵の回転制御に使うためY軸情報を消去。これにより敵が上下を向かなくなる。
+
+        //経過時間を取得
+        searchTime += Time.deltaTime;
+
+        if (searchTime >= 1.0f) {
+            //最も近かったオブジェクトを取得
+            nearObj = serchTag(gameObject, "Player");
+            player = nearObj.transform;
+
+            //経過時間を初期化
+            searchTime = 0;
+        }   
 
         //プレイヤーとの距離を設定
         switch (distance_state)
@@ -143,26 +148,34 @@ public class AI2 : MonoBehaviour
         timer += 1;
         atktimer += 1;
 
-        //Debug.Log(timer);
-
-        ////重力落下処理（プレイヤーの距離関係なく下に移動する）
-        //Vector3 rayPos = transform.position;
-        //rayPos.y -= 1f;
-
-        //if (!Physics.Raycast(rayPos, Vector3.down, 0.5f))
-        //{
-        //    transform.position = transform.position + (Vector3.down * 9.8f * Time.deltaTime);
-        //}
-        ////地面判定線を見れるようにする
-        //Debug.DrawRay(rayPos, Vector3.down * 1 / 10);
-
-        ////敵のY座標が-5以下の時自身を削除
-        //if (transform.position.y <= -5f)
-        //{
-        //    Destroy(gameObject);
-        //}
     }
+    
+    //指定されたタグの中で最も近いものを取得
+    GameObject serchTag(GameObject nowObj,string tagName){
+        float tmpDis = 0;           //距離用一時変数
+        float nearDis = 0;          //最も近いオブジェクトの距離
+        //string nearObjName = "";    //オブジェクト名称
+        GameObject targetObj = null; //オブジェクト
 
+        //タグ指定されたオブジェクトを配列で取得する
+        foreach (GameObject obs in  GameObject.FindGameObjectsWithTag(tagName)){
+            //自身と取得したオブジェクトの距離を取得
+            tmpDis = Vector3.Distance(obs.transform.position, nowObj.transform.position);
+
+            //オブジェクトの距離が近いか、距離0であればオブジェクト名を取得
+            //一時変数に距離を格納
+            if (nearDis == 0 || nearDis > tmpDis){
+                nearDis = tmpDis;
+                //nearObjName = obs.name;
+                targetObj = obs;
+            }
+
+        }
+        //最も近かったオブジェクトを返す
+        //return GameObject.Find(nearObjName);
+        return targetObj;
+    }
+    
     void Attack()
     {
         Debug.Log("Attack");
@@ -176,4 +189,5 @@ public class AI2 : MonoBehaviour
         left_weapon.CreateBullet();
         left_weapon.SetReticle(player.gameObject);
     }
+
 }
