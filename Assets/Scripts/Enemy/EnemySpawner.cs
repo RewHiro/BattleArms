@@ -14,25 +14,26 @@ public class EnemySpawner : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        //CreateEnemy(0);
 
-        for (int i = 0; i < 1; i++)
-        {
-            var spawn_num = i;
-            var enemy = Instantiate(
-            enmey_prefab,
-            enemy_spawn_point_[spawn_num].transform.position,
-            enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
-            enemy.name = "Enemy" + i.ToString();
-            NetworkServer.Spawn(enemy);
-        }
+        //CreateEnemy(0);
+        //CreateEnemy(1);
+
+        //for (int i = 0; i < 1; i++)
+        //{
+        //    var spawn_num = i;
+        //    var enemy = Instantiate(
+        //    enmey_prefab,
+        //    enemy_spawn_point_[spawn_num].transform.position,
+        //    enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
+        //    enemy.name = "Enemy" + i.ToString();
+        //    NetworkServer.Spawn(enemy);
+        //}
 
         //if (FindObjectOfType<MyNetworkLobbyManager>().numPlayers <= 2) return;
-        //CreateEnemy(1);
 
     }
 
-    void CreateEnemy(int spawn_num)
+    public void CreateEnemy(int spawn_num)
     {
         var enemy = Instantiate(
             enmey_prefab,

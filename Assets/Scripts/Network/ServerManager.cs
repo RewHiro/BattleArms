@@ -65,6 +65,7 @@ public class ServerManager : NetworkBehaviour
 
     void Update()
     {
+        return;
         Result();
 
         if (goResult) return;
