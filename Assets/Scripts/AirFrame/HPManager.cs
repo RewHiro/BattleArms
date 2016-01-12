@@ -83,6 +83,10 @@ public class HPManager : NetworkBehaviour
         if (!isServer) return;
         if (collider.gameObject.layer != layer_num_) return;
         hp -= 10;
+        if (hp <= 0)
+        {
+            hp_ = 0;
+        }
         Destroy(collider.gameObject);
         var hit_effect = Instantiate(hit_effect_prefab);
         hit_effect.transform.SetParent(gameObject.transform);

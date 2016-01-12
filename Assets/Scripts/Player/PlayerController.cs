@@ -329,6 +329,7 @@ public class PlayerController : NetworkBehaviour
     {
         get
         {
+            if (!leap_contoller_.IsConnected) return Input.GetKeyDown(KeyCode.Tab);
             foreach (var gesture in leap_contoller_.Frame().Gestures())
             {
                 var screen_tap = new SwipeGesture(gesture);

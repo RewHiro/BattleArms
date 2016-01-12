@@ -33,7 +33,7 @@ public class EnemySpawner : NetworkBehaviour
 
     }
 
-    public void CreateEnemy(int spawn_num)
+    public GameObject CreateEnemy(int spawn_num)
     {
         var enemy = Instantiate(
             enmey_prefab,
@@ -41,6 +41,7 @@ public class EnemySpawner : NetworkBehaviour
             enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
         enemy.name = "Enemy" + spawn_num.ToString();
         NetworkServer.Spawn(enemy);
+        return enemy;
     }
 
     void Update()
