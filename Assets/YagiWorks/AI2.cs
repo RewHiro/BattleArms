@@ -46,11 +46,17 @@ public class AI2 : MonoBehaviour
     private GameObject nearObj;
     private float searchTime=0;
 
+    HPManager hp_manager_ = null;
+    EnemyStater enemy_stater_ = null;
+
     // private bool isGround = false;
 
     //ゲーム開始時に一度
     void Start()
     {
+        hp_manager_ = GetComponent<HPManager>();
+        enemy_stater_ = GetComponent<EnemyStater>();
+
         //Playerオブジェクトを検索し、参照を代入
         player = GameObject.FindGameObjectWithTag("Player").transform;
         distance_state = DISTANCE_STATE.LONG;
@@ -60,6 +66,9 @@ public class AI2 : MonoBehaviour
     //毎フレームに一度
     void Update()
     {
+        if (!hp_manager_.isActive) return;
+        if (!enemy_stater_.isNormal) return;
+
         Vector3 playerPos = player.position;                 //プレイヤーの位置
         Vector3 direction = playerPos - transform.position; //方向と距離を求める。
         float distance = direction.sqrMagnitude;            //directionから距離要素だけを取り出す。
