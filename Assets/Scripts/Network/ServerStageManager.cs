@@ -14,7 +14,7 @@ public class ServerStageManager : NetworkBehaviour
     List<GameObject> enemys = new List<GameObject>();
 
     float result_count_ = 0.0f;
-    float limit_count_ = 60 * 5;
+    float limit_count_ = 60* 5;
 
     public bool CanGoRoom(uint num)
     {
@@ -26,7 +26,7 @@ public class ServerStageManager : NetworkBehaviour
     {
         get
         {
-            if (limit_count_ <= 0.0f) return false;
+            if (limit_count_ <= 0.0f) return true;
 
             var players = GameObject.FindGameObjectsWithTag("Player");
             List<HPManager> player_hp_managers = new List<HPManager>();
@@ -40,7 +40,7 @@ public class ServerStageManager : NetworkBehaviour
             List<HPManager> enemy_hp_managers = new List<HPManager>();
 
             if (enemys.Count <= 17) return false;
-            var active_enemys = enemys.GetRange(7, 10);
+            var active_enemys = enemys.GetRange(7, 11);
             foreach (var enemy in active_enemys)
             {
                 if (enemy == null) continue;
@@ -82,13 +82,15 @@ public class ServerStageManager : NetworkBehaviour
 
     void Update()
     {
-        Result();
-        LimitTimeUpdate();
+        var go_result = goResult;
+        Result(go_result);
+        LimitTimeUpdate(go_result);
     }
 
-    void Result()
+    void Result(bool go_result)
     {
-        if (!goResult) return;
+        if (!go_result) return;
+
         if (result_count_ <= 0.0)
         {
             if (isWinPlayer)
@@ -117,9 +119,9 @@ public class ServerStageManager : NetworkBehaviour
         FindObjectOfType<MyNetworkLobbyManager>().StopHost();
     }
 
-    void LimitTimeUpdate()
+    void LimitTimeUpdate(bool go_result)
     {
-        if (goResult) return;
+        if (go_result) return;
         limit_count_ -= Time.deltaTime;
 
         foreach (var player in FindObjectsOfType<Limiter>())

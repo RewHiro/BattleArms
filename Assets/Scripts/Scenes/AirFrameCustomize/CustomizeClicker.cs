@@ -36,6 +36,8 @@ public class CustomizeClicker : MonoBehaviour
 
         FindObjectOfType<MoviePlayer>().Play();
 
+        FindObjectOfType<SoundManager>().PlaySE(15);
+
         FindObjectOfType<MyNetworkDiscovery>().StopBroadcast();
 
         foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())

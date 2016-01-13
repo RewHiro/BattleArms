@@ -13,6 +13,7 @@ public class ModeUIChanger : MonoBehaviour
 
     public void ChangeOnlineUI()
     {
+        Debug.Log("OK");
         online_ui_.SetActive(true);
         offline_ui_.SetActive(false);
         FindObjectOfType<SoundManager>().PlaySE(4);
@@ -20,6 +21,7 @@ public class ModeUIChanger : MonoBehaviour
 
     public void ChangeOfflineUI()
     {
+        Debug.Log("OK");
         online_ui_.SetActive(false);
         offline_ui_.SetActive(true);
         FindObjectOfType<SoundManager>().PlaySE(4);

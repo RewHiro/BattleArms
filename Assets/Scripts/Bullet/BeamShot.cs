@@ -13,12 +13,27 @@ public class BeamShot : Weapon {
 
     [SerializeField]
     GameObject explosion_effect_ = null;
+
+    SoundManager sound_manager_ = null;
+
+    float POWER = 0.0f;
+
+    bool is_shot_ = false;
 	
 	// Use this for initialization
 	void Awake () {
 		beamParticle = GetComponent<ParticleSystem> ();
 		lineRenderer = GetComponent<LineRenderer> ();
+
+        var parameter = FindObjectOfType<RocketLauncherParameter>();
+        if (parameter == null) return;
+        POWER = parameter.GetAttackPower(0);
 	}
+
+    void Start()
+    {
+        sound_manager_ = FindObjectOfType<SoundManager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,8 +45,19 @@ public class BeamShot : Weapon {
 
     public override void OnAttack()
     {
+        if (!is_shot_)
+        {
+            sound_manager_.PlaySE(9);
+            is_shot_ = true;
+        }
         shot();
         base.OnAttack();
+    }
+
+    public override void OnNotAttack()
+    {
+        is_shot_ = false;
+        base.OnNotAttack();
     }
 
     private void shot(){
@@ -58,7 +84,7 @@ public class BeamShot : Weapon {
             var collider = shotHit.collider;
             if (collider.tag == "Enemy")
             {
-                collider.GetComponent<HPManager>().Damage(1);
+                collider.GetComponent<HPManager>().Damage(POWER);
             }
              
 		}

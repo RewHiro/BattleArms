@@ -14,9 +14,17 @@ public class AssaultRifle : Weapon
     [SerializeField]
     GameObject spark_prefab_ = null;
 
+    SoundManager sound_manager_ = null;
+
+    float POWER = 0.0f;
+
     void Start()
     {
         bullet_creater_ = FindObjectOfType<BulletCreater>();
+        var parameter = FindObjectOfType<GatlingGunParameter>();
+        if (parameter == null) return;
+        POWER = parameter.GetAttackPower(0);
+        sound_manager_ = FindObjectOfType<SoundManager>();
     }
 
     public override void OnAttack()
@@ -61,7 +69,7 @@ public class AssaultRifle : Weapon
 
         var direction = (reticle_position - transform.position).normalized;
 
-        const float diff = 0.1f;
+        const float diff = 0.03f;
 
         var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), Random.Range(-diff, diff));
 
@@ -72,9 +80,11 @@ public class AssaultRifle : Weapon
 
         Destroy(obj, 3.0f);
 
+        obj.GetComponent<BulletPower>().SetPower(POWER);
+
         bullets.Add(obj);
 
-        FindObjectOfType<SoundManager>().PlaySE(7);
+        sound_manager_.PlaySE(7);
 
         return bullets;
     }

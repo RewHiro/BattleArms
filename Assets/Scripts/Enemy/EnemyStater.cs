@@ -11,6 +11,7 @@ public class EnemyStater : MonoBehaviour
     Quaternion hit_rotate_ = Quaternion.identity;
     EnemyState enemy_state_ = EnemyState.NORMAL;
     float stop_count_ = 0;
+    float time_ = 0.0f;
     int attacked_count_ = 0;
     int PLAYER_HASH = 0;
 
@@ -83,8 +84,17 @@ public class EnemyStater : MonoBehaviour
 
     void MeleeUpdate()
     {
+        time_ += Time.deltaTime;
+
         transform.position.Set(hit_position_.x, transform.position.y, hit_position_.z);
         transform.rotation = hit_rotate_;
+
+        if (time_ >= 4.0f)
+        {
+            enemy_state_ = EnemyState.NORMAL;
+            attacked_count_ = 0;
+            time_ = 0.0f;
+        }
 
         if (attacked_count_ < 3) return;
         enemy_state_ = EnemyState.STOP;

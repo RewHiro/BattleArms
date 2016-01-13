@@ -13,13 +13,14 @@ public class MeleeHand : MonoBehaviour
     GameObject explosion_effect_ = null;
 
     PlayerMeleeAttacker player_melee_attacker_ = null;
-
+    SoundManager sound_manager_ = null;
     int ENEMY_HASH = 0;
 
     void Start()
     {
         ENEMY_HASH = "Enemy".GetHashCode();
         player_melee_attacker_ = player_.GetComponent<PlayerMeleeAttacker>();
+        sound_manager_ = FindObjectOfType<SoundManager>();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -41,7 +42,7 @@ public class MeleeHand : MonoBehaviour
     {
         if (collision.gameObject.tag.GetHashCode() != ENEMY_HASH) return;
 
-        FindObjectOfType<SoundManager>().PlaySE(6);
+        sound_manager_.PlaySE(6);
 
         player_melee_attacker_.SendAttack();
         collision.gameObject.GetComponent<EnemyStater>().SendAttacked();

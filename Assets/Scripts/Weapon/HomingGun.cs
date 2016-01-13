@@ -6,9 +6,14 @@ public class HomingGun : Weapon
 {
     BulletCreater bullet_creater_ = null;
 
+    float POWER = 0.0f;
+
     void Start()
     {
         bullet_creater_ = FindObjectOfType<BulletCreater>();
+        var parameter = FindObjectOfType<HomingMissileParameter>();
+        if (parameter == null) return;
+        POWER = parameter.GetAttackPower(0);
     }
 
     public override void OnAttack()
@@ -38,6 +43,8 @@ public class HomingGun : Weapon
         obj.transform.rotation = gameObject.transform.rotation;
 
         obj.GetComponent<HomingBulletMover>().SetReticle(Reticle.GetComponentInChildren<Reticle>());
+
+        obj.GetComponent<BulletPower>().SetPower(POWER);
 
         bullets.Add(obj);
 

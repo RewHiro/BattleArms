@@ -8,6 +8,7 @@ public class PlayerJumper : NetworkBehaviour
 
     HPManager hp_manager_ = null;
     PlayerModer player_moder_ = null;
+    SoundManager sound_manager_ = null;
 
     void Start()
     {
@@ -26,6 +27,8 @@ public class PlayerJumper : NetworkBehaviour
         rigidbody_ = GetComponent<Rigidbody>();
 
         player_moder_ = GetComponent<PlayerModer>();
+
+        sound_manager_ = FindObjectOfType<SoundManager>();
     }
 
     void FixedUpdate()
@@ -43,6 +46,7 @@ public class PlayerJumper : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (collision.gameObject.layer != STAGE_LAYER) return;
+        sound_manager_.PlaySE(13);
         is_jump_ = false;
     }
 

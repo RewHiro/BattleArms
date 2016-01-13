@@ -15,6 +15,15 @@ public class ShotGun : Weapon
     [SerializeField]
     GameObject spark_prefab_ = null;
 
+    float POWER = 0.0f;
+
+    void Start()
+    {
+        var parameter = FindObjectOfType<ShotGunParameter>();
+        if (parameter == null) return;
+        POWER = parameter.GetAttackPower(0);
+    }
+
     override public void OnAttack()
     {
         if (shot_count_ <= 0.0f)
@@ -66,6 +75,8 @@ public class ShotGun : Weapon
             obj.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
             obj.layer = layer_;
+
+            obj.GetComponent<BulletPower>().SetPower(POWER);
 
             Destroy(obj, 3.0f);
 

@@ -20,12 +20,16 @@ public class FaceEnemy : NetworkBehaviour
 
     bool is_change_target_ = false;
 
+    SoundManager sound_manager_ = null;
+
     public override void OnStartLocalPlayer()
     {
 
         enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         base_ = GameObject.FindGameObjectsWithTag("Base");
         player_controller_ = GetComponent<PlayerController>();
+
+        sound_manager_ = FindObjectOfType<SoundManager>();
 
         base.OnStartLocalPlayer();
     }
@@ -53,7 +57,7 @@ public class FaceEnemy : NetworkBehaviour
     {
         if (!player_controller_.isChangeTarget) return;
         if (cool_down_count_ != 0.0f) return;
-        FindObjectOfType<SoundManager>().PlaySE(1);
+        sound_manager_.PlaySE(1);
         is_change_target_ = true;
         enemy_number_++;
 

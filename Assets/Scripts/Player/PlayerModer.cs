@@ -16,6 +16,8 @@ public class PlayerModer : NetworkBehaviour
     float MELEE_DISTANCE = 7.0f;
     int ENEMY_HASH = 0;
 
+    float melee_time_ = 0.0f;
+
     public bool isNormalMode
     {
         get
@@ -45,11 +47,14 @@ public class PlayerModer : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (!isMeleeMode) return;
-        Debug.Log(hit_position_);
+
+        melee_time_ += Time.deltaTime;
+
         var position = new Vector3(hit_position_.x, transform.position.y, hit_position_.z);
         transform.position = position;
 
-        if (!player_melee_attacker_.isThreeAttacked) return;
+        if (!(player_melee_attacker_.isThreeAttacked || melee_time_ >= 3.0f)) return;
+
         rigidbody_.AddForce(-transform.forward * 50.0f, ForceMode.Impulse);
         player_mode_ = PlayerMode.NORMAL;
         melee_manager_.SetActive(false);
@@ -61,6 +66,9 @@ public class PlayerModer : NetworkBehaviour
 
         var enemy_stater = collider.gameObject.GetComponent<EnemyStater>();
         if (!enemy_stater.isNormal) return;
+
+        var enemy_hp_manager = collider.gameObject.GetComponent<HPManager>();
+        if (!enemy_hp_manager.isActive) return;
 
         if (player_mode_ != PlayerMode.NORMAL) return;
 
@@ -88,6 +96,9 @@ public class PlayerModer : NetworkBehaviour
 
         var enemy_stater = collision.gameObject.GetComponent<EnemyStater>();
         if (!enemy_stater.isNormal) return;
+
+        var enemy_hp_manager = collision.gameObject.GetComponent<HPManager>();
+        if (!enemy_hp_manager.isActive) return;
 
         if (player_mode_ != PlayerMode.NORMAL) return;
 

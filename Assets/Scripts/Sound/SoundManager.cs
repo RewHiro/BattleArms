@@ -49,6 +49,11 @@ public class SoundManager : MonoBehaviour
 
     }
 
+    public bool IsPlaySE(int num)
+    {
+        return se_list_[num].isPlaying;
+    }
+
     public void PlaySE(int num)
     {
         //if (se_list_[num].isPlaying) return;

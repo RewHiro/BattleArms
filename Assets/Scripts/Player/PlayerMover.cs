@@ -5,6 +5,8 @@ public class PlayerMover : NetworkBehaviour
 {
     HPManager hp_manager_ = null;
     PlayerModer player_moder_ = null;
+    bool is_boost_ = false;
+    SoundManager sound_manager_ = null;
 
     void Start()
     {
@@ -20,6 +22,8 @@ public class PlayerMover : NetworkBehaviour
 
         MOVE_SPEED = air_frame_parameter.GetMoveSpeed(id);
         BOOST_POWER = air_frame_parameter.GetBoostPower(id);
+
+        sound_manager_ = FindObjectOfType<SoundManager>();
     }
 
     void Update()
@@ -65,6 +69,16 @@ public class PlayerMover : NetworkBehaviour
         if (player_controller_.isInputBoost)
         {
             boost_value = BOOST_POWER;
+
+            if (!is_boost_)
+            {
+                is_boost_ = true;
+                sound_manager_.PlaySE(8);
+            }
+        }
+        else
+        {
+            is_boost_ = false;
         }
 
         gameObject.transform.localPosition +=

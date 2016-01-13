@@ -9,6 +9,8 @@ public class HitEffector : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        Destroy(gameObject);
+        if (collider.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
         var effect = Instantiate(effect_);
         effect_.transform.position = gameObject.transform.position;
         Destroy(effect, 4.0f);
