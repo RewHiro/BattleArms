@@ -24,26 +24,26 @@ public class CustomizeClicker : MonoBehaviour
     {
         if (is_click_) return;
         is_click_ = true;
-        FindObjectOfType<MyNetworkLobbyManager>().playScene = stage_name_list_[num];
+        FindObjectOfType<MyNetworkLobbyManager>().playScene = stage_name_list_[3];
 
-        var sound_manager = FindObjectOfType<SoundManager>();
-        sound_manager.PlaySE(4);
-        sound_manager.StopBGM(0);
+        //var sound_manager = FindObjectOfType<SoundManager>();
+        //sound_manager.PlaySE(4);
+        //sound_manager.StopBGM(0);
 
-        FindObjectOfType<StageData>().stageNum = num;
+        FindObjectOfType<StageData>().stageNum = 3;
 
-        FindObjectOfType<MyNetworkLobbyManager>().CheckReadyToBegin();
+        //FindObjectOfType<MyNetworkLobbyManager>().CheckReadyToBegin();
 
-        FindObjectOfType<MoviePlayer>().Play();
+        //FindObjectOfType<MoviePlayer>().Play();
 
-        FindObjectOfType<SoundManager>().PlaySE(15);
+        //FindObjectOfType<SoundManager>().PlaySE(15);
 
         FindObjectOfType<MyNetworkDiscovery>().StopBroadcast();
 
         foreach (var player in FindObjectsOfType<MyNetworkLobbyPlayer>())
         {
             if (!player.isLocalPlayer) continue;
-            player.Ready();
+            player.SendReadyToBeginMessage();
         }
 
     }
