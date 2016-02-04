@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum HITNAWAY
+{
+    HIT,
+    AWAY
+}
 
 public class AI3 : MonoBehaviour
 {
@@ -17,7 +22,7 @@ public class AI3 : MonoBehaviour
 
     //敵キャラクターがどの程度近づいてくるか設定(この値以下には近づかない）
     [SerializeField]
-    private float shortlimitDistance = 100f;
+    private float shortlimitDistance = 50f;
     [SerializeField]
     private float middlelimitDistance = 1000f;
     [SerializeField]
@@ -27,6 +32,8 @@ public class AI3 : MonoBehaviour
 
     private DISTANCE_STATE distance_state;
     private ATTACK_STATE attack_state;
+
+    private HITNAWAY hitnaway;
 
     private int timer = 0;
     
@@ -106,31 +113,15 @@ public class AI3 : MonoBehaviour
         //プレイヤーの方を向く
         transform.rotation = Quaternion.LookRotation(direction);
 
-
-
-        if (timer >= 180)
+        if (hitnaway == HITNAWAY.HIT)
         {
-            int var;
-            var = Random.Range(0, 3);
-            Debug.Log(var);
-            if (var == 0)
-            {
-                distance_state = DISTANCE_STATE.SHORT;
-                Debug.Log("short");
-            }
-            if (var == 1)
-            {
-                distance_state = DISTANCE_STATE.MIDDLE;
-                Debug.Log("middle");
-            }
-            if (var == 2)
-            {
-                distance_state = DISTANCE_STATE.LONG;
-                Debug.Log("long");
-            }
-            timer = 0;
+            distance_state = DISTANCE_STATE.SHORT;
         }
-
+        else if (hitnaway == HITNAWAY.AWAY)
+        {
+            Attack();
+            distance_state = DISTANCE_STATE.LONG;
+        }
     }
     
     //指定されたタグの中で最も近いものを取得
