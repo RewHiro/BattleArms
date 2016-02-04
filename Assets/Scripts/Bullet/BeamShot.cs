@@ -78,12 +78,11 @@ public class BeamShot : Weapon {
 		if(Physics.Raycast(shotRay , out shotHit , range))
         {
             // hit
-            var effect = Instantiate(explosion_effect_);
-            effect.transform.position = shotHit.point;
-
             var collider = shotHit.collider;
             if (collider.tag == "Enemy")
             {
+                var effect = Instantiate(explosion_effect_);
+                effect.transform.position = shotHit.point;
                 collider.GetComponent<HPManager>().Damage(POWER);
             }
              
