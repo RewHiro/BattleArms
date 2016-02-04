@@ -138,8 +138,10 @@ public class HandController : MonoBehaviour {
 
   /** Initalizes the hand and tool lists and recording, if enabled.*/
   void Start() {
-    // Initialize hand lookup tables.
-    hand_graphics_ = new Dictionary<int, HandModel>();
+
+        Debug.Log("OK");
+        // Initialize hand lookup tables.
+        hand_graphics_ = new Dictionary<int, HandModel>();
     hand_physics_ = new Dictionary<int, HandModel>();
 
     tools_ = new Dictionary<int, ToolModel>();

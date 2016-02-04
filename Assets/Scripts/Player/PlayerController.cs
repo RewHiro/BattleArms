@@ -41,19 +41,18 @@ public class PlayerController : NetworkBehaviour
         {
             if (!leap_contoller_.IsConnected) return Input.GetAxis("Vertical");
 
-            if (isBothHandsFront)
+            if (right_hand_input_)
             {
-                return Mathf.Max(left_hand_input_.getVerticalValue, right_hand_input_.getVerticalValue);
+                return right_hand_input_.getVerticalValue;
             }
-            else if (isBothHandsBack)
+            else if (left_hand_input_)
             {
-                return Mathf.Min(left_hand_input_.getVerticalValue, right_hand_input_.getVerticalValue);
+                return left_hand_input_.getVerticalValue;
             }
             else
             {
                 return 0.0f;
             }
-
         }
     }
     #endregion
@@ -343,9 +342,15 @@ public class PlayerController : NetworkBehaviour
     void Start()
     {
         if (!isLocalPlayer) return;
+
+
+
         var leap_motion_parameter = FindObjectOfType<LeapMotionParameter>();
         REACTION_BOOST_VALUE = leap_motion_parameter.getReactionBoostValue;
         REACTION_JUMP_VALUE = leap_motion_parameter.getReactionJumpValue;
+
+        var hand_controller = FindObjectOfType<HandController>();
+
         main_camera_.SetActive(true);
         leap_contoller_ = GetComponentInChildren<HandController>().GetLeapController();
     }
