@@ -25,6 +25,11 @@ public class HPManager : NetworkBehaviour
 
     float MAX_HP = 0.0f;
 
+    [SerializeField]
+    GameObject noise_effect_ = null;
+
+    GameObject saved_noise_effect_ = null;
+
     public bool isActive
     {
         get
@@ -91,6 +96,24 @@ public class HPManager : NetworkBehaviour
         hit_effect.transform.SetParent(gameObject.transform);
         hit_effect.transform.position = collider.gameObject.transform.position;
         NetworkServer.Spawn(hit_effect);
+
+        if (noise_effect_ != null)
+        {
+            if (saved_noise_effect_ == null)
+            {
+                var effect = Instantiate<GameObject>(noise_effect_);
+                var effect_transform = effect.transform;
+                effect_transform.SetParent(transform);
+                effect_transform.localPosition = noise_effect_.transform.position;
+                effect_transform.localScale = noise_effect_.transform.localScale;
+                effect_transform.localRotation = noise_effect_.transform.rotation;
+                effect.name = noise_effect_.name;
+
+                Destroy(effect, 2.0f);
+
+                saved_noise_effect_ = effect;
+            }
+        }
 
         if (hp < 0)
         {
