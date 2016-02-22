@@ -16,6 +16,7 @@ public class MyNetworkDiscovery : NetworkDiscovery
     {
         var address = fromAddress.Substring(7);
         my_network_lobby_manager_.networkAddress = address;
+        Debug.Log(address);
         base.OnReceivedBroadcast(fromAddress, data);
     }
 }
