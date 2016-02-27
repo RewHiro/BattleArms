@@ -49,6 +49,8 @@ public class AI2 : MonoBehaviour
     HPManager hp_manager_ = null;
     EnemyStater enemy_stater_ = null;
 
+    ServerStageManager server_stage_manager_ = null;
+
     // private bool isGround = false;
 
     //ゲーム開始時に一度
@@ -68,6 +70,13 @@ public class AI2 : MonoBehaviour
     {
         if (!hp_manager_.isActive) return;
         if (!enemy_stater_.isNormal) return;
+
+        if (server_stage_manager_ == null)
+        {
+            server_stage_manager_ = FindObjectOfType<ServerStageManager>();
+        }
+        if (server_stage_manager_ == null) return;
+        if (server_stage_manager_.IsEndTutorial) return;
 
         Vector3 playerPos = player.position;                 //プレイヤーの位置
         Vector3 direction = playerPos - transform.position; //方向と距離を求める。
