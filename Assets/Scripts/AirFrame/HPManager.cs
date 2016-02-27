@@ -30,6 +30,8 @@ public class HPManager : NetworkBehaviour
 
     GameObject saved_noise_effect_ = null;
 
+    ServerStageManager server_stage_manager_ = null;
+
     public bool isActive
     {
         get
@@ -52,6 +54,13 @@ public class HPManager : NetworkBehaviour
 
     public void Damage(float damage)
     {
+        if (server_stage_manager_ == null)
+        {
+            server_stage_manager_ = FindObjectOfType<ServerStageManager>();
+        }
+        if (server_stage_manager_ == null) return;
+        if (server_stage_manager_.IsEndTutorial) return;
+
         hp -= damage;
     }
 
@@ -61,6 +70,7 @@ public class HPManager : NetworkBehaviour
         hp = FindObjectOfType<AirFrameParameter>().GetMaxHP(id);
         MAX_HP = hp;
         sound_manager_ = FindObjectOfType<SoundManager>();
+        server_stage_manager_ = FindObjectOfType<ServerStageManager>();
     }
 
     void Death()
@@ -82,13 +92,21 @@ public class HPManager : NetworkBehaviour
         if (hp_text_ == null) return;
 
         hp_text_.GetComponent<Text>().text = "HP:" + hp_.ToString() + "/" + MAX_HP.ToString();
-
     }
 
     void OnTriggerEnter(Collider collider)
     {
         if (!isServer) return;
+
         if (collider.gameObject.layer != layer_num_) return;
+
+        if (server_stage_manager_ == null)
+        {
+            server_stage_manager_ = FindObjectOfType<ServerStageManager>();
+        }
+        if (server_stage_manager_ == null) return;
+
+        if (server_stage_manager_.IsEndTutorial) return;
 
         hp -= collider.gameObject.GetComponent<BulletPower>().getPower;
         Destroy(collider.gameObject);
@@ -109,7 +127,7 @@ public class HPManager : NetworkBehaviour
                 effect_transform.localRotation = noise_effect_.transform.rotation;
                 effect.name = noise_effect_.name;
 
-                Destroy(effect, 2.0f);
+                Destroy(effect, 8.0f);
 
                 saved_noise_effect_ = effect;
             }
@@ -123,12 +141,5 @@ public class HPManager : NetworkBehaviour
         if (gameObject.tag != "Player") return;
 
         sound_manager_.PlaySE(12);
-
-        //if (hp_ > 0) return;
-        //var destory_effect = Instantiate(destory_effect_prefab_);
-        //destory_effect.transform.SetParent(gameObject.transform);
-        //destory_effect.transform.position = gameObject.transform.position;
-        //is_active_ = false;
-        //FindObjectOfType<SoundManager>().PlaySE(0);
     }
 }

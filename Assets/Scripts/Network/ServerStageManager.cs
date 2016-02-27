@@ -16,6 +16,18 @@ public class ServerStageManager : NetworkBehaviour
     float result_count_ = 0.0f;
     float limit_count_ = 60* 5;
 
+    TutorialManager tutorial_manager_ = null;
+
+    public bool IsEndTutorial
+    {
+        get
+        {
+            Debug.Log(tutorial_manager_);
+            if (tutorial_manager_ == null) return false;
+            return !tutorial_manager_.IsStart;
+        }
+    }
+
     public bool CanGoRoom(uint num)
     {
         if (num > go_room_.Length) return false;
@@ -80,9 +92,23 @@ public class ServerStageManager : NetworkBehaviour
         StartCoroutine("Room1");
     }
 
+    void FindComponent()
+    {
+        if (tutorial_manager_ != null) return;
+        foreach (var player in FindObjectsOfType<PlayerSetting>())
+        {
+            if (!player.isLocalPlayer) continue;
+            tutorial_manager_ = player.GetComponentInChildren<TutorialManager>();
+        }
+    }
+
     void Update()
     {
+
         var go_result = goResult;
+        FindComponent();
+        if (tutorial_manager_ == null) return;
+        if (!tutorial_manager_.IsStart) return;
         Result(go_result);
         LimitTimeUpdate(go_result);
     }
@@ -148,7 +174,6 @@ public class ServerStageManager : NetworkBehaviour
                 go_room_[0] = true;
                 yield return StartCoroutine("Room2");
             }
-
         }
     }
 
