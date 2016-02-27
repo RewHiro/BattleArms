@@ -11,6 +11,16 @@ public class MissionManager : MonoBehaviour
     [SerializeField]
     GameObject info_panel_ = null;
 
+    bool is_drawed_ = false;
+
+    public bool IsDrawed
+    {
+        get
+        {
+            return is_drawed_;
+        }
+    }
+
     void Start()
     {
         bg_panel_.GetComponent<Image>().color = new Color(1, 1, 1, 0);
@@ -46,6 +56,8 @@ public class MissionManager : MonoBehaviour
             info_image.color = color;
             yield return null;
         }
+
+        is_drawed_ = true;
 
         yield return null;
     }

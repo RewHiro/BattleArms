@@ -13,12 +13,20 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     GameObject tutorial_info_panel_ = null;
 
+    MissionManager mission_manager_ = null;
+
     public bool IsStart
     {
         get
         {
-            return is_start_;
+            if (mission_manager_ == null) return false;
+            return mission_manager_.IsDrawed;
         }
+    }
+
+    void Start()
+    {
+        mission_manager_ = FindObjectOfType<MissionManager>();
     }
 
     public void Skip()
