@@ -1,9 +1,10 @@
 fileFormatVersion: 2
 guid: f5541fd82f6a1914192b7d14e7103448
-timeCreated: 1456483167
+timeCreated: 1456668921
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: tuto_arrow_blue_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -49,7 +50,26 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: tuto_arrow_blue_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 113
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7.5, y: 76}
+        - {x: -56.5, y: 44}
+        - {x: -56.5, y: -5}
+        - {x: -21.5, y: -76}
+        - {x: 22.5, y: -76}
+        - {x: 56.5, y: 0}
+        - {x: 56.5, y: 30}
+        - {x: 14.5, y: 76}
     outline: []
   spritePackingTag: 
   userData: 

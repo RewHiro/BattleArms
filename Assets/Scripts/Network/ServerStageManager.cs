@@ -22,7 +22,6 @@ public class ServerStageManager : NetworkBehaviour
     {
         get
         {
-            Debug.Log(tutorial_manager_);
             if (tutorial_manager_ == null) return false;
             return !tutorial_manager_.IsStart;
         }
