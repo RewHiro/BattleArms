@@ -12,6 +12,9 @@ public class BulletCreater : NetworkBehaviour
     [SerializeField]
     GameObject homing_bullet_ = null;
 
+    [SerializeField]
+    GameObject gutring_bullet = null;
+
     public GameObject getAssaulutBullet
     {
         get
@@ -33,6 +36,14 @@ public class BulletCreater : NetworkBehaviour
         get
         {
             return homing_bullet_;
+        }
+    }
+
+    public GameObject getGutringBullet
+    {
+        get
+        {
+            return gutring_bullet;
         }
     }
 }

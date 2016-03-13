@@ -28,7 +28,6 @@ public class Reticle : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision2D_stay)
     {
-        Debug.Log(target_circle_);
         var enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemy_.Length == 0) return;
         if (collision2D_stay.gameObject.transform.parent.name == enemy_[target_circle_.NearEnemySelect()].name)

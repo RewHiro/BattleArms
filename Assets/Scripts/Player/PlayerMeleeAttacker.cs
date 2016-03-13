@@ -17,11 +17,11 @@ public class PlayerMeleeAttacker : NetworkBehaviour
 
     int attack_count_ = 0;
 
-    public bool isThreeAttacked
+    public bool isFiveAttacked
     {
         get
         {
-            return attack_count_ >= 3;
+            return attack_count_ >= 7;
         }
     }
 
@@ -39,6 +39,7 @@ public class PlayerMeleeAttacker : NetworkBehaviour
 
     void Update()
     {
+        if (!isLocalPlayer) return;
         foreach (var hand in hand_controller_.GetFrame().Hands)
         {
             if (hand.IsLeft)

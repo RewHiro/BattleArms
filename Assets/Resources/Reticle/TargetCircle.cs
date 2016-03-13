@@ -75,7 +75,6 @@ public class TargetCircle : MonoBehaviour
     {
         if(collision2D_stay.gameObject.transform.parent.name == enemy_[NearEnemySelect()].name)
         {
-            Debug.Log("ok");
             is_hit_enemy_ = true;
         }
     }
@@ -84,7 +83,6 @@ public class TargetCircle : MonoBehaviour
     {
         if (collision2D_exit.gameObject.transform.parent.name == enemy_[NearEnemySelect()].name)
         {
-            Debug.Log("exit");
             is_hit_enemy_ = false;
         }
     }

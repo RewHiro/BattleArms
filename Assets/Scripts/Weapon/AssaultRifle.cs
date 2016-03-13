@@ -14,6 +14,7 @@ public class AssaultRifle : Weapon
     [SerializeField]
     GameObject spark_prefab_ = null;
 
+
     SoundManager sound_manager_ = null;
 
     float POWER = 0.0f;
@@ -21,7 +22,7 @@ public class AssaultRifle : Weapon
     void Start()
     {
         bullet_creater_ = FindObjectOfType<BulletCreater>();
-        var parameter = FindObjectOfType<GatlingGunParameter>();
+        var parameter = FindObjectOfType<AssaultRifleParameter>();
         if (parameter == null) return;
         POWER = parameter.GetAttackPower(0);
         sound_manager_ = FindObjectOfType<SoundManager>();
@@ -31,13 +32,15 @@ public class AssaultRifle : Weapon
     {
         if (shot_count_ <= 0.0f)
         {
+            spark_prefab_.SetActive(true);
+
             shot_count_ = 0.1f;
 
             if (origin_pos_ == Vector3.zero)
             {
                 origin_pos_ = WeaponObject.transform.localPosition;
             }
-            spark_prefab_.SetActive(true);
+
             var diff = 0.01f;
             var random = new Vector3(Random.Range(-diff, diff), Random.Range(-diff, diff), 0.0f);
             WeaponObject.transform.localPosition = origin_pos_ + random; 
@@ -47,8 +50,8 @@ public class AssaultRifle : Weapon
 
     public override void OnNotAttack()
     {
-        shot_count_ = 0.0f;
         spark_prefab_.SetActive(false);
+        shot_count_ = 0.1f;
     }
 
     public override bool CanShot()
@@ -61,7 +64,7 @@ public class AssaultRifle : Weapon
         List<GameObject> bullets = new List<GameObject>();
         var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
         obj.transform.position = gameObject.transform.position;
-        obj.transform.Translate(gameObject.transform.forward * 2.5f);
+        obj.transform.Translate(gameObject.transform.forward);
         obj.transform.rotation = gameObject.transform.rotation;
         obj.transform.Rotate(0, -90, 0);
         Vector3 force;

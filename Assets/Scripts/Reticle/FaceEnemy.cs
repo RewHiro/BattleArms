@@ -12,6 +12,7 @@ public class FaceEnemy : NetworkBehaviour
     Vector3 enemy_position;
 
     PlayerController player_controller_ = null;
+    PlayerModer player_moder_ = null;
 
     float cool_down_count_ = 0.0f;
 
@@ -28,6 +29,7 @@ public class FaceEnemy : NetworkBehaviour
         enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
         base_ = GameObject.FindGameObjectsWithTag("Base");
         player_controller_ = GetComponent<PlayerController>();
+        player_moder_ = GetComponent<PlayerModer>();
 
         sound_manager_ = FindObjectOfType<SoundManager>();
 
@@ -55,6 +57,7 @@ public class FaceEnemy : NetworkBehaviour
 
     public void ChangeLockEnemy()
     {
+        if (player_moder_.isMeleeMode) return;
         if (!player_controller_.isChangeTarget) return;
         if (cool_down_count_ != 0.0f) return;
         sound_manager_.PlaySE(1);
@@ -98,7 +101,7 @@ public class FaceEnemy : NetworkBehaviour
         else
         if (enemy_number_ >= enemy_.Length)
         {
-            look_object_ = base_[base_number_];
+
         }
 
         enemy_position = look_object_.transform.position;

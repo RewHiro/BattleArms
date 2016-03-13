@@ -29,6 +29,8 @@ public class BackWeaponSelector : MonoBehaviour
         weapon_transform.localScale = select_weapon_transform.lossyScale;
 
         FindObjectOfType<SoundManager>().PlaySE(4);
+
+        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("Default"));
     }
 
     void Start()

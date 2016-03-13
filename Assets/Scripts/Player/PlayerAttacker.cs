@@ -22,6 +22,8 @@ public class PlayerAttacker : NetworkBehaviour
     HPManager hp_manager_ = null;
     PlayerModer player_moder_ = null;
 
+    bool[] is_stop_shots_ = new bool[3];
+
     public override void PreStartClient()
     {
         base.PreStartClient();
@@ -79,18 +81,19 @@ public class PlayerAttacker : NetworkBehaviour
         if (!isLocalPlayer) return;
         if (!hp_manager_.isActive) return;
         if (!player_moder_.isNormalMode) return;
-        AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_);
-        AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_);
-        AttackWithWeapon(player_controller_.isInputBothHandAttack, back_weapon_);
+        AttackWithWeapon(player_controller_.isInputRightAttack, right_weapon_, ref is_stop_shots_[0]);
+        AttackWithWeapon(player_controller_.isInputLeftAttack, left_weapon_, ref is_stop_shots_[1]);
+        AttackWithWeapon(player_controller_.isInputBothHandAttack, back_weapon_, ref is_stop_shots_[2]);
     }
 
-    void AttackWithWeapon(bool input, Weapon weapon)
+    void AttackWithWeapon(bool input, Weapon weapon, ref bool is_stop_shot)
     {
         if (weapon == null) return;
 
         if (input)
         {
             weapon.OnAttack();
+            is_stop_shot = false;
             if (weapon.CanShot())
             {
                 switch (weapon.getType)
@@ -109,7 +112,11 @@ public class PlayerAttacker : NetworkBehaviour
         }
         else
         {
-            weapon.OnNotAttack();
+            if (!is_stop_shot)
+            {
+                weapon.OnNotAttack();
+                is_stop_shot = true;
+            }
         }
     }
 

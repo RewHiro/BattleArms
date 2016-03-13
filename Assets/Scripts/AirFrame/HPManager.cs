@@ -136,6 +136,7 @@ public class HPManager : NetworkBehaviour
         if (hp < 0)
         {
             hp = 0;
+            GetComponent<Rigidbody>().freezeRotation = false;
         }
 
         if (gameObject.tag != "Player") return;

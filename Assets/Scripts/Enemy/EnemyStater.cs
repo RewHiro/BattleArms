@@ -8,7 +8,6 @@ public class EnemyStater : MonoBehaviour
 
     Dictionary<EnemyState, StateUpdate> state_update_list_ = new Dictionary<EnemyState, StateUpdate>();
     Vector3 hit_position_ = Vector3.zero;
-    Quaternion hit_rotate_ = Quaternion.identity;
     EnemyState enemy_state_ = EnemyState.NORMAL;
     float stop_count_ = 0;
     float time_ = 0.0f;
@@ -55,8 +54,9 @@ public class EnemyStater : MonoBehaviour
     public void SendHitPlayer(Transform transform)
     {
         enemy_state_ = EnemyState.MELEED;
-        hit_position_ = transform.position;
-        hit_rotate_ = transform.rotation;
+        var forward = transform.forward;
+        forward.y = 0.0f;
+        hit_position_ = transform.position + forward * 17.0f;
         var rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -86,8 +86,7 @@ public class EnemyStater : MonoBehaviour
     {
         time_ += Time.deltaTime;
 
-        transform.position.Set(hit_position_.x, transform.position.y, hit_position_.z);
-        transform.rotation = hit_rotate_;
+        transform.position = hit_position_;
 
         if (time_ >= 4.0f)
         {

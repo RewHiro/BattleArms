@@ -8,6 +8,13 @@ public class PlayerMover : NetworkBehaviour
     bool is_boost_ = false;
     SoundManager sound_manager_ = null;
 
+    bool is_start_ = false;
+
+    public void Go()
+    {
+        is_start_ = true;
+    }
+
     void Start()
     {
         if (!isLocalPlayer) return;
@@ -28,6 +35,7 @@ public class PlayerMover : NetworkBehaviour
 
     void Update()
     {
+        if (!is_start_) return;
         if (!isLocalPlayer) return;
         if (!hp_manager_.isActive) return;
         if (!player_moder_.isNormalMode) return;

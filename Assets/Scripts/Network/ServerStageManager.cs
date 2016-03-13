@@ -14,7 +14,7 @@ public class ServerStageManager : NetworkBehaviour
     List<GameObject> enemys = new List<GameObject>();
 
     float result_count_ = 0.0f;
-    float limit_count_ = 60* 5;
+    float limit_count_ = 60 * 5;
 
     TutorialManager tutorial_manager_ = null;
 
@@ -50,8 +50,8 @@ public class ServerStageManager : NetworkBehaviour
 
             List<HPManager> enemy_hp_managers = new List<HPManager>();
 
-            if (enemys.Count <= 17) return false;
-            var active_enemys = enemys.GetRange(7, 11);
+            if (enemys.Count <= 15) return false;
+            var active_enemys = enemys.GetRange(5, 11);
             foreach (var enemy in active_enemys)
             {
                 if (enemy == null) continue;
@@ -103,7 +103,6 @@ public class ServerStageManager : NetworkBehaviour
 
     void Update()
     {
-
         var go_result = goResult;
         FindComponent();
         if (tutorial_manager_ == null) return;
@@ -124,7 +123,8 @@ public class ServerStageManager : NetworkBehaviour
 
                 foreach (var player in FindObjectsOfType<EndDirector>())
                 {
-                    player.RpcTellClientStart("Win");
+                    player.RpcTellClientStart("Win");                    
+                    player.RpcTellClientTime((int)limit_count_);
                 }
             }
             else
@@ -195,10 +195,12 @@ public class ServerStageManager : NetworkBehaviour
             {
                 if (go_room_[1]) yield return null;
 
-                for (int i = 3; i < 8; i++)
+                for (int i = 3; i < 5; i++)
                 {
                     enemys.Add(enemy_spawner_.CreateEnemy(i));
                 }
+                //enemys.Add(enemy_spawner_.CreateMiddleEnemy01(6));
+                enemys.Add(enemy_spawner_.CreateMiddleEnemy02(5));
                 go_room_[1] = true;
                 yield return StartCoroutine("Room3");
             }
@@ -216,22 +218,23 @@ public class ServerStageManager : NetworkBehaviour
             var enemys_active = false;
 
             var count = 0;
-            for (int i = 3; i < 8; i++)
+            for (int i = 3; i < 6; i++)
             {
                 if (enemys[i] != null) break;
                 count++;
             }
 
-            if (count == 5) enemys_active = true;
+            if (count == 3) enemys_active = true;
 
             if (enemys_active)
             {
                 if (go_room_[2]) yield return null;
 
-                for (int i = 8; i < 18; i++)
+                for (int i = 8; i < 15; i++)
                 {
                     enemys.Add(enemy_spawner_.CreateEnemy(i));
                 }
+                enemys.Add(enemy_spawner_.CreateBigEnemy(15));
                 go_room_[2] = true;
                 StopCoroutine("Room3");
             }

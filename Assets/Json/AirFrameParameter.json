@@ -19,15 +19,45 @@
             "ID": 1,
             "Mass": 1.0,
             "Drag": 0.0,
-            "MoveSpeed": 10.0,
+            "MoveSpeed": 30.0,
             "SwingSpeed": 150.0,
-            "BoostPower": 8.0,
-            "JumpPower": 30.0,
+            "BoostPower": 150.0,
+            "JumpPower": 80.0,
             "MaxBoostValue": 100.0,
             "MaxHP": 500.0,
             "ArmorValue": 100.0,
             "Name": "Default00",
             "ExplanatoryText": "敵"
+        },
+
+        {
+            "ID": 2,
+            "Mass": 1.0,
+            "Drag": 0.0,
+            "MoveSpeed": 30.0,
+            "SwingSpeed": 150.0,
+            "BoostPower": 150.0,
+            "JumpPower": 80.0,
+            "MaxBoostValue": 100.0,
+            "MaxHP": 500.0,
+            "ArmorValue": 100.0,
+            "Name": "Default00",
+            "ExplanatoryText": "中敵"
+        },
+
+        {
+            "ID": 3,
+            "Mass": 1.0,
+            "Drag": 0.0,
+            "MoveSpeed": 30.0,
+            "SwingSpeed": 150.0,
+            "BoostPower": 150.0,
+            "JumpPower": 80.0,
+            "MaxBoostValue": 100.0,
+            "MaxHP": 500.0,
+            "ArmorValue": 100.0,
+            "Name": "Default00",
+            "ExplanatoryText": "大敵"
         }
     ]
 }

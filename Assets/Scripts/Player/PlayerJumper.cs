@@ -46,7 +46,7 @@ public class PlayerJumper : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
         if (collision.gameObject.layer != STAGE_LAYER) return;
-        sound_manager_.PlaySE(13);
+        sound_manager_.PlaySE(18);
         is_jump_ = false;
     }
 

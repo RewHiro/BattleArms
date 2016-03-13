@@ -11,6 +11,9 @@ public class ButtonToggle : ButtonToggleBase
     [SerializeField]
     UnityEvent OnRelease = null;
 
+    [SerializeField]
+    bool is_game = false;
+
     bool guard_ = false;
 
     public override void ButtonTurnsOff()
@@ -32,5 +35,25 @@ public class ButtonToggle : ButtonToggleBase
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void OnTriggerEnter(Collider collider)
+    {
+        base.OnTriggerEnter(collider);
+
+        if (!is_game) return;
+        if (collider.gameObject.layer != LayerMask.NameToLayer("LeapHandUI")) return;
+
+        ButtonTurnsOn();
+    }
+
+    protected override void OnTriggerExit(Collider collider)
+    {
+        base.OnTriggerExit(collider);
+
+        if (!is_game) return;
+        if (collider.gameObject.layer != LayerMask.NameToLayer("LeapHandUI")) return;
+
+        ButtonTurnsOff();
     }
 }

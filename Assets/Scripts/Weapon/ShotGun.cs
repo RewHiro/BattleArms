@@ -26,6 +26,7 @@ public class ShotGun : Weapon
 
     override public void OnAttack()
     {
+        spark_prefab_.SetActive(false);
         if (shot_count_ <= 0.0f)
         {
             shot_count_ = 0.8f;

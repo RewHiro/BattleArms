@@ -9,6 +9,12 @@ public class PlayerModer : NetworkBehaviour
     [SerializeField]
     GameObject melee_manager_ = null;
 
+    [SerializeField]
+    GameObject right_weapon_ = null;
+
+    [SerializeField]
+    GameObject leftt_weapon_ = null;
+
     Vector3 hit_position_ = Vector3.zero;
     PlayerMode player_mode_ = PlayerMode.NORMAL;
     PlayerMeleeAttacker player_melee_attacker_ = null;
@@ -53,11 +59,14 @@ public class PlayerModer : NetworkBehaviour
         var position = new Vector3(hit_position_.x, transform.position.y, hit_position_.z);
         transform.position = position;
 
-        if (!(player_melee_attacker_.isThreeAttacked || melee_time_ >= 3.0f)) return;
+        if (!(player_melee_attacker_.isFiveAttacked || melee_time_ >= 3.0f)) return;
 
+        melee_time_ = 0.0f;
         rigidbody_.AddForce(-transform.forward * 50.0f, ForceMode.Impulse);
         player_mode_ = PlayerMode.NORMAL;
         melee_manager_.SetActive(false);
+        right_weapon_.SetActive(true);
+        leftt_weapon_.SetActive(true);
     }
 
     void OnTriggerEnter(Collider collider)
@@ -77,6 +86,8 @@ public class PlayerModer : NetworkBehaviour
         hit_position_ = collider.gameObject.transform.position + direction * MELEE_DISTANCE;
         player_mode_ = PlayerMode.MELEE;
         melee_manager_.SetActive(true);
+        right_weapon_.SetActive(false);
+        leftt_weapon_.SetActive(false);
         for (int i = 0; i < 4; i++)
         {
             var effect = Instantiate(effect_);
@@ -107,6 +118,8 @@ public class PlayerModer : NetworkBehaviour
         hit_position_ = collision.gameObject.transform.position + direction * MELEE_DISTANCE;
         player_mode_ = PlayerMode.MELEE;
         melee_manager_.SetActive(true);
+        right_weapon_.SetActive(false);
+        leftt_weapon_.SetActive(false);
         for (int i = 0; i < 4; i++)
         {
             var effect = Instantiate(effect_);

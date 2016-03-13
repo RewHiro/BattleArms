@@ -1,0 +1,20 @@
+{
+    "Parameter": [
+        {
+            "ID": 0,
+            "Name": "Default00",
+            "AttackPower" : 5.0,
+            "MaxAttackPowerRange" : 20.0,
+            "MinAttackPowerRange" : 40.0,
+            "FiringSpeed" :  1.0,
+            "BulletsNumber" : 20,
+            "BulletSpeed": 7.0,
+            "ReloadTime": 2.0,
+            "Variability": 0.7,
+            "HitAccuracy" :  80,
+            "ExplanatoryText": "アサルトライフル"
+
+        }
+    ]
+}
+

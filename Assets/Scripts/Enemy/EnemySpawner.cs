@@ -7,7 +7,13 @@ public class EnemySpawner : NetworkBehaviour
     GameObject enmey_prefab = null;
 
     [SerializeField]
+    GameObject[] middle_enemy_prefabs = null;
+
+    [SerializeField]
     GameObject[] enemy_spawn_point_ = null;
+
+    [SerializeField]
+    GameObject big_enemy_prefab_ = null;
 
     bool is_create_ = false;
 
@@ -43,6 +49,40 @@ public class EnemySpawner : NetworkBehaviour
         NetworkServer.Spawn(enemy);
         return enemy;
     }
+
+    public GameObject CreateMiddleEnemy01(int spawn_num)
+    {
+        var enemy = Instantiate(
+            middle_enemy_prefabs[0],
+            enemy_spawn_point_[spawn_num].transform.position,
+            enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
+        enemy.name = "Enemy" + spawn_num.ToString();
+        NetworkServer.Spawn(enemy);
+        return enemy;
+    }
+
+    public GameObject CreateMiddleEnemy02(int spawn_num)
+    {
+        var enemy = Instantiate(
+            middle_enemy_prefabs[1],
+            enemy_spawn_point_[spawn_num].transform.position,
+            enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
+        enemy.name = "Enemy" + spawn_num.ToString();
+        NetworkServer.Spawn(enemy);
+        return enemy;
+    }
+    public GameObject CreateBigEnemy(int spawn_num)
+    {
+        var enemy = Instantiate(
+            big_enemy_prefab_,
+            enemy_spawn_point_[spawn_num].transform.position,
+            enemy_spawn_point_[spawn_num].transform.rotation) as GameObject;
+        enemy.name = "Enemy" + spawn_num.ToString();
+        NetworkServer.Spawn(enemy);
+        return enemy;
+    }
+
+
 
     void Update()
     {
