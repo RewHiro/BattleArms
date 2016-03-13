@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-enum BackWeapon
+public enum BackWeapon
 {
     LaserGun,
     HomingMissile
@@ -15,6 +15,14 @@ public class BackWeaponUI : MonoBehaviour {
     private Animator _animator;
     private int _lasergunHash = Animator.StringToHash("Is_LaserGun");
     private int _homingmissileHash = Animator.StringToHash("Is_HomingMissile");
+
+    public BackWeapon getBackWeapon
+    {
+        get
+        {
+            return back_weapon_;
+        }
+    }
 
     BackWeapon back_weapon_ = BackWeapon.LaserGun;
     BackWeapon former_back_weapon_ = BackWeapon.LaserGun;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-enum ArmWeapon
+public enum ArmWeapon
 {
     AssaultRifle,
     ShotGun,
@@ -17,6 +17,14 @@ public class WeaponUI : MonoBehaviour {
     private int _assaultrifleHash = Animator.StringToHash("Is_AssaultRifle");
     private int _shotgunHash = Animator.StringToHash("Is_ShotGun");
     private int _gatlinggunHash = Animator.StringToHash("Is_GatlingGun");
+
+    public ArmWeapon getArmWeapon
+    {
+        get
+        {
+            return arm_weapon_;
+        }
+    }
 
     ArmWeapon arm_weapon_ = ArmWeapon.AssaultRifle;
     ArmWeapon former_arm_weapon_ = ArmWeapon.AssaultRifle;
