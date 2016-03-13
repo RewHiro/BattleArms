@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CustomizeClicker : MonoBehaviour
@@ -7,12 +8,25 @@ public class CustomizeClicker : MonoBehaviour
 
     bool is_click_ = false;
 
+    [SerializeField]
+    GameObject right_weapon_bezier_manager_ = null;
+
     void Start()
     {
         stage_name_list_.Add("stage01");
         stage_name_list_.Add("stage02");
         stage_name_list_.Add("stage03");
         stage_name_list_.Add("stage04");
+
+        if (right_weapon_bezier_manager_ == null) return;
+        StartCoroutine(Bezeir());
+    }
+
+    IEnumerator Bezeir()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        right_weapon_bezier_manager_.GetComponent<BezierMover>().BezeirStart();
     }
 
     public void Transition()
