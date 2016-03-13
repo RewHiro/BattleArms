@@ -305,7 +305,7 @@ public class TutorialManager : MonoBehaviour
         left_arrow.GetComponent<Animator>().SetTrigger("Idle");
         right_arrow.GetComponent<Animator>().SetTrigger("Idle");
 
-        text_.text = "背中武器攻撃";
+        text_.text = "一斉射撃";
 
         yield return null;
 

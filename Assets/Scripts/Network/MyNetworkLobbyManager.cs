@@ -75,19 +75,19 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
 
     public override void OnLobbyStartHost()
     {
-        my_network_discovery_.StartAsServer();
+        //my_network_discovery_.StartAsServer();
         base.OnLobbyStartHost();
     }
 
     public override void OnLobbyStartClient(NetworkClient lobbyClient)
     {
-        my_network_discovery_.StartAsClient();
+        //my_network_discovery_.StartAsClient();
         base.OnLobbyStartClient(lobbyClient);
     }
 
     public override void OnStopClient()
     {
-        my_network_discovery_.StopBroadcast();
+        //my_network_discovery_.StopBroadcast();
         base.OnStopClient();
     }
 
@@ -98,19 +98,19 @@ public class MyNetworkLobbyManager : NetworkLobbyManager
 
     void Start()
     {
-        my_network_discovery_.Initialize();
+        //my_network_discovery_.Initialize();
         var json_text = File.ReadAllText(Utility.JSON_PATH + JSON_FILE_NAME);
         JsonNode json = JsonNode.Parse(json_text);
         is_host_ = json["IsHost"].Get<bool>();
 
-        if (is_host_)
-        {
-            my_network_discovery_.StartAsServer();
-        }
-        else
-        {
-            my_network_discovery_.StartAsClient();
-        }
+        //if (is_host_)
+        //{
+        //    my_network_discovery_.StartAsServer();
+        //}
+        //else
+        //{
+        //    my_network_discovery_.StartAsClient();
+        //}
     }
 
     void Update()

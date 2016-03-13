@@ -22,7 +22,6 @@ public class BezierMover : MonoBehaviour
         START,
         MOVE,
         STOP,
-        BACK,
     }
 
     BezierCurve bezier_curve_ = null;
@@ -43,26 +42,11 @@ public class BezierMover : MonoBehaviour
 
     public void BezeirStart()
     {
-        type_ = Type.BACK;
+        type_ = Type.MOVE;
         current_time_ = 0.0f;
-        bezier_curve_[2].position = move_object_.transform.position;
+        bezier_curve_[0].position = move_object_.transform.position;
     }
 
-    public void BezeirBack()
-    {
-        if (type_ != Type.BACK) return;
-        var elapsed_time = current_time_ / STOP_TIME;
-        Vector3 current_point = BezierCurve.GetQuadraticCurvePoint(bezier_curve_[2].position, bezier_curve_[1].position, bezier_curve_[0].position, elapsed_time);
-        current_time_ += Time.deltaTime;
-
-        move_object_.transform.position = current_point;
-
-        var player_position = GameObject.FindGameObjectWithTag("Player").transform.position;
-        move_object_.transform.LookAt(player_position);
-
-        if (!(current_time_ >= STOP_TIME)) return;
-        type_ = Type.STOP;
-    }
 
     void BezeirMove()
     {

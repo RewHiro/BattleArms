@@ -24,7 +24,7 @@
             "BoostPower": 150.0,
             "JumpPower": 80.0,
             "MaxBoostValue": 100.0,
-            "MaxHP": 500.0,
+            "MaxHP": 1.0,
             "ArmorValue": 100.0,
             "Name": "Default00",
             "ExplanatoryText": "敵"
@@ -39,7 +39,7 @@
             "BoostPower": 150.0,
             "JumpPower": 80.0,
             "MaxBoostValue": 100.0,
-            "MaxHP": 500.0,
+            "MaxHP": 1.0,
             "ArmorValue": 100.0,
             "Name": "Default00",
             "ExplanatoryText": "中敵"
@@ -54,7 +54,7 @@
             "BoostPower": 150.0,
             "JumpPower": 80.0,
             "MaxBoostValue": 100.0,
-            "MaxHP": 500.0,
+            "MaxHP": 1.0,
             "ArmorValue": 100.0,
             "Name": "Default00",
             "ExplanatoryText": "大敵"

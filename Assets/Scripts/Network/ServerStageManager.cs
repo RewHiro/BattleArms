@@ -50,8 +50,10 @@ public class ServerStageManager : NetworkBehaviour
 
             List<HPManager> enemy_hp_managers = new List<HPManager>();
 
-            if (enemys.Count <= 15) return false;
-            var active_enemys = enemys.GetRange(5, 11);
+            Debug.Log(enemys.Count);
+
+            if (enemys.Count <= 8) return false;
+            var active_enemys = enemys.GetRange(5, 4);
             foreach (var enemy in active_enemys)
             {
                 if (enemy == null) continue;
@@ -238,7 +240,7 @@ public class ServerStageManager : NetworkBehaviour
             {
                 if (go_room_[2]) yield return null;
 
-                for (int i = 8; i < 15; i++)
+                for (int i = 8; i < 10; i++)
                 {
                     var enemy = enemy_spawner_.CreateEnemy(i);
                     enemy.GetComponent<AI2>().SetRoomName("room3");

@@ -28,7 +28,7 @@ public class EndDirector : NetworkBehaviour
 
         while (true)
         {
-            hi_score_text_.color = UnityEngine.Random.ColorHSV();
+            score_.color = UnityEngine.Random.ColorHSV();
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -37,7 +37,6 @@ public class EndDirector : NetworkBehaviour
     [ClientRpc]
     public void RpcTellClientStart(string str)
     {
-        Debug.Log("OK");
         text_object_.SetActive(true);
         text_.text = str;
         score_.gameObject.SetActive(false);
@@ -48,13 +47,15 @@ public class EndDirector : NetworkBehaviour
     public void RpcTellClientTime(int current_count)
     {
 
+        current_count = 60 * 5 - current_count;
+
         int min = current_count / 60;
         int sec = current_count % 60;
 
         int ten_sec = sec / 10;
         int one_sec = sec % 10;
 
-        score_.text = "クリア時間:" + min.ToString() + ":" + ten_sec.ToString() + one_sec.ToString();
+        score_.text = "ClearTime:" + min.ToString() + ":" + ten_sec.ToString() + one_sec.ToString();
         score_.gameObject.SetActive(true);
         hi_score_text_.gameObject.SetActive(true);
 
@@ -120,7 +121,7 @@ public class EndDirector : NetworkBehaviour
         int ten_sec = sec / 10;
         int one_sec = sec % 10;
 
-        hi_score_text_.text = "最短クリア時間" + min.ToString() + ":" + ten_sec.ToString() + one_sec.ToString();
+        hi_score_text_.text = "TopTime" + min.ToString() + ":" + ten_sec.ToString() + one_sec.ToString();
     }
 
 }

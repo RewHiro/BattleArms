@@ -59,7 +59,7 @@ public class ShotGun : Weapon
         List<GameObject> bullets = new List<GameObject>();
         for (int i = 0; i < 8; ++i)
         {
-            var obj = Instantiate(FindObjectOfType<BulletCreater>().getAssaulutBullet);
+            var obj = Instantiate(FindObjectOfType<BulletCreater>().getShotGunBullet);
             obj.transform.position = gameObject.transform.position;
             obj.transform.Translate(gameObject.transform.forward * 1.5f);
             obj.transform.rotation = gameObject.transform.rotation;
