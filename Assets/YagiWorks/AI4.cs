@@ -55,6 +55,23 @@ public class AI4 : MonoBehaviour
     Weapon right_weapon_ = null;
     Weapon left_weapon_ = null;
 
+    EnterRoom enter_room_ = null;
+
+    string room_name_ = "";
+
+    public string roomName
+    {
+        get
+        {
+            return room_name_;
+        }
+    }
+
+    public void SetRoomName(string name)
+    {
+        room_name_ = name;
+    }
+
     // private bool isGround = false;
 
     //ゲーム開始時に一度
@@ -78,6 +95,12 @@ public class AI4 : MonoBehaviour
         speed = air_frame_parameter.GetMoveSpeed(id);
         JUMP_POWER = air_frame_parameter.GetJumpPower(id);
         BOOST_POWER = air_frame_parameter.GetBoostPower(id);
+
+        foreach (var room in FindObjectsOfType<EnterRoom>())
+        {
+            if (room.transform.parent.name.GetHashCode() != roomName.GetHashCode()) continue;
+            enter_room_ = room;
+        }
     }
 
     //毎フレームに一度
@@ -98,6 +121,8 @@ public class AI4 : MonoBehaviour
         }
         if (server_stage_manager_ == null) return;
         if (server_stage_manager_.IsEndTutorial) return;
+
+        if (!enter_room_.isEnter) return;
 
         if (!guard)
         {

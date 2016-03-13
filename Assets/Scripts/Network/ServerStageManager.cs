@@ -85,7 +85,9 @@ public class ServerStageManager : NetworkBehaviour
 
         for (int i = 0; i < 1; i++)
         {
-            enemys.Add(enemy_spawner_.CreateEnemy(i));
+            var enemy = enemy_spawner_.CreateEnemy(i);
+            enemy.GetComponent<AI2>().SetRoomName("lastStage_clean");
+            enemys.Add(enemy);
         }
 
         StartCoroutine("Room1");
@@ -168,7 +170,9 @@ public class ServerStageManager : NetworkBehaviour
                 if (go_room_[0]) yield return null;
                 for (int i = 1; i < 3; i++)
                 {
-                    enemys.Add(enemy_spawner_.CreateEnemy(i));
+                    var enemy = enemy_spawner_.CreateEnemy(i);
+                    enemy.GetComponent<AI2>().SetRoomName("room1");
+                    enemys.Add(enemy);
                 }
                 go_room_[0] = true;
                 yield return StartCoroutine("Room2");
@@ -197,10 +201,14 @@ public class ServerStageManager : NetworkBehaviour
 
                 for (int i = 3; i < 5; i++)
                 {
-                    enemys.Add(enemy_spawner_.CreateEnemy(i));
+                    var enemy = enemy_spawner_.CreateEnemy(i);
+                    enemy.GetComponent<AI2>().SetRoomName("room2");
+                    enemys.Add(enemy);
                 }
                 //enemys.Add(enemy_spawner_.CreateMiddleEnemy01(6));
-                enemys.Add(enemy_spawner_.CreateMiddleEnemy02(5));
+                var middle_enemy = enemy_spawner_.CreateMiddleEnemy02(5);
+                middle_enemy.GetComponent<AI2>().SetRoomName("room2");
+                enemys.Add(middle_enemy);
                 go_room_[1] = true;
                 yield return StartCoroutine("Room3");
             }
@@ -232,9 +240,13 @@ public class ServerStageManager : NetworkBehaviour
 
                 for (int i = 8; i < 15; i++)
                 {
-                    enemys.Add(enemy_spawner_.CreateEnemy(i));
+                    var enemy = enemy_spawner_.CreateEnemy(i);
+                    enemy.GetComponent<AI2>().SetRoomName("room3");
+                    enemys.Add(enemy);
                 }
-                enemys.Add(enemy_spawner_.CreateBigEnemy(15));
+                var big_enemy = enemy_spawner_.CreateBigEnemy(15);
+                big_enemy.GetComponent<AI4>().SetRoomName("room3");
+                enemys.Add(big_enemy);
                 go_room_[2] = true;
                 StopCoroutine("Room3");
             }

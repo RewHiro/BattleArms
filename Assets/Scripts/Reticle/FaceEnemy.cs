@@ -7,7 +7,6 @@ public class FaceEnemy : NetworkBehaviour
 {
 
     GameObject[] enemy_;
-    GameObject[] base_;
     GameObject look_object_;
     Vector3 enemy_position;
 
@@ -27,7 +26,6 @@ public class FaceEnemy : NetworkBehaviour
     {
 
         enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
-        base_ = GameObject.FindGameObjectsWithTag("Base");
         player_controller_ = GetComponent<PlayerController>();
         player_moder_ = GetComponent<PlayerModer>();
 
@@ -68,13 +66,6 @@ public class FaceEnemy : NetworkBehaviour
         {
             base_number_++;
         }
-
-        if (base_number_ >= base_.Length)
-        {
-            base_number_ = -1;
-            enemy_number_ = 0;
-
-        }
     }
 
 
@@ -83,11 +74,6 @@ public class FaceEnemy : NetworkBehaviour
         if (!(enemy_.Length == GameObject.FindGameObjectsWithTag("Enemy").Length))
         {
             enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
-        }
-
-        if (!(base_.Length == GameObject.FindGameObjectsWithTag("Base").Length))
-        {
-            base_ = GameObject.FindGameObjectsWithTag("Base");
         }
 
     }
