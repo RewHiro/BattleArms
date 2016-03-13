@@ -207,7 +207,7 @@ public class ServerStageManager : NetworkBehaviour
                 }
                 //enemys.Add(enemy_spawner_.CreateMiddleEnemy01(6));
                 var middle_enemy = enemy_spawner_.CreateMiddleEnemy02(5);
-                middle_enemy.GetComponent<AI2>().SetRoomName("room2");
+                middle_enemy.GetComponent<AI4>().SetRoomName("room2");
                 enemys.Add(middle_enemy);
                 go_room_[1] = true;
                 yield return StartCoroutine("Room3");

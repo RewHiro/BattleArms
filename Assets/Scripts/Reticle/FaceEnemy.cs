@@ -7,8 +7,6 @@ public class FaceEnemy : NetworkBehaviour
 {
 
     GameObject[] enemy_;
-    GameObject look_object_;
-    Vector3 enemy_position;
 
     PlayerController player_controller_ = null;
     PlayerModer player_moder_ = null;
@@ -16,7 +14,6 @@ public class FaceEnemy : NetworkBehaviour
     float cool_down_count_ = 0.0f;
 
     int enemy_number_;
-    int base_number_;
 
     bool is_change_target_ = false;
 
@@ -64,33 +61,37 @@ public class FaceEnemy : NetworkBehaviour
 
         if (enemy_number_ >= enemy_.Length)
         {
-            base_number_++;
+            enemy_number_ = 0;
         }
     }
 
 
     public void IsChangeEnemyNumber()
     {
-        if (!(enemy_.Length == GameObject.FindGameObjectsWithTag("Enemy").Length))
+        if (enemy_.Length != GameObject.FindGameObjectsWithTag("Enemy").Length)
         {
-            enemy_ = GameObject.FindGameObjectsWithTag("Enemy");
-        }
+            var enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemys == null) return;
+            enemy_ = enemys;
 
+            if (enemy_number_ >= enemy_.Length)
+            {
+                enemy_number_ = 0;
+            }
+        }
     }
 
     public void LookAtEnemy()
     {
-        if (enemy_number_ < enemy_.Length)
-        {
-            look_object_ = enemy_[enemy_number_];
-        }
-        else
-        if (enemy_number_ >= enemy_.Length)
-        {
+        GameObject look_object_ = null;
 
-        }
+        if (enemy_.Length == 0) return;
 
-        enemy_position = look_object_.transform.position;
+        look_object_ = enemy_[enemy_number_];
+
+        if (look_object_ == null) return;
+
+        var enemy_position = look_object_.transform.position;
         enemy_position.y = gameObject.transform.position.y;
 
         gameObject.transform.LookAt(enemy_position);

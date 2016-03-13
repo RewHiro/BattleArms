@@ -18,6 +18,8 @@ public class AirFrameCustomizeUIChanger : MonoBehaviour
     {
         right_weapon_select_ui_.SetActive(false);
         air_frame_select_ui_.SetActive(true);
+        left_weapon_select_ui_.SetActive(false);
+        back_weapon_select_ui_.SetActive(false);
         FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
@@ -25,6 +27,8 @@ public class AirFrameCustomizeUIChanger : MonoBehaviour
     {
         right_weapon_select_ui_.SetActive(true);
         air_frame_select_ui_.SetActive(false);
+        left_weapon_select_ui_.SetActive(false);
+        back_weapon_select_ui_.SetActive(false);
         FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
@@ -32,6 +36,8 @@ public class AirFrameCustomizeUIChanger : MonoBehaviour
     {
         left_weapon_select_ui_.SetActive(true);
         right_weapon_select_ui_.SetActive(false);
+        back_weapon_select_ui_.SetActive(false);
+        air_frame_select_ui_.SetActive(false);
         FindObjectOfType<SoundManager>().PlaySE(4);
     }
 
@@ -39,6 +45,8 @@ public class AirFrameCustomizeUIChanger : MonoBehaviour
     {
         back_weapon_select_ui_.SetActive(true);
         left_weapon_select_ui_.SetActive(false);
+        right_weapon_select_ui_.SetActive(false);
+        air_frame_select_ui_.SetActive(false);
         FindObjectOfType<SoundManager>().PlaySE(4);
     }
 }
